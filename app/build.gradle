@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.0"
+    buildToolsVersion "29.0.0"
 
     defaultConfig {
         applicationId "com.avc.manager"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -20,5 +20,15 @@ android {
 }
 
 dependencies {
+	/**compile 'com.google.android.gms:play-services-ads:11.8.0'**/
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+	implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+	implementation 'com.google.android.material:material:1.0.0-rc01'
+	implementation 'androidx.cardview:cardview:1.0.0'
+	implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
+	implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    
+    implementation ('android.arch.core:runtime:1.+'){ force = true }
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:left="30dp" android:drawable="@drawable/yellow_bubble" android:bottom="60dp"/>
+		
+	
+	<item android:left="60dp" android:drawable="@drawable/yellow_bubble" android:bottom="60dp"/>
+		
+	
+	<item android:left="90dp" android:drawable="@drawable/yellow_bubble" android:bottom="60dp"/>
+		
+	
+	<item android:left="120dp" android:drawable="@drawable/yellow_bubble" android:bottom="60dp"/>
+		
+	
+	<item android:left="150dp" android:drawable="@drawable/yellow_bubble" android:bottom="60dp"/>
+		
+	
+</layer-list>

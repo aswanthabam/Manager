@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:fitsSystemWindows="true"
+	android:layout_height="match_parent"
+	android:id="@+id/mainDrawerLayout"
+	android:background="@drawable/gradient_background">
+
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:animateLayoutChanges="true"
+		android:fitsSystemWindows="true"
+		android:layout_height="match_parent">
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:elevation="0dp"
+			android:background="@android:color/transparent">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/mainToolbar"
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				android:background="@android:color/transparent"
+				app:layout_scrollFlags="scroll|enterAlways"/>
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"
+			android:orientation="vertical">
+
+			<ScrollView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<LinearLayout
+						android:id="@+id/activity_mainBubbleBg"
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/home_top_box_height"
+						>
+
+						<TextView
+							android:id="@+id/activity_mainInfoTxt"
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:typeface="monospace"
+							android:textSize="@dimen/home_floating_text_size"
+							android:textColor="@color/colorControlNormal"
+							android:text="100MB of memory can be freed"
+							android:textStyle="bold"/>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/activity_mainGridItemsContainer"
+						android:orientation="vertical"
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/home_main_menu_box_height"
+						>
+
+						<LinearLayout
+							android:orientation="horizontal"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/home_main_icon_vertical_margin_bottom">
+
+							<LinearLayout
+								android:id="@+id/activity_mainGridItem1"
+								android:orientation="vertical"
+								android:layout_width="wrap_content"
+								android:layout_height="match_parent"
+								android:layout_columnWeight="1"
+								android:layout_rowWeight="1"
+								android:gravity="center"
+								android:layout_weight="1.0">
+
+								<ImageView
+									android:tint="@color/mainIconTint"
+									android:layout_width="@dimen/home_main_icon_width"
+									android:layout_height="@dimen/home_main_icon_width"
+									android:layout_margin="@dimen/home_main_icon_margin"
+									android:src="@drawable/data_cleaning"/>
+
+								<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Space cleaner"
+									android:layout_margin="@dimen/home_main_icon_text_margin"
+									android:textStyle="bold"
+									android:textSize="@dimen/home_main_icon_text_size"
+									android:textColor="@color/mainIconTint"/>
+								
+								<TextView
+									android:id="@+id/activity_mainGridItem1InfoTxt"
+									android:layout_width="@dimen/home_main_icon_info_txt_width"
+									android:textColor="@color/lightBlack"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Free up device storage"
+									android:layout_margin="@dimen/home_main_icon_info_txt_margin"
+									android:textSize="@dimen/home_main_icon_info_txt_size"/>
+
+							</LinearLayout>
+
+							<LinearLayout
+								android:id="@+id/activity_mainGridItem2"
+								android:orientation="vertical"
+								android:layout_width="wrap_content"
+								android:layout_height="match_parent"
+								android:layout_columnWeight="1"
+								android:layout_rowWeight="1"
+								android:gravity="center"
+								android:layout_weight="1.0">
+
+								<ImageView
+									android:tint="@color/mainIconTint"
+									android:layout_width="@dimen/home_main_icon_width"
+									android:layout_height="@dimen/home_main_icon_width"
+									android:layout_margin="@dimen/home_main_icon_margin"
+									android:src="@drawable/download"/>
+
+								<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Status Saver"
+									android:layout_margin="@dimen/home_main_icon_text_margin"
+									android:textStyle="bold"
+									android:textSize="@dimen/home_main_icon_text_size"
+									android:textColor="@color/mainIconTint"/>
+
+								<TextView
+									android:id="@+id/activity_mainGridItem2InfoTxt"
+									android:layout_width="@dimen/home_main_icon_info_txt_width"
+									android:textColor="@color/lightBlack"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Save whatsapp status"
+									android:layout_margin="@dimen/home_main_icon_info_txt_margin"
+									android:textSize="@dimen/home_main_icon_info_txt_size"/>
+
+							</LinearLayout>
+
+						</LinearLayout>
+
+						<LinearLayout
+							android:orientation="horizontal"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/home_main_icon_vertical_margin_bottom">
+
+							<LinearLayout
+								android:id="@+id/activity_mainGridItem3"
+								android:orientation="vertical"
+								android:layout_width="wrap_content"
+								android:layout_height="match_parent"
+								android:layout_columnWeight="1"
+								android:layout_rowWeight="1"
+								android:gravity="center"
+								android:layout_weight="1.0">
+
+								<ImageView
+									android:tint="@color/mainIconTint"
+									android:layout_width="@dimen/home_main_icon_width"
+									android:layout_height="@dimen/home_main_icon_width"
+									android:layout_margin="@dimen/home_main_icon_margin"
+									android:src="@drawable/download"/>
+
+								<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="About phone"
+									android:layout_margin="@dimen/home_main_icon_text_margin"
+									android:textStyle="bold"
+									android:textSize="@dimen/home_main_icon_text_size"
+									android:textColor="@color/mainIconTint"/>
+
+								<TextView
+									android:id="@+id/activity_mainGridItem3InfoTxt"
+									android:layout_width="@dimen/home_main_icon_info_txt_width"
+									android:textColor="@color/lightBlack"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Knows about your phone hardware"
+									android:layout_margin="@dimen/home_main_icon_info_txt_margin"
+									android:textSize="@dimen/home_main_icon_info_txt_size"/>
+								
+							</LinearLayout>
+
+							<LinearLayout
+								android:id="@+id/activity_mainGridItem4"
+								android:orientation="vertical"
+								android:layout_width="wrap_content"
+								android:layout_height="match_parent"
+								android:layout_columnWeight="1"
+								android:layout_rowWeight="1"
+								android:gravity="center"
+								android:layout_weight="1.0">
+
+								<ImageView
+									android:tint="@color/mainIconTint"
+									android:layout_width="@dimen/home_main_icon_width"
+									android:layout_height="@dimen/home_main_icon_width"
+									android:layout_margin="@dimen/home_main_icon_margin"
+									android:src="@drawable/settings"/>
+
+								<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Settings"
+									android:layout_margin="@dimen/home_main_icon_text_margin"
+									android:textStyle="bold"
+									android:textSize="@dimen/home_main_icon_text_size"
+									android:textColor="@color/mainIconTint"/>
+
+								<TextView
+									android:id="@+id/activity_mainGridItem4InfoTxt"
+									android:layout_width="@dimen/home_main_icon_info_txt_width"
+									android:textColor="@color/lightBlack"
+									android:layout_height="wrap_content"
+									android:gravity="center"
+									android:text="Free up device storage"
+									android:layout_margin="@dimen/home_main_icon_info_txt_margin"
+									android:textSize="@dimen/home_main_icon_info_txt_size"/>
+								
+							</LinearLayout>
+
+						</LinearLayout>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</ScrollView>
+
+		</FrameLayout>
+
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+	<com.google.android.material.navigation.NavigationView
+		android:id="@+id/nav_view"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
+		android:fitsSystemWindows="true"
+		app:headerLayout="@layout/nav_header_main"
+		android:background="@drawable/drawer_background"
+		android:padding="10dp"
+		app:menu="@menu/menu_nav"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
