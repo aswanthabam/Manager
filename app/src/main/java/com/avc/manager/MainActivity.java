@@ -12,8 +12,15 @@ import android.graphics.*;
 import android.widget.*;
 import android.view.animation.*;
 import android.util.*;
+import android.content.*;
+import androidx.core.content.*;
+import android.content.pm.*;
+import android.*;
+import com.avc.manager.Res.*;
+import java.net.*;
+import org.json.*;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener//, PubConnect.OnUpdateResponceListener
 {
     private Toolbar toolbar;
     private DrawerLayout d;
@@ -22,10 +29,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public Animation floatUp;
 	int info_i = 0;
 	AppCompatActivity activity;
+	Me me;
 	/*GridLayout home_grid;
 	LinearLayout GridItem1,GridItem2,GridItem3,GridItem4;
     */
-	LinearLayout GridContainer, HomeTopBox;
+	LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
 	public int SystemWidth,SystemHeight;
 	private String[] info_txts = {"NMB of storage can be freed","Delete old whatsapp images","TELENMB Storage is used by telegram"};
     @Override
@@ -34,10 +42,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		activity = this;
+		/*me = new Me();
+		PubConnect conn = new PubConnect(this,Me.app_id,Me.app_pass,Me.version);
+		conn.setOnUpdateResponceListener(this);
+		conn.checkForUpdates();
+		*/
+		String[] per = {
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.READ_EXTERNAL_STORAGE
+		};
+		requestPermissions(per,6909);
+		if(isPermission(this,per))
+		{
+			
+		}
 		
         toolbar = findViewById(R.id.mainToolbar);
         d = findViewById(R.id.mainDrawerLayout);
 		n = findViewById(R.id.nav_view);
+		
+		Item1 =findViewById(R.id.activity_mainGridItem1); // Space cleaner
+		Item2 =findViewById(R.id.activity_mainGridItem2);
+		Item3 =findViewById(R.id.activity_mainGridItem3);
+		Item4 =findViewById(R.id.activity_mainGridItem4);
+		
+		Item1.setOnClickListener(this);
+		Item2.setOnClickListener(this);
+		Item3.setOnClickListener(this);
+		Item4.setOnClickListener(this);
 		
 		// set full screen and margins
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);// Set to full screen
@@ -146,4 +178,85 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			}
 		});
 	}
+
+	@Override
+	public void onClick(View p1)
+	{
+		Intent i;
+		switch(p1.getId())
+		{
+			case R.id.activity_mainGridItem1:
+				i = new Intent(this,SpaceCleanerActivity.class);
+				
+				startActivity(i);
+				break;
+			case R.id.activity_mainGridItem2:
+				i = new Intent(this,StatusSaverActivity.class);
+				
+				startActivity(i);
+				break;
+			case R.id.activity_mainGridItem3:
+
+				break;
+			case R.id.activity_mainGridItem4:
+
+				break;
+		}
+	}
+	
+	public static boolean isPermission(AppCompatActivity a,String[] permission)
+	{
+		boolean flag = true;
+		
+		for(String i : permission)
+		if(ContextCompat.checkSelfPermission(a,i) == PackageManager.PERMISSION_DENIED)
+		{
+			flag = false;
+			break;
+		}
+		return flag;
+	}
+/*
+	@Override
+	public void onUpdateResponce(HttpURLConnection conn, String out, JSONObject obj, PubConnect.UpdateConnect up)
+	{
+		Utils.toast(this,out);
+		try{
+			if(obj.getString("status") == "ok"){
+				JSONObject message = obj.getJSONObject("message");
+				if(message.getBoolean("available_update"))
+				{
+					JSONObject update = message.getJSONObject("update");
+					JSONObject info = update.getJSONObject("info");
+					me.update.app_id = update.getString("app_id");
+					me.update.app_name = update.getString("app_name");
+					me.update.version = update.getString("version");
+					me.update.version_id = update.getString("version_id");
+					me.update.author = update.getString("author");
+					me.update.description = update.getString("description");
+					me.update.file_name = update.getString("file_name");
+					me.update.pub_name = update.getString("pub_name");
+					me.update.more_link = update.getString("more_link");
+					me.update.uploaded_date = update.getString("uploaded_date");
+					me.update.created_date = update.getString("created_date");
+					me.update.common_app_id = update.getString("common_app_id");
+					
+					me.update.download_link = update.getString("download_link");
+					me.update.download_link_is_redirect = update.getBoolean("download_link_is_redirect");
+					me.update.download_link_is_icedrive = update.getBoolean("download_link_is_icedrive");
+					
+					me.update.title = info.getString("title");
+					me.update.sub_title = info.getString("sub_title");
+					me.update.update_description = info.getString("description");
+					me.update.must_update = update.getBoolean("must_update");
+					PubConnect.UpdateConnect.UpdateDialog di = up.getDialog(me);
+					di.show();
+				}
+			}
+		}catch(Exception e)
+		{
+			Utils.toast(this,e.toString());
+		}
+	}
+	*/
 }

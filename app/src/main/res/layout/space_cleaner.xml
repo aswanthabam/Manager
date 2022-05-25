@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:animateLayoutChanges="true"
+	android:layout_height="match_parent"
+	android:background="@color/colorPrimary">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:elevation="0dp"
+		android:background="@android:color/transparent">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/mainToolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="@android:color/transparent"
+			app:layout_scrollFlags="scroll|enterAlways"/>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		android:orientation="vertical">
+
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/space_cleaner_top_size_box_height"
+					android:gravity="center">
+
+					<TextView
+						android:id="@+id/space_cleanerSizeText"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Small Text"
+						android:textSize="@dimen/space_cleaner_top_text_size"
+						android:textStyle="bold"
+						android:textColor="@color/mainIconTint"
+						android:layout_gravity="center"/>
+					
+					<TextView 
+						android:id="@+id/space_cleanerCurrentName"
+						android:layout_width="200dp"
+						android:layout_height="wrap_content"
+						android:text=""
+						android:textSize="@dimen/space_cleaner_current_file_txt_size"
+						android:textColor="@color/lightBlack"
+						android:gravity="center"
+						android:singleLine="true"
+						android:layout_gravity="center"
+						/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/space_cleaner_menu_box1_height"
+					android:background="@drawable/light_border_background"
+					android:layout_margin="@dimen/space_cleaner_icons_container_margin"
+					android:padding="@dimen/space_cleaner_icons_container_padding">
+
+					<LinearLayout
+						android:orientation="horizontal"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0">
+
+						<LinearLayout
+							android:orientation="vertical"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:layout_weight="1.0">
+
+							<ImageView
+								android:layout_width="@dimen/space_cleaner_icons_width"
+								android:layout_height="@dimen/space_cleaner_icons_width"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								android:src="@drawable/whatsapp"
+								android:tint="@color/mainIconTint"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:textSize="@dimen/space_cleaner_icon_text_size"
+								android:text="WhatsApp Cleaner"
+								android:gravity="center"
+								android:textColor="@color/mainIconTint"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								/>
+
+						</LinearLayout>
+
+						<LinearLayout
+							android:orientation="vertical"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:layout_weight="1.0">
+
+							<ImageView
+								android:layout_width="@dimen/space_cleaner_icons_width"
+								android:layout_height="@dimen/space_cleaner_icons_width"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								android:src="@drawable/telegram"
+								android:tint="@color/mainIconTint"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:textSize="@dimen/space_cleaner_icon_text_size"
+								android:text="Telegram Cleaner"
+								android:gravity="center"
+								android:textColor="@color/mainIconTint"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								/>
+
+						</LinearLayout>
+
+						<LinearLayout
+							android:orientation="vertical"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:layout_weight="1.0">
+
+							<ImageView
+								android:layout_width="@dimen/space_cleaner_icons_width"
+								android:layout_height="@dimen/space_cleaner_icons_width"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								android:src="@drawable/instagram"
+								android:tint="@color/mainIconTint"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:textSize="@dimen/space_cleaner_icon_text_size"
+								android:text="Instagram Cleaner"
+								android:gravity="center"
+								android:textColor="@color/mainIconTint"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								/>
+
+						</LinearLayout>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:orientation="horizontal"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1.0">
+
+						<LinearLayout
+							android:orientation="vertical"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:layout_weight="1.0">
+
+							<ImageView
+								android:layout_width="@dimen/space_cleaner_icons_width"
+								android:layout_height="@dimen/space_cleaner_icons_width"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								android:src="@drawable/facebook"
+								android:tint="@color/mainIconTint"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:textSize="@dimen/space_cleaner_icon_text_size"
+								android:text="Facebook Cleaner"
+								android:gravity="center"
+								android:textColor="@color/mainIconTint"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								/>
+
+						</LinearLayout>
+
+						<LinearLayout
+							android:orientation="vertical"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:layout_weight="1.0">
+
+							<ImageView
+								android:layout_width="@dimen/space_cleaner_icons_width"
+								android:layout_height="@dimen/space_cleaner_icons_width"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								android:src="@drawable/whatsapp"
+								android:tint="@color/mainIconTint"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:textSize="@dimen/space_cleaner_icon_text_size"
+								android:text="WhatsApp Cleaner"
+								android:gravity="center"
+								android:textColor="@color/mainIconTint"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								/>
+
+						</LinearLayout>
+
+						<LinearLayout
+							android:orientation="vertical"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:layout_weight="1.0">
+
+							<ImageView
+								android:layout_width="@dimen/space_cleaner_icons_width"
+								android:layout_height="@dimen/space_cleaner_icons_width"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								android:src="@drawable/telegram"
+								android:tint="@color/mainIconTint"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:textSize="@dimen/space_cleaner_icon_text_size"
+								android:text="WhatsApp Cleaner"
+								android:gravity="center"
+								android:textColor="@color/mainIconTint"
+								android:layout_margin="@dimen/space_cleaner_icons_margin"
+								/>
+
+						</LinearLayout>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+	</FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

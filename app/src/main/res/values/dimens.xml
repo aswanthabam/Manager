@@ -41,6 +41,25 @@
 	
 	<dimen name="home_floating_text_size">15sp</dimen>
 	
+	<!-- Space cleaner activity sizes -->
+	
+	<dimen name="space_cleaner_top_text_size">20dp</dimen>
+	
+	<dimen name="space_cleaner_current_file_txt_size">10sp</dimen>
+	
+	<dimen name="space_cleaner_top_size_box_height">200dp</dimen>
+	
+	<dimen name="space_cleaner_menu_box1_height">200dp</dimen>
+	
+	<dimen name="space_cleaner_icons_container_margin">10dp</dimen>
+	
+	<dimen name="space_cleaner_icons_width">28dp</dimen>
+	
+	<dimen name="space_cleaner_icon_text_size">8sp</dimen>
+	
+	<dimen name="space_cleaner_icons_container_padding">5dp</dimen>
+	
+	<dimen name="space_cleaner_icons_margin">5dp</dimen>
 	
 </resources>
 

@@ -84,14 +84,17 @@
 								android:layout_columnWeight="1"
 								android:layout_rowWeight="1"
 								android:gravity="center"
-								android:layout_weight="1.0">
+								android:layout_weight="1.0"
+								android:clickable="true"
+								>
 
 								<ImageView
 									android:tint="@color/mainIconTint"
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"
 									android:layout_margin="@dimen/home_main_icon_margin"
-									android:src="@drawable/data_cleaning"/>
+									android:src="@drawable/data_cleaning"
+									android:background="?attr/selectableItemBackground"/>
 
 								<TextView
 									android:layout_width="wrap_content"
