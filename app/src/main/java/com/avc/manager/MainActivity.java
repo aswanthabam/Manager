@@ -1,26 +1,28 @@
 package com.avc.manager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.navigation.NavigationView;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import android.os.Bundle;
 import android.view.*;
 import android.graphics.drawable.*;
 import android.graphics.*;
 import android.widget.*;
 import android.view.animation.*;
+import android.view.animation.AnimationUtils;
 import android.util.*;
 import android.content.*;
-import androidx.core.content.*;
 import android.content.pm.*;
 import android.*;
 import com.avc.manager.Res.*;
 import java.net.*;
 import org.json.*;
+import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.*;
+import android.support.v7.app.*;
+//import android.support.design.widget.AnimationUtils;
+import android.support.design.widget.*;
+import android.support.v4.content.*;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener//, PubConnect.OnUpdateResponceListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener, PubConnect.OnUpdateResponceListener
 {
     private Toolbar toolbar;
     private DrawerLayout d;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	/*GridLayout home_grid;
 	LinearLayout GridItem1,GridItem2,GridItem3,GridItem4;
     */
+	
 	LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
 	public int SystemWidth,SystemHeight;
 	private String[] info_txts = {"NMB of storage can be freed","Delete old whatsapp images","TELENMB Storage is used by telegram"};
@@ -42,11 +45,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		activity = this;
-		/*me = new Me();
+		me = new Me();
 		PubConnect conn = new PubConnect(this,Me.app_id,Me.app_pass,Me.version);
 		conn.setOnUpdateResponceListener(this);
 		conn.checkForUpdates();
-		*/
+		
 		String[] per = {
 			Manifest.permission.WRITE_EXTERNAL_STORAGE,
 			Manifest.permission.READ_EXTERNAL_STORAGE
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		GridContainer = findViewById(R.id.activity_mainGridItemsContainer);
         
 		// Setting drawer and toolbar
-		
+		//androidx.core.util.Preconditions.checkArgumentInRange();
 		setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -216,18 +219,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 		return flag;
 	}
-/*
+
 	@Override
 	public void onUpdateResponce(HttpURLConnection conn, String out, JSONObject obj, PubConnect.UpdateConnect up)
 	{
-		Utils.toast(this,out);
+		
 		try{
-			if(obj.getString("status") == "ok"){
+			String status = obj.getString("status");
+			if(status.equals("ok")){
 				JSONObject message = obj.getJSONObject("message");
+				Utils.toast(this,message.toString());
 				if(message.getBoolean("available_update"))
 				{
 					JSONObject update = message.getJSONObject("update");
-					JSONObject info = update.getJSONObject("info");
+					JSONObject info = update.getJSONArray("info").getJSONObject(0);
 					me.update.app_id = update.getString("app_id");
 					me.update.app_name = update.getString("app_name");
 					me.update.version = update.getString("version");
@@ -248,15 +253,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					me.update.title = info.getString("title");
 					me.update.sub_title = info.getString("sub_title");
 					me.update.update_description = info.getString("description");
-					me.update.must_update = update.getBoolean("must_update");
+					me.update.must_update = info.getBoolean("must_update");
 					PubConnect.UpdateConnect.UpdateDialog di = up.getDialog(me);
 					di.show();
 				}
+			}else
+			{
+				Utils.toast(this,"Unable ti find updates");
 			}
 		}catch(Exception e)
 		{
 			Utils.toast(this,e.toString());
 		}
 	}
-	*/
+	
 }

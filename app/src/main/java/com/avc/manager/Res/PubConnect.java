@@ -1,6 +1,5 @@
 package com.avc.manager.Res;
-import androidx.appcompat.widget.*;
-import androidx.appcompat.app.*;
+
 import java.net.*;
 import android.util.*;
 import org.apache.http.*;
@@ -13,6 +12,7 @@ import android.app.*;
 import android.os.*;
 import android.widget.*;
 import android.view.*;
+import android.support.v7.app.*;
 
 public class PubConnect
 {
@@ -79,7 +79,6 @@ public class PubConnect
 			}
 		}
 		
-		
 		public class UpdateDialog extends Dialog
 		{
 			AppCompatActivity activity;
@@ -97,35 +96,36 @@ public class PubConnect
 			{
 				// TODO: Implement this method
 				super.onCreate(savedInstanceState);
-				setContentView(R.layout.update_app_dailog);
+				setContentView(R.layout.self_update_app_dailog);
 				
-				//title = findViewById(R.id.update_app_dailogTextTitle);
-				sub = findViewById(R.id.update_app_dailogSubTitle);
-				des = findViewById(R.id.update_app_dailogDescription);
-				btn1 = findViewById(R.id.update_app_dailogBtn1);
-				btn2 = findViewById(R.id.update_app_dailogBtn2);
-				
-				//title.setText(me.update.title);
-				sub.setText(me.update.sub_title);
-				des.setText(me.update.description);
-				
-				btn1.setOnClickListener(new View.OnClickListener()
-				{
-					@Override public void onClick(View v)
-					{
-						dismiss();
-					}
-				});
-				
-				btn2.setOnClickListener(new View.OnClickListener()
-				{
-					@Override public void onClick(View v)
-					{
-						dismiss();
-					}
-				});
+				getWindow().setBackgroundDrawableResource(R.drawable.light_border_background);
+				title = findViewById(R.id.self_update_app_dailog_Title);
+				 /*sub = findViewById(R.id.update_app_dailogSubTitle);
+				 des = findViewById(R.id.update_app_dailogDescription);
+				 */btn1 = findViewById(R.id.update_app_dailogBtn1);
+				// btn2 = findViewById(R.id.update_app_dailogBtn2);
+
+				 title.setText(me.update.title);
+				 /*sub.setText(me.update.sub_title);
+				 des.setText(me.update.description);
+*/
+				 btn1.setOnClickListener(new View.OnClickListener()
+				 {
+				 @Override public void onClick(View v)
+				 {
+				 dismiss();
+				 }
+				 });
+
+				 btn2.setOnClickListener(new View.OnClickListener()
+				 {
+				 @Override public void onClick(View v)
+				 {
+				 dismiss();
+				 }
+				 });
 			}
-			
+	
 		}
 	}
 	

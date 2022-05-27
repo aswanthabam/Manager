@@ -8,11 +8,12 @@ public class Me
 	public static String version = "1";
 	public static String app_pass = "avcmanager";
 	public static String name = "AVC Manager";
-	public static Update update = null;
+	public static Update update = new Update();
 	public Me(){}
 	
-	public class Update
+	public static class Update
 	{
+		
 		public String app_id = "";
 		public String app_name = "";
 		public String version = "";

@@ -1,0 +1,70 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	
+	android:layout_width="match_parent"
+	android:animateLayoutChanges="true"
+	android:fitsSystemWindows="true"
+	android:layout_height="match_parent"
+	tools:context="com.avc.manager.MainActivity">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1.0">
+
+		<ScrollView
+			android:id="@+id/self_update_app_dailogScrollView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:id="@+id/self_update_app_dailog_Title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<Button
+			android:id="@+id/update_app_dailogBtn1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Exit"
+			android:layout_margin="10dp"/>
+
+		<Button
+			android:id="@+id/update_app_dailogBtn2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Download"
+			android:layout_margin="10dp"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

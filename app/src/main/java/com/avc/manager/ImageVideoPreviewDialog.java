@@ -1,5 +1,5 @@
 package com.avc.manager;
-import androidx.appcompat.app.*;
+
 import java.io.*;
 import android.app.*;
 import android.os.*;
@@ -8,6 +8,7 @@ import android.view.*;
 import java.net.*;
 import android.net.*;
 import android.media.*;
+import android.support.v7.app.*;
 
 public class ImageVideoPreviewDialog extends Dialog
 {

@@ -1,6 +1,5 @@
 package com.avc.manager.Res;
 import android.widget.*;
-import androidx.appcompat.app.*;
 import android.view.*;
 import android.os.*;
 import android.content.*;
@@ -8,6 +7,7 @@ import android.util.*;
 import com.avc.manager.*;
 import android.app.*;
 import java.util.*;
+import android.support.v7.app.*;
 
 public class HoldebleObject extends LinearLayout
 {

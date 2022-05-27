@@ -1,7 +1,8 @@
 package com.avc.manager;
-import androidx.appcompat.app.*;
+
 import android.os.*;
 import android.content.*;
+import android.support.v7.app.*;
 
 public class SplashScreenActivity extends AppCompatActivity
 {
@@ -13,7 +14,7 @@ public class SplashScreenActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash_screen);
 		a = this;
-		/*new Thread(new Runnable()
+		new Thread(new Runnable()
 		{
 			@Override public void run()
 			{
@@ -22,7 +23,7 @@ public class SplashScreenActivity extends AppCompatActivity
 				startActivity(i);
 				finish();
 			}
-		}).start();*/
+		}).start();
 	}
 	
 }

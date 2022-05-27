@@ -1,21 +1,22 @@
 package com.avc.manager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
-import androidx.recyclerview.widget.*;
 import com.avc.manager.Adapter.*;
 import com.avc.manager.Res.*;
 import android.widget.*;
 import android.view.*;
-import androidx.coordinatorlayout.widget.*;
 import android.os.*;
 import android.view.animation.*;
+import android.view.animation.AnimationUtils;
 import android.util.*;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.text.*;
 import java.util.*;
 import com.avc.manager.Adapter.StatusRVAdapter.*;
+import android.support.v7.widget.*;
+import android.support.v7.app.*;
+import android.support.design.widget.*;
+import android.support.v7.widget.Toolbar;
 
 public class StatusSaverActivity extends AppCompatActivity implements StatusRVAdapter.OnBind , StatusRVAdapter.OnDialog
 {
@@ -92,7 +93,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 			}
 			@Override public void onAnimationRepeat(Animation a){}
 		});
-			
+		
 		// Setting recyclerview 
 
 		GridLayoutManager lManager = new GridLayoutManager(this,3);

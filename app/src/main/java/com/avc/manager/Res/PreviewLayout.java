@@ -7,7 +7,7 @@ import java.io.*;
 import com.avc.manager.*;
 import android.media.*;
 import android.app.*;
-import androidx.appcompat.app.*;
+import android.support.v7.app.*;
 
 public class PreviewLayout
 {

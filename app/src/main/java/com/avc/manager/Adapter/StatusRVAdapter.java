@@ -1,11 +1,10 @@
 package com.avc.manager.Adapter;
-import androidx.recyclerview.widget.*;
+
 import android.view.*;
 import android.widget.*;
 import com.avc.manager.*;
 import android.graphics.*;
 import java.io.*;
-import androidx.appcompat.app.*;
 import android.media.*;
 import android.provider.*;
 import android.graphics.drawable.*;
@@ -13,8 +12,10 @@ import java.util.*;
 import android.os.*;
 import android.view.View.*;
 import com.avc.manager.Res.*;
-import androidx.coordinatorlayout.widget.*;
 import android.util.*;
+import android.support.v7.widget.*;
+import android.support.v7.app.*;
+import android.support.design.widget.*;
 
 public class StatusRVAdapter extends RecyclerView.Adapter<StatusRVAdapter.ViewHolder>
 {

@@ -1,7 +1,5 @@
 package com.avc.manager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.graphics.*;
 import android.graphics.drawable.*;
@@ -10,7 +8,8 @@ import android.util.*;
 import com.avc.manager.Res.*;
 import android.widget.*;
 import android.view.View.*;
-
+import android.support.v7.app.*;
+import android.support.v7.widget.Toolbar;
 public class SpaceCleanerActivity extends AppCompatActivity 
 {
     private Toolbar toolbar;
