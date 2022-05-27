@@ -10,6 +10,7 @@ import android.widget.*;
 import android.view.View.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.Toolbar;
+
 public class SpaceCleanerActivity extends AppCompatActivity 
 {
     private Toolbar toolbar;
@@ -17,6 +18,7 @@ public class SpaceCleanerActivity extends AppCompatActivity
 	public AppCompatActivity activity;
 	public TextView sizeTxt,SizeInfoText;
 	public GROUPFiles files = new GROUPFiles();
+	
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,20 +42,21 @@ public class SpaceCleanerActivity extends AppCompatActivity
 
 		SystemWidth = outMetrics.widthPixels;
 		SystemHeight = outMetrics.heightPixels;
-
+		// Get denisty of screen
 		int density  = (int) getResources().getDisplayMetrics().density;
-		
+		// Set support toolbar
         setSupportActionBar(toolbar);
-		
+		// Get home as up icon size
 		int dr_size = (int) getResources().getDimension(R.dimen.topbar_drawer_icon_size)/density;
-		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Bitmap dr = ((BitmapDrawable) getResources().getDrawable(R.drawable.btn_back)).getBitmap();
 		Drawable di = new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(dr,dr_size,dr_size,true));
 		getSupportActionBar().setHomeAsUpIndicator(di);
-		
+		// Start stotage clranup scan
 		storageScan();
+		
+		// click listenr for about size indicator below tge main size textvuew
 		
 		SizeInfoText.setOnClickListener(new OnClickListener()
 		{
@@ -64,13 +67,16 @@ public class SpaceCleanerActivity extends AppCompatActivity
 		});
     }
 	
+	// Scan for space cleanup for fast up it is done inside a thread
+	
 	public void storageScan()
 	{
 		new Thread(new Runnable(){
 			@Override public void run()
 			{
 				WhatsApp wh = new WhatsApp(activity);
-				GROUPFiles g = new GROUPFiles();
+				GROUPFiles g = new GROUPFiles(); // group files to group the collectef files
+				// Group files liatener callbacks when added,removed,paused the filss
 				g.setListener(new GROUPFiles.Listener()
 				{
 					@Override public void onAdded(final GROUPFiles f)
@@ -114,6 +120,8 @@ public class SpaceCleanerActivity extends AppCompatActivity
 			}
 		}).start();
 	}
+	
+	// Option item selecteions
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)

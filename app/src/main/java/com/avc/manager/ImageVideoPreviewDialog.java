@@ -9,7 +9,8 @@ import java.net.*;
 import android.net.*;
 import android.media.*;
 import android.support.v7.app.*;
-
+// Preview a video or image show image if tge file is image if video
+// play the video
 public class ImageVideoPreviewDialog extends Dialog
 {
 	private AppCompatActivity activity;
@@ -32,7 +33,10 @@ public class ImageVideoPreviewDialog extends Dialog
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.image_video_prev_dialog);
+		// Dialog background
 		getWindow().setBackgroundDrawableResource(R.drawable.light_border_background);
+		
+		// Initializing views
 		
 		v1 = findViewById(R.id.image_video_prev_dialogVideoView);
 		v2 = findViewById(R.id.image_video_prev_dialogImageView);
@@ -41,10 +45,13 @@ public class ImageVideoPreviewDialog extends Dialog
 		download = findViewById(R.id.image_video_prev_dialogDownload);
 		share = findViewById(R.id.image_video_prev_dialogShare);
 		
+		// Click listener
+		
 		Cancel.setOnClickListener(new View.OnClickListener()
 		{
 			@Override public void onClick(View v)
 			{
+				// Cancel image
 				dismiss();
 			}
 		});
@@ -53,6 +60,7 @@ public class ImageVideoPreviewDialog extends Dialog
 		{
 			@Override public void onClick(View v)
 			{
+				// Download image
 				Utils.saveToDevice(file,"Statuses");
 				Utils.toast(activity,"File saved!");
 			}
@@ -62,6 +70,7 @@ public class ImageVideoPreviewDialog extends Dialog
 		{
 			@Override public void onClick(View v)
 			{
+				// Share image
 				File f = Utils.saveToDevice(file,"Statuses");
 				Utils.toast(activity,"File saved!");
 				Utils.shareFile(activity,"AVC Manager","Hey,\nLook at this amazing content, "+
@@ -71,7 +80,10 @@ public class ImageVideoPreviewDialog extends Dialog
 			}
 		});
 		
-		String mime = Utils.getMimeType(file.getAbsolutePath());
+		String mime = Utils.getMimeType(file.getAbsolutePath()); // Get the file mime type
+		
+		// Set the videoview to be looped
+		
 		v1.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
 		{
 			@Override public void onPrepared(MediaPlayer p)
@@ -79,6 +91,9 @@ public class ImageVideoPreviewDialog extends Dialog
 				p.setLooping(true);
 			}
 		});
+		
+		// Setup the views accourding to file type (Image/Video)
+		
 		if(mime.startsWith("video/"))
 		{
 			video = true;
@@ -93,6 +108,8 @@ public class ImageVideoPreviewDialog extends Dialog
 			v2.setImageURI(Uri.fromFile(file));
 		}
 	}
+	
+	// Return true if tge file is video
 	
 	public boolean isVideo()
 	{

@@ -123,7 +123,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 						rcView.setVisibility(View.VISIBLE);		
 					}
 				});
-				
+				// Starts the showing of top image slideshow
 				new Thread(new Runnable()
 				{
 					@Override public void run()
@@ -162,7 +162,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 		}).start();
 		
 	}
-
+	// Options item selectiom
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -174,20 +174,20 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 		}
 		return true;
 	}
-
+	// Status RV Adapter : calls when the dialog is shown
 	@Override
 	public void onDialog(ImageVideoPreviewDialog dialog)
 	{
 		if(dialog.isVideo())
-			vViews.put(dialog.v1,0);
+			vViews.put(dialog.v1,0); // Add the videview to the cyrrently playing video list. to resume when the app is paused
 	}
-	
+	// Calls when a view is binded
 	@Override
 	public void onBind(StatusRVAdapter.ViewHolder holder)
 	{
 		if(holder.img.isVideo())
 		{
-			vViews.put(holder.v2,0);
+			vViews.put(holder.v2,0); 
 		}
 	}
 	
@@ -202,7 +202,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 			if(v.isPlaying())
 			{
 				v.pause();
-				vViews.replace(v,v.getCurrentPosition());
+				vViews.replace(v,v.getCurrentPosition());// for Resuming the videos in the previous seek position
 			}
 		}
 		super.onPause();
@@ -220,7 +220,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 			{
 				//v.setVideoPath(vViews.get(v));
 				v.seekTo(vViews.get(v));
-				v.start();
+				v.start();// Resume the videk
 			}
 		}
 		super.onResume();

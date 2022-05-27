@@ -26,6 +26,8 @@ public class Utils
 		activity = a;
 	}
 	
+	// Convert string to Json
+	
 	public static JSONObject stringToJSON(String txt)
 	{
 		JSONObject obj = null;
@@ -100,7 +102,7 @@ public class Utils
 		sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
 		sharingIntent.putExtra(Intent.EXTRA_TEXT, txt);
 		sharingIntent.putExtra(Intent.EXTRA_TITLE, title);
-		toast((AppCompatActivity) c,type);
+		//toast((AppCompatActivity) c,type);
 		c.startActivity(Intent.createChooser(sharingIntent, "Share using"));
 		
 	}

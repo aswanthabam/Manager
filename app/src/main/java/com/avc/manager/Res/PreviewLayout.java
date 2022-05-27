@@ -8,45 +8,47 @@ import com.avc.manager.*;
 import android.media.*;
 import android.app.*;
 import android.support.v7.app.*;
-
+/*
+ Preview layout ( Similar to imagevideo preview dialog)
+ This class is a associative class and didnt extends any base class
+*/
 public class PreviewLayout
 {
 	public Context con;
-	//public AttributeSet attrs;
 	private ImageView v1;
 	private VideoView v2;
-	private MediaController controller;
 	private MediaPlayer player;
 	public RelativeLayout parent;
 	private int SystemWidth,SystemHeight,density;
-	//private AttributeSet set;
 	public static final int CENTER_CROP = 10;
 	public static final int AUTO_CROP = 11;
 	public static final int MUTE = 10;
 	public static final int UNMUTE = 11;
 	
 	public boolean video = false;
-	
+	// Different type of initializers 
+	// with some attrivute set to default or not 
+	// Like fill,mute,loop video etc.
 	public PreviewLayout(Context m,ImageView vv,VideoView vvv,int fill,int mute,boolean loop)
 	{
 		init(m,vv,vvv,fill,mute,loop);
 	}
-	
 	public PreviewLayout(Context m,ImageView vv,VideoView vvv,int fill,int mute)
 	{
 		init(m,vv,vvv,fill,mute,true);
 	}
-	
 	public PreviewLayout(Context m,ImageView vv,VideoView vvv,int fill)
 	{
 		init(m,vv,vvv,fill,MUTE,true);
 	}
-	
 	public PreviewLayout(Context m,ImageView vv,VideoView vvv)
 	{
 		init(m,vv,vvv,AUTO_CROP,MUTE,true);
 	}
 	
+	// Initizing function
+		// the diffecnt intializers of the class will set some defaukt values and call this function to class initalizatio 
+			// Here we set dufferent values like if want to loop, mute etc.
 	public void init(Context m,ImageView vv,VideoView vvv,final int fill,final int mute,final boolean loop)
 	{
 		// Get display width and set the width to linear layout for same width and height
@@ -56,13 +58,12 @@ public class PreviewLayout
 		// Store the width and height in pixels for future use
 		SystemWidth = outMetrics.widthPixels;
 		SystemHeight = outMetrics.heightPixels;
-		density  = (int) ((AppCompatActivity)m). getResources().getDisplayMetrics().density;
+		density  = (int) ((AppCompatActivity)m). getResources().getDisplayMetrics().density; // Get the density of device for future use
 		
 		con = m;
-		
 		v1 = vv; v2 = vvv;
-		
 		v2.setMediaController(null);
+		
 		v2.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
 		{
 			@Override public void onPrepared(MediaPlayer p)
@@ -132,40 +133,57 @@ public class PreviewLayout
 		v1.setVisibility(View.GONE);
 	}
 	
+	// Returns true if the given file is video
+	
 	public boolean isVideo()
 	{
 		return video;
 	}
+	
+	// Set the parent view
 	
 	public void setParent(RelativeLayout l)
 	{
 		parent = l;
 	}
 	
+	// Set the video to be looped
+	
 	public void loop(boolean l)
 	{
 		if(player != null) player.setLooping(l);
 	}
+	
+	// Resume a videi
 	
 	public void resume()
 	{
 		v2.resume();
 	}
 	
+	// Pause a video
+	
 	public void pause()
 	{
 		v2.pause();
 	}
+	
+	// Unmute a vudeo
 	
 	public void unmute()
 	{
 		if(player!= null)player.setVolume(100f,100f);
 	}
 	
+	//Mute a vudeo
+	
 	public void mute()
 	{
 		if(player != null) player.setVolume(0f,0f);
 	}
+	
+	// set to preview a file
+		// Check if tge file if video or image and preview the file
 	
 	public boolean preview(File f)
 	{

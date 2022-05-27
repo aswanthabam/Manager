@@ -18,7 +18,6 @@ import org.json.*;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.widget.*;
 import android.support.v7.app.*;
-//import android.support.design.widget.AnimationUtils;
 import android.support.design.widget.*;
 import android.support.v4.content.*;
 
@@ -29,36 +28,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private NavigationView n;
 	public TextView infoTxt;
 	public Animation floatUp;
-	int info_i = 0;
-	AppCompatActivity activity;
-	Me me;
-	/*GridLayout home_grid;
-	LinearLayout GridItem1,GridItem2,GridItem3,GridItem4;
-    */
-	
-	LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
+	public int info_i = 0;
+	public AppCompatActivity activity;
+	public Me me;
+	public LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
 	public int SystemWidth,SystemHeight;
 	private String[] info_txts = {"NMB of storage can be freed","Delete old whatsapp images","TELENMB Storage is used by telegram"};
-    @Override
+    
+	@Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 		activity = this;
+		
+		// Initialize objects related to app and perform an update check
+		
 		me = new Me();
 		PubConnect conn = new PubConnect(this,Me.app_id,Me.app_pass,Me.version);
 		conn.setOnUpdateResponceListener(this);
 		conn.checkForUpdates();
+		
+		// Check for permissions
 		
 		String[] per = {
 			Manifest.permission.WRITE_EXTERNAL_STORAGE,
 			Manifest.permission.READ_EXTERNAL_STORAGE
 		};
 		requestPermissions(per,6909);
-		if(isPermission(this,per))
-		{
-			
-		}
+		
+		// Views initialization
 		
         toolbar = findViewById(R.id.mainToolbar);
         d = findViewById(R.id.mainDrawerLayout);
@@ -69,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		Item3 =findViewById(R.id.activity_mainGridItem3);
 		Item4 =findViewById(R.id.activity_mainGridItem4);
 		
+		// Set click listeners
+		// For grid items
 		Item1.setOnClickListener(this);
 		Item2.setOnClickListener(this);
 		Item3.setOnClickListener(this);
@@ -108,10 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
         
+		// Setup drawerlayout
 		ActionBarDrawerToggle t = new ActionBarDrawerToggle(this, d, toolbar, R.string.app_name, R.string.app_name);
 		d.setDrawerListener(t);
 		t.syncState();
 		n.setNavigationItemSelectedListener(this);
+		
+		// Set home navigation icon and size
 		
 		int dr_size = (int) getResources().getDimension(R.dimen.topbar_drawer_icon_size)/density;
 		Drawable dr = getResources().getDrawable(R.drawable.menus);
@@ -165,23 +169,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
     }
 	
+	// Drawer Navigation item click listener
+	
 	@Override
 	public boolean onNavigationItemSelected(MenuItem p1)
 	{
 		
 		return true;
 	}
-	public static void toast(final AppCompatActivity a,final String txt)
-	{
-		a.runOnUiThread(new Runnable()
-		{
-			@Override public void run()
-			{
-				Toast.makeText(a,txt,Toast.LENGTH_LONG).show();
-			}
-		});
-	}
-
+	
+	// Onclick listener (All in one using switch and id)
+	
 	@Override
 	public void onClick(View p1)
 	{
@@ -189,23 +187,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		switch(p1.getId())
 		{
 			case R.id.activity_mainGridItem1:
+				// Main grid item 1 (Space Cleaner)
 				i = new Intent(this,SpaceCleanerActivity.class);
-				
 				startActivity(i);
 				break;
 			case R.id.activity_mainGridItem2:
+				//Main grid item 2 (Status saver)
 				i = new Intent(this,StatusSaverActivity.class);
-				
 				startActivity(i);
 				break;
 			case R.id.activity_mainGridItem3:
-
+				// Main grid item 3
 				break;
 			case R.id.activity_mainGridItem4:
-
+				// Main grid item 4
 				break;
 		}
 	}
+	
+	// Function to check if a permission is granted or not(Useless)
 	
 	public static boolean isPermission(AppCompatActivity a,String[] permission)
 	{
@@ -219,20 +219,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 		return flag;
 	}
-
+	
+	// PubConnect : Calls when the responce of check for update is got
+	
 	@Override
 	public void onUpdateResponce(HttpURLConnection conn, String out, JSONObject obj, PubConnect.UpdateConnect up)
 	{
 		
 		try{
+			// The api gives the data in json 
+			// Status will be "ok" if no error
 			String status = obj.getString("status");
 			if(status.equals("ok")){
+				// Message contains all details of responce
 				JSONObject message = obj.getJSONObject("message");
-				Utils.toast(this,message.toString());
 				if(message.getBoolean("available_update"))
 				{
+					// Etc. Etc. more about the api responce can be found in server code
 					JSONObject update = message.getJSONObject("update");
 					JSONObject info = update.getJSONArray("info").getJSONObject(0);
+					// Add all deatils to "Me" object (Me.Update)
 					me.update.app_id = update.getString("app_id");
 					me.update.app_name = update.getString("app_name");
 					me.update.version = update.getString("version");
@@ -254,16 +260,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					me.update.sub_title = info.getString("sub_title");
 					me.update.update_description = info.getString("description");
 					me.update.must_update = info.getBoolean("must_update");
+					// Create pubconnect dialog with update notification
 					PubConnect.UpdateConnect.UpdateDialog di = up.getDialog(me);
-					di.show();
+					di.show(); //show
 				}
 			}else
 			{
-				Utils.toast(this,"Unable ti find updates");
+				
 			}
 		}catch(Exception e)
 		{
-			Utils.toast(this,e.toString());
+			Utils.toast(this,"Couldnt connect to server");
 		}
 	}
 	

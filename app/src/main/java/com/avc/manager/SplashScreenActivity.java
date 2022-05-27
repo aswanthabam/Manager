@@ -3,7 +3,10 @@ package com.avc.manager;
 import android.os.*;
 import android.content.*;
 import android.support.v7.app.*;
-
+import android.app.*;
+/*
+ Splash screen to show when the app is loading
+*/
 public class SplashScreenActivity extends AppCompatActivity
 {
 	public AppCompatActivity a;

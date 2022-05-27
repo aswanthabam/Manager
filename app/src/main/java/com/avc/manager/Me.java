@@ -1,7 +1,9 @@
 package com.avc.manager;
 import java.text.*;
 import java.util.*;
-
+// Class for storing all deatils about the app itself
+// Used for update purpose (Version id and othe details are there)
+// An Me.Update class is available for storing the deatils about the update fetched online
 public class Me
 {
 	public static String app_id = "1000";
@@ -39,11 +41,15 @@ public class Me
 		public SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public Date date = null;
 		
+		// Return the created date as "Date" objet
+		
 		public Date get_created_date()
 		{
 			try{return format.parse(created_date);}
 			catch(Exception e){return null;}
 		}
+		
+		// Retuen the uploaded date as "Date" Object
 		
 		public Date get_uploaded_date()
 		{

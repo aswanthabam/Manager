@@ -8,7 +8,7 @@
 	android:layout_height="match_parent"
 	android:background="@color/colorPrimary">
 
-	<android.support.design.AppBarLayout
+	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		app:elevation="0dp"
@@ -21,7 +21,7 @@
 			android:background="@android:color/transparent"
 			app:layout_scrollFlags="scroll|enterAlways"/>
 
-	</android.support.design.AppBarLayout>
+	</android.support.design.widget.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -69,12 +69,12 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent">
 
-				<androidx.recyclerview.widget.RecyclerView
+				<android.support.v7.widget.RecyclerView
 					android:id="@+id/status_saverRecyclerView"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent">
 
-				</androidx.recyclerview.widget.RecyclerView>
+				</android.support.v7.widget.RecyclerView>
 
 				<LinearLayout
 					android:id="@+id/status_saverProgressBar"

@@ -8,7 +8,10 @@ import com.avc.manager.*;
 import android.app.*;
 import java.util.*;
 import android.support.v7.app.*;
-
+/*
+ Holdable object class extends linear layiout
+ This class is usefull for sencing holding of view and removing etc.
+*/
 public class HoldebleObject extends LinearLayout
 {
 	public AppCompatActivity activity;
@@ -24,6 +27,9 @@ public class HoldebleObject extends LinearLayout
 		con = a;
 		activity = (AppCompatActivity) con;
 	}
+	
+	// Add all given parent an action up(Hold remove) action
+	// Parents are given in the runtime
 	public void setToucher()
 	{
 		for(int i = 0;i < parents.size();i++)
@@ -43,18 +49,30 @@ public class HoldebleObject extends LinearLayout
 			});
 		}
 	}
+	
+	// Add a view to parent list
+	
 	public void addParent(View v)
 	{
 		parents.add(v);
 	}
+	
+	// Add a list of views to parent list
+	
 	public void addParent(List<View> v)
 	{
 		for(int i = 0;i < v.size();i++) parents.add(v.get(i));
 	}
+	
+	// Add a array of view to parent list
+	
 	public void addParent(View[] v)
 	{
 		for(View i: v) parents.add(i);
 	}
+	
+	// functiom to initialize listeners
+	
 	public void setInitListener()
 	{
 		onclick = new OnClickListener()
@@ -76,6 +94,9 @@ public class HoldebleObject extends LinearLayout
 			}
 		};
 	}
+	
+	// Extends the touch event
+	
 	@Override
 	public boolean onTouchEvent(final MotionEvent event)
 	{
@@ -134,6 +155,8 @@ public class HoldebleObject extends LinearLayout
 		return true;
 	}
 	
+	// functions to set Listeners
+	
 	public void setOnHoldListener(OnHoldListener l)
 	{
 		onhold = l;
@@ -143,6 +166,8 @@ public class HoldebleObject extends LinearLayout
 	{
 		onclick = l;
 	}
+	
+	// On hold and on click
 	
 	public interface OnHoldListener
 	{

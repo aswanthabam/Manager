@@ -8,4 +8,6 @@
 	<color name="mainIconTint">#292A2A</color>
 	<color name="lightBlack">#8D8D8D</color>
 	<color name="light_border">#C0C0C0</color>
+	<color name="green">#70F44D</color>
+	<color name="red">#F50909</color>
 </resources>
