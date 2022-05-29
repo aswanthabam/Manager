@@ -10,4 +10,6 @@
 	<color name="light_border">#C0C0C0</color>
 	<color name="green">#70F44D</color>
 	<color name="red">#F50909</color>
+	<color name="blue">#54B7FF</color>
+	<color name="green_1">#2DAA7D</color>
 </resources>
