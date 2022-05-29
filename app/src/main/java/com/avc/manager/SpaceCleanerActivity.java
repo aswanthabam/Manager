@@ -10,6 +10,7 @@ import android.widget.*;
 import android.view.View.*;
 import android.support.v7.app.*;
 import android.support.v7.widget.Toolbar;
+import java.io.*;
 
 public class SpaceCleanerActivity extends AppCompatActivity 
 {
@@ -18,7 +19,7 @@ public class SpaceCleanerActivity extends AppCompatActivity
 	public AppCompatActivity activity;
 	public TextView sizeTxt,SizeInfoText;
 	public GROUPFiles files = new GROUPFiles();
-	
+	public Button clear;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -29,6 +30,7 @@ public class SpaceCleanerActivity extends AppCompatActivity
 		sizeTxt = findViewById(R.id.space_cleanerSizeText);
 		sizeTxt.setText("");
 		SizeInfoText = findViewById(R.id.space_cleanerCurrentName);
+		clear = findViewById(R.id.space_cleanerClearButton);
 		
 		activity = this;
 		
@@ -65,12 +67,29 @@ public class SpaceCleanerActivity extends AppCompatActivity
 				for(int i = 0;i < files.all.size();i++) Utils.toast(activity,files.all.get(i).parent);
 			}
 		});
+		
+		// Click listener for cleae now button
+		
+		clear.setOnClickListener(new View.OnClickListener()
+		{
+			@Override public void onClick(View v)
+			{
+				if(files.files.size() > 0){
+					for(File f : files.files){
+						f.delete();
+					}
+					sizeTxt.setText("All Cleared");
+				}
+			}
+		});
+		clear.setVisibility(View.GONE); // Hide button till.the stkrage scan is comoleted
     }
 	
 	// Scan for space cleanup for fast up it is done inside a thread
 	
 	public void storageScan()
 	{
+		clear.setVisibility(View.GONE);
 		new Thread(new Runnable(){
 			@Override public void run()
 			{
@@ -87,9 +106,10 @@ public class SpaceCleanerActivity extends AppCompatActivity
 							{
 								sizeTxt.setText(f.sizeSTR);
 								SizeInfoText.setText(f.current);
+								
 							}
 						});
-						try{Thread.sleep(5);}catch(Exception e){}
+						//try{Thread.sleep(5);}catch(Exception e){}
 					}
 					@Override public void onRemove(final GROUPFiles f)
 					{
@@ -111,6 +131,12 @@ public class SpaceCleanerActivity extends AppCompatActivity
 							{
 								sizeTxt.setText(f.sizeSTR);
 								SizeInfoText.setText("View All");
+								if(files.files.size() > 0)clear.setVisibility(View.VISIBLE); // Show clear now button
+								else{
+									sizeTxt.setText("All Cleared");
+									SizeInfoText.setText("");
+									clear.setVisibility(View.GONE);
+								}
 							}
 						});
 					}

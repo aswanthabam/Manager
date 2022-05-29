@@ -15,13 +15,13 @@ public class SplashScreenActivity extends AppCompatActivity
 	{
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.splash_screen);
+		//setContentView(R.layout.splash_screen);
 		a = this;
 		new Thread(new Runnable()
 		{
 			@Override public void run()
 			{
-				try{Thread.sleep(1000);}catch(Exception e){}
+				//try{Thread.sleep(1000);}catch(Exception e){}
 				Intent i = new Intent(a,MainActivity.class);
 				startActivity(i);
 				finish();

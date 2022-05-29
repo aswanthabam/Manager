@@ -93,8 +93,7 @@
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"
 									android:layout_margin="@dimen/home_main_icon_margin"
-									android:src="@drawable/data_cleaning"
-									android:background="?attr/selectableItemBackground"/>
+									android:src="@drawable/data_cleaning"/>
 
 								<TextView
 									android:layout_width="wrap_content"

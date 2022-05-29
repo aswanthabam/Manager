@@ -52,8 +52,8 @@
 						android:textStyle="bold"
 						android:textColor="@color/mainIconTint"
 						android:layout_gravity="center"/>
-					
-					<TextView 
+
+					<TextView
 						android:id="@+id/space_cleanerCurrentName"
 						android:layout_width="200dp"
 						android:layout_height="wrap_content"
@@ -62,8 +62,19 @@
 						android:textColor="@color/lightBlack"
 						android:gravity="center"
 						android:singleLine="true"
-						android:layout_gravity="center"
-						/>
+						android:layout_gravity="center"/>
+
+					<Button
+						android:id="@+id/space_cleanerClearButton"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Clear Now"
+						android:background="@drawable/button_round"
+						android:layout_margin="6dp"
+						android:typeface="serif"
+						android:textStyle="bold"
+						android:textColor="#FFFFFF"
+						android:padding="5dp"/>
 
 				</LinearLayout>
 
@@ -102,8 +113,7 @@
 								android:text="WhatsApp Cleaner"
 								android:gravity="center"
 								android:textColor="@color/mainIconTint"
-								android:layout_margin="@dimen/space_cleaner_icons_margin"
-								/>
+								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
 
@@ -128,8 +138,7 @@
 								android:text="Telegram Cleaner"
 								android:gravity="center"
 								android:textColor="@color/mainIconTint"
-								android:layout_margin="@dimen/space_cleaner_icons_margin"
-								/>
+								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
 
@@ -154,8 +163,7 @@
 								android:text="Instagram Cleaner"
 								android:gravity="center"
 								android:textColor="@color/mainIconTint"
-								android:layout_margin="@dimen/space_cleaner_icons_margin"
-								/>
+								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
 
@@ -188,8 +196,7 @@
 								android:text="Facebook Cleaner"
 								android:gravity="center"
 								android:textColor="@color/mainIconTint"
-								android:layout_margin="@dimen/space_cleaner_icons_margin"
-								/>
+								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
 
@@ -214,8 +221,7 @@
 								android:text="WhatsApp Cleaner"
 								android:gravity="center"
 								android:textColor="@color/mainIconTint"
-								android:layout_margin="@dimen/space_cleaner_icons_margin"
-								/>
+								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
 
@@ -240,8 +246,7 @@
 								android:text="WhatsApp Cleaner"
 								android:gravity="center"
 								android:textColor="@color/mainIconTint"
-								android:layout_margin="@dimen/space_cleaner_icons_margin"
-								/>
+								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
 
