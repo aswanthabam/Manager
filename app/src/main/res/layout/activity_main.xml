@@ -89,6 +89,7 @@
 								>
 
 								<ImageView
+									android:id="@+id/activity_mainImageViewAnim"
 									android:tint="@color/mainIconTint"
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"

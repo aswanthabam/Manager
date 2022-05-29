@@ -41,6 +41,7 @@
 					android:orientation="vertical"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/space_cleaner_top_size_box_height"
+					android:background="@drawable/top_arrow"
 					android:gravity="center">
 
 					<TextView
@@ -67,14 +68,14 @@
 					<Button
 						android:id="@+id/space_cleanerClearButton"
 						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_height="40dp"
 						android:text="Clear Now"
-						android:background="@drawable/button_round"
-						android:layout_margin="6dp"
+						android:background="@drawable/button_round_blue"
+						android:layout_margin="10dp"
 						android:typeface="serif"
 						android:textStyle="bold"
 						android:textColor="#FFFFFF"
-						android:padding="5dp"/>
+						/>
 
 				</LinearLayout>
 

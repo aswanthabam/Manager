@@ -20,6 +20,7 @@ import android.support.v4.widget.*;
 import android.support.v7.app.*;
 import android.support.design.widget.*;
 import android.support.v4.content.*;
+import android.support.graphics.drawable.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener, PubConnect.OnUpdateResponceListener
 {
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				// Main grid item 1 (Space Cleaner)
 				i = new Intent(this,SpaceCleanerActivity.class);
 				startActivity(i);
+				
 				break;
 			case R.id.activity_mainGridItem2:
 				//Main grid item 2 (Status saver)

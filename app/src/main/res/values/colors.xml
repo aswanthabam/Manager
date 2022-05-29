@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FFFFFFFF</color>
-    <color name="colorPrimaryDark">#70a1ff</color>
-    <color name="colorAccent">#FFECCC68</color>
-    <color name="colorControlNormal">#FFFF6348</color>
-    <color name="colorControlHighlight">#70a1ff</color>
+    <color name="colorPrimaryDark">#54B7FF</color>
+	<color name="colorPrimaryDarkLight">#94D1FF</color>
+    <color name="colorAccent">#2DAA7D</color>
+    <color name="colorControlNormal">#2DAA7D</color>
+    <color name="colorControlHighlight">#54B7FF</color>
 	<color name="mainIconTint">#292A2A</color>
 	<color name="lightBlack">#8D8D8D</color>
 	<color name="light_border">#C0C0C0</color>
