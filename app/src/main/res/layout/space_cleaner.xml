@@ -41,7 +41,7 @@
 					android:orientation="vertical"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/space_cleaner_top_size_box_height"
-					android:background="@drawable/top_arrow"
+					android:background="@drawable/top_arrow_bg"
 					android:gravity="center">
 
 					<TextView

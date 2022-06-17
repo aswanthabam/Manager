@@ -21,8 +21,11 @@ import android.support.v7.app.*;
 import android.support.design.widget.*;
 import android.support.v4.content.*;
 import android.support.graphics.drawable.*;
+import java.io.*;
+import android.os.*;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener, PubConnect.OnUpdateResponceListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener, PubConnect.OnUpdateResponceListener,
+SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHomeMessageListener
 {
     private Toolbar toolbar;
     private DrawerLayout d;
@@ -30,18 +33,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public TextView infoTxt;
 	public Animation floatUp;
 	public int info_i = 0;
-	public AppCompatActivity activity;
+	//public AppCompatActivity activity;
 	public Me me;
 	public LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
-	public int SystemWidth,SystemHeight;
-	private String[] info_txts = {"NMB of storage can be freed","Delete old whatsapp images","TELENMB Storage is used by telegram"};
+	//public int SystemWidth,SystemHeight;
+	//private String[] info_txts = {"NMB of storage can be freed","Delete old whatsapp images","TELENMB Storage is used by telegram"};
     
 	@Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-		activity = this;
+		Manager._main_activity = this;
 		
 		// Initialize objects related to app and perform an update check
 		
@@ -85,9 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		int statusBarHeight = rectangle.top;
 		int contentViewTop = 
 			window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
-		int titleBarHeight= contentViewTop - statusBarHeight;
+		Me.titleBarHeight= contentViewTop - statusBarHeight;
 		
-		toolbar.setPadding(0,titleBarHeight+30,0,0);
+		toolbar.setPadding(0,Me.titleBarHeight+30,0,0);
 		
 		// Get display width and set the width to linear layout for same width and height
 
@@ -97,10 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 		// Store the width and height in pixels for future use
 
-		SystemWidth = outMetrics.widthPixels;
-		SystemHeight = outMetrics.heightPixels;
+		Me.SystemWidth = outMetrics.widthPixels;
+		Me.SystemHeight = outMetrics.heightPixels;
 		
-		int density  = (int) getResources().getDisplayMetrics().density;
+		Me.density  = (int) getResources().getDisplayMetrics().density;
 		HomeTopBox = findViewById(R.id.activity_mainBubbleBg);
 		GridContainer = findViewById(R.id.activity_mainGridItemsContainer);
         
@@ -118,10 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		// Set home navigation icon and size
 		
-		int dr_size = (int) getResources().getDimension(R.dimen.topbar_drawer_icon_size)/density;
+		Me.dr_size = (int) getResources().getDimension(R.dimen.topbar_drawer_icon_size)/Me.density;
 		Drawable dr = getResources().getDrawable(R.drawable.menus);
 		Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
-		Drawable di = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, dr_size, dr_size, true));
+		Drawable di = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, Me.dr_size, Me.dr_size, true));
 		di.setTint(getResources().getColor(R.color.colorAccent));
 		getSupportActionBar().setHomeAsUpIndicator(di); // Change drawer icon
 		
@@ -129,45 +132,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		infoTxt = findViewById(R.id.activity_mainInfoTxt);
 		floatUp = AnimationUtils.loadAnimation(this,R.anim.text_float_up);
-		floatUp.setRepeatCount(Animation.INFINITE);
-		floatUp.setRepeatMode(Animation.REVERSE);
-		
+		floatUp.setRepeatCount(0);
+		/*floatUp.setRepeatMode(Animation.REVERSE);
+		*/
 		floatUp.setAnimationListener(new Animation.AnimationListener()
 		{
 			@Override public void onAnimationEnd(Animation n)
 			{
 				infoTxt.setText("");
-				if(info_i == info_txts.length) info_i = 0;
 				infoTxt.startAnimation(floatUp);
 			}
 			@Override public void onAnimationRepeat(Animation n)
 			{
-				infoTxt.setText(info_txts[info_i]);
-				info_i++;
+				
 			}
 			@Override public void onAnimationStart(Animation n)
 			{
-				if(info_i == info_txts.length) info_i = 0;
-				infoTxt.setText(info_txts[info_i]);
+				if(info_i >= Manager.show_home.size()) info_i = 0;
 				info_i++;
+				infoTxt.setText(Manager.show_home.get(info_i-1));
+				//Utils.toast(activity,String.valueOf(info_i)+" : "+Manager.show_home.get(info_i));
 			}
 		});
-		
+		info_i = 0;
 		infoTxt.startAnimation(floatUp);
 		
 		
 		ViewGroup.LayoutParams par = GridContainer.getLayoutParams();
-		par.height = SystemWidth;
+		par.height = Me.SystemWidth;
 		GridContainer.setLayoutParams(par);
 		
 		// Set home top box size to 50% of screen size
 		
 		par = HomeTopBox.getLayoutParams();
 
-		par.height = (SystemHeight/2);
+		par.height = (Me.SystemHeight/2);
 		
 		HomeTopBox.setLayoutParams(par);
 		
+		
+		Me.externalStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath();
+		
+		Manager.space_cleaner = new SpaceCleaner(this);
+		Manager.space_cleaner.setOnFileChangeListener(this);
+		Manager.space_cleaner.setOnScanListener(this);
+		Manager.space_cleaner.setOnHomeMessageListener(this);
+		if(Manager.loadSpaceCleaner(this)) Manager.space_cleaner.storageScan();
+		else Utils.toast(this,"Unable to load space cleaner");
+		
+		if(Manager.loadStatusSaver(this)) Manager.status_saver = new StatusSaver(this);
+		else Utils.toast(this,"Unable to load status saver");
     }
 	
 	// Drawer Navigation item click listener
@@ -272,8 +286,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			}
 		}catch(Exception e)
 		{
-			Utils.toast(this,"Couldnt connect to server");
+			Log.e("UPDATE_CHECK","Couldnt connect to server");
 		}
+	}
+
+	@Override
+	protected void onResume()
+	{
+		// Changes to this activity listener when backed to this activity
+		if(Manager.space_cleaner != null){
+			Manager.space_cleaner.setOnFileChangeListener(this);
+			Manager.space_cleaner.setOnScanListener(this);
+			Manager.space_cleaner.setOnHomeMessageListener(this);
+		}
+		super.onResume();
+	}
+	
+	/*
+	 ****************************************
+	 Space Cleaner Listeners of this activity
+	 ***************************************
+	*/
+	
+	@Override
+	public void onStart(GROUPFiles files)
+	{
+		// Storage scan started
+	}
+
+	@Override
+	public void onEnd(GROUPFiles files)
+	{
+		// Stirage scan ended
+		Manager.show_home.add(Manager.space_cleaner_show_in_home_text.replaceAll("&size",files.sizeSTR));
+	}
+
+	@Override
+	public void onAdd(GROUPFiles files)
+	{
+		// New fike added to space cleane
+	}
+
+	@Override
+	public void onRemove(GROUPFiles files)
+	{
+		// File remoced
+	}
+	
+	@Override
+	public void onMessageChange(GROUPFiles f)
+	{
+		// The message list want to be shown in hime screen floating text is changed by spaceCleaber object
+		
+		//Utils.toast(this,String.valueOf(Manager.show_home.size()));
 	}
 	
 }

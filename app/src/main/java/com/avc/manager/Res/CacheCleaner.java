@@ -1,42 +1,26 @@
 package com.avc.manager.Res;
 import java.io.*;
+import android.*;
+import android.support.v7.app.*;
+import android.content.pm.*;
+import java.lang.reflect.*;
+import com.avc.manager.*;
 
 public class CacheCleaner
 {
-	String re = null;
+	private AppCompatActivity activity;
 	
-	public CacheCleaner()
+	public CacheCleaner(AppCompatActivity a)
 	{
-		try {
-
-			// Executes the command.
-
-			Process process = Runtime.getRuntime().exec("/system/bin/ls /sdcard");
-
-			// Reads stdout.
-			// NOTE: You can write to stdin of the command using
-			//       process.getOutputStream().
-			BufferedReader reader = new BufferedReader(
-				new InputStreamReader(process.getInputStream()));
-			int read;
-			char[] buffer = new char[4096];
-			StringBuffer output = new StringBuffer();
-			while ((read = reader.read(buffer)) > 0) {
-				output.append(buffer, 0, read);
-			}
-			reader.close();
-
-			// Waits for the command to finish.
-			process.waitFor();
-
-			re = output.toString();
-		} catch (IOException e) {
-
-			throw new RuntimeException(e);
-
-		} catch (InterruptedException e) {
-
-			throw new RuntimeException(e);
+		activity = a;
+		try{
+			PackageManager pm = a.getPackageManager();
+			Method method = pm.getClass().getMethod("freeStorageAndNotify", new Class[] { Long.TYPE, Class.forName("")});
+			method.setAccessible(true);
+			Utils.toast(activity,method.invoke(pm, Long.MAX_VALUE, null).toString());
+			
+		}catch(Exception e){
+			Utils.toast(activity,"Unable to toast "+e.toString());
 		}
 	}
 }

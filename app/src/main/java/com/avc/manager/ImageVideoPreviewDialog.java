@@ -18,7 +18,7 @@ public class ImageVideoPreviewDialog extends Dialog
 	public VideoView v1;
 	public ImageView v2,Cancel,download,share;
 	public LinearLayout main;
-	
+	public boolean want_save = true;
 	private boolean video = false;
 	
 	public ImageVideoPreviewDialog(AppCompatActivity a,File f)
@@ -71,8 +71,10 @@ public class ImageVideoPreviewDialog extends Dialog
 			@Override public void onClick(View v)
 			{
 				// Share image
-				File f = Utils.saveToDevice(file,"Statuses");
-				Utils.toast(activity,"File saved!");
+				File f ;
+				if(want_save) f = Utils.saveToDevice(file,"Statuses");
+				else f = file;
+				Utils.toast(activity,"Sharing...");
 				Utils.shareFile(activity,"AVC Manager","Hey,\nLook at this amazing content, "+
 								"I saved this status using AVC Manager Application!. AVC Manager has more features like this including\n"+
 								" • Status saver\n • Space cleaner\n • Device Optimization etc..\n\n Download the app now."

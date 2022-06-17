@@ -5,12 +5,38 @@ import android.os.*;
 
 public class GROUPFiles
 {
+	// static constant varuables
+	
+	public static final int SORT_BY_NAME_ASCENDING = 10;
+	public static final int SORT_BY_NAME_DESCENDING = 11;
+	public static final int SORT_BY_DATE_ASCENDING = 12;
+	public static final int SORT_BY_DATE_DESCENDING = 13;
+	
 	public List<File> files = new ArrayList<File>();
 	public String name = "",parent = "",sizeSTR = "",current = "";
 	public long size = 0;
 	public float sizeKB = 0,sizeMB = 0,sizeGB = 0;
-	private Listener listener;
+	public Object linkedObject = null; // This object is used as an extension of thia class
+	
+	private Listener listener = new Listener(){
+		@Override public void onPause(GROUPFiles f){}
+		@Override public void onRemove(GROUPFiles f){}
+		@Override public void onAdded(GROUPFiles f){}
+	};
+	
 	public List<GROUPFiles> all = new ArrayList<GROUPFiles>();
+	
+	// Recreate the object by seting all varuabke empty this method is used to avoid copying of cintent
+	// Because of using parser
+	
+	public void recreate()
+	{
+		// Info :: This method must wanted to be called to create a new instance of this class
+		files = new ArrayList<File>();
+		name = "";parent = "";sizeSTR = "";current = "";
+		size = 0;
+		sizeKB = 0;sizeMB = 0;sizeGB = 0;
+	}
 	
 	// Class initialization with data
 	// Files as list,size,name
@@ -47,7 +73,14 @@ public class GROUPFiles
 	}
 	// No data
 	public GROUPFiles(){}
-
+	
+	// set linkage or extenaion obhect
+		// This object is used as an extension of this class this object may contain more infirmation about this groupfile
+	public void setLinkage(Object m)
+	{
+		linkedObject = m;
+	}
+	
 	// set file name
 
 	public void setName(String na){name = na;}
@@ -146,4 +179,46 @@ public class GROUPFiles
 		listener = l;
 	}
 	
+	public void sortFiles(int sort_by)
+	{
+		Comparator com = new Comparator<File>(){
+			@Override public int compare(File f1,File f2)
+			{
+				// Oldest on top
+				return Long.compare(f1.lastModified(),f2.lastModified());
+			}
+		};
+		switch(sort_by){
+			case SORT_BY_NAME_ASCENDING:
+				
+				break;
+			case SORT_BY_NAME_DESCENDING:
+				
+				break;
+			case SORT_BY_DATE_ASCENDING:
+				com = new Comparator<File>(){
+					@Override public int compare(File f1,File f2)
+					{
+						// Oldest on top
+						return Long.compare(f1.lastModified(),f2.lastModified());
+					}
+				};
+				break;
+			case SORT_BY_DATE_DESCENDING:
+				com = new Comparator<File>(){
+					@Override public int compare(File f1,File f2)
+					{
+						// Newest on top
+						return Long.compare(f2.lastModified(),f1.lastModified());
+					}
+				};
+				break;
+		}
+		File[] fil = new File[files.size()];
+		fil = files.toArray(fil);
+		Arrays.sort(fil,com);
+		List<File> fis = new ArrayList<File>();
+		for(File f : fil) fis.add(f);
+		files = fis;
+	}
 }

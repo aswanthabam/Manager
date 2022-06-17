@@ -6,13 +6,31 @@ import java.util.*;
 // An Me.Update class is available for storing the deatils about the update fetched online
 public class Me
 {
+	// Some details which are constant all over the app
+	
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	
+	// Details about the system
+	//Variables
+	public static String externalStorageDirectory = "";	// External storage directory of device
+	// Measures
+	public static int SystemWidth = 0;		// Screen width
+	public static int SystemHeight = 0;		// Screen Height
+	public static int titleBarHeight = 0;	// Title bar height(Top status bar height)
+	public static int density = 0;			// Density of screen
+	public static int dr_size = 0;			// Drawer icon or topbar menu icon. Thus is the size of that perticular image
+	
+	// Details about the app
+	
 	public static String app_id = "1000";
 	public static String version = "1";
 	public static String app_pass = "avcmanager";
 	public static String name = "AVC Manager";
 	public static Update update = new Update();
-	public Me(){}
 	
+	public Me(){}
+	// Update class holding information about an update
 	public static class Update
 	{
 		
@@ -38,14 +56,14 @@ public class Me
 		public String update_description = "";
 		public boolean must_update = true;
 		
-		public SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//public SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public Date date = null;
 		
 		// Return the created date as "Date" objet
 		
 		public Date get_created_date()
 		{
-			try{return format.parse(created_date);}
+			try{return dateFormat.parse(created_date);}
 			catch(Exception e){return null;}
 		}
 		
@@ -53,7 +71,7 @@ public class Me
 		
 		public Date get_uploaded_date()
 		{
-			try{return format.parse(created_date);}
+			try{return dateFormat.parse(created_date);}
 			catch(Exception e){return null;}
 		}
 	}

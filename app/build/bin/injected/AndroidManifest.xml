@@ -21,6 +21,9 @@
 	<uses-permission
 		android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
+	<uses-permission
+		android:name="android.permission.CLEAR_APP_CACHE"/>
+
 	<application
 		android:name=".AIDEApplication"
 		android:allowBackup="true"
@@ -73,6 +76,16 @@
 
 		<activity
 			android:name=".StatusSaverActivity"
+			android:screenOrientation="portrait"
+			android:label=""/>
+
+		<activity
+			android:name=".FileViewerActivity"
+			android:screenOrientation="portrait"
+			android:label=""/>
+
+		<activity
+			android:name=".DownloadedStatusActivity"
 			android:screenOrientation="portrait"
 			android:label=""/>
 

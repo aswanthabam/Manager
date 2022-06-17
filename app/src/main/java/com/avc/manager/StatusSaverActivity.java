@@ -17,6 +17,8 @@ import android.support.v7.widget.*;
 import android.support.v7.app.*;
 import android.support.design.widget.*;
 import android.support.v7.widget.Toolbar;
+import android.view.View.*;
+import android.content.*;
 
 public class StatusSaverActivity extends AppCompatActivity implements StatusRVAdapter.OnBind , StatusRVAdapter.OnDialog
 {
@@ -26,9 +28,9 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 	public WhatsApp whatsapp;
 	public GROUPFiles f;
 	public CoordinatorLayout main;
-	public ImageView topImg;
+	public ImageView topImg,downloads_icon;
 	public Toolbar toolbar;
-	public int anim_o = 0,SystemWidth,SystemHeight;
+	public int anim_o = 0;
 	public TextView TotalTxt;
 	public LinearLayout bar;
 	public Map<VideoView,Integer> vViews = new ArrayMap<VideoView,Integer>();
@@ -50,6 +52,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 		toolbar = findViewById(R.id.mainToolbar);
 		TotalTxt = findViewById(R.id.status_saverTextViewTotal);
 		topImg = findViewById(R.id.status_saver_preview_layoutImageView);
+		downloads_icon = findViewById(R.id.status_saverDownloads);
 		
 		// Set toolbar
 		
@@ -60,17 +63,10 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 		
 		activity = this;
 		
-		// Get display width and set the width to linear layout for same width and height
-		Display display = getWindowManager().getDefaultDisplay();
-		DisplayMetrics outMetrics = new DisplayMetrics ();
-		display.getMetrics(outMetrics);
-		// Store the width and height in pixels for future use
-		SystemWidth = outMetrics.widthPixels;
-		SystemHeight = outMetrics.heightPixels;
-		int density  = (int) getResources().getDisplayMetrics().density;
-		int dr_size = (int) getResources().getDimension(R.dimen.topbar_drawer_icon_size)/density;
+		// Set top menu icon size
+		
 		Bitmap dr = ((BitmapDrawable) getResources().getDrawable(R.drawable.btn_back)).getBitmap();
-		Drawable di = new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(dr,dr_size,dr_size,true));
+		Drawable di = new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(dr,Me.dr_size,Me.dr_size,true));
 		getSupportActionBar().setHomeAsUpIndicator(di);
 		
 		// Whatsapp object
@@ -106,6 +102,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 			@Override public void onAdded(GROUPFiles ff){}
 			@Override public void onPause(GROUPFiles ff)
 			{
+				ff.sortFiles(GROUPFiles.SORT_BY_DATE_DESCENDING);
 				new Thread(new Runnable()
 				{
 					@Override public void run()
@@ -161,6 +158,17 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 			}
 		}).start();
 		
+		// Top view downloaded status  clock listenr
+		
+		downloads_icon.setOnClickListener(new OnClickListener()
+		{
+			@Override public void onClick(View v){
+				Intent i = new Intent(activity,DownloadedStatusActivity.class);
+				
+				//rcView.setAdapter(null);
+				startActivity(i);
+			}
+		});
 	}
 	// Options item selectiom
 	@Override

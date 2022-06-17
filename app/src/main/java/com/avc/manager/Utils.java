@@ -26,6 +26,15 @@ public class Utils
 		activity = a;
 	}
 	
+	// Converts a List<> to Array[]
+	
+	public static Object[] listToArray(List<Object> list)
+	{
+		Object[] o = new Object[list.size()];
+		o = list.toArray(o);
+		return o;
+	}
+	
 	// Convert string to Json
 	
 	public static JSONObject stringToJSON(String txt)
@@ -42,27 +51,23 @@ public class Utils
 	
 	// read responce from httpurlconnection (web)
 	
-	public static String reader(AppCompatActivity context,HttpURLConnection u)
+	public static String reader(AppCompatActivity context,HttpURLConnection u) throws Exception
 	{
 		String t = "";
 		int n = 0;
 		char[] buffer = new char[1024*4];
-		try{
-			int responceCode = u.getResponseCode();
-			InputStream in;
-			if(responceCode == 200)
-				in = new BufferedInputStream(u.getInputStream());
-			else in = u.getErrorStream();
-			InputStreamReader reader = new InputStreamReader(in,"UTF-8");
-			StringWriter writer = new StringWriter();
-			while(-1 != (n = reader.read(buffer))) writer.write(buffer,0,n);
-			t = writer.toString();
-			in.close();
-			u.disconnect();
-		}catch(Exception e){
-			toast(context,"Couldnt connect to server "+e.toString());
-			Log.e("HTTP_CONNECTION_ERROR_3",e.toString());
-		}
+		
+		int responceCode = u.getResponseCode();
+		InputStream in;
+		if(responceCode == 200)
+			in = new BufferedInputStream(u.getInputStream());
+		else in = u.getErrorStream();
+		InputStreamReader reader = new InputStreamReader(in,"UTF-8");
+		StringWriter writer = new StringWriter();
+		while(-1 != (n = reader.read(buffer))) writer.write(buffer,0,n);
+		t = writer.toString();
+		in.close();
+		u.disconnect();
 		return t;
 	}
 	
@@ -233,17 +238,17 @@ public class Utils
 		String st = null;
 		float siz = 0;
 		String qu = null;
-		if(toGB(si) > 0)
+		if(toGB(si) > 0.9)
 		{
 			siz = toGB(si);
 			qu = "GB";
 		}
-		else if(toMB(si) > 0)
+		else if(toMB(si) > 0.9)
 		{
 			siz = toMB(si);
 			qu = "MB";
 		}
-		else if(toKB(si) > 0)
+		else if(toKB(si) > 0.9)
 		{
 			siz = toKB(si);
 			qu = "KB";
@@ -262,7 +267,7 @@ public class Utils
 
 	public static float toGB(long si)
 	{
-		float s = si/1000000000;
+		float s = (float) si/1000000000;
 		return s;
 	}
 	
@@ -270,7 +275,7 @@ public class Utils
 	
 	public static float toMB(long si)
 	{
-		float s = si/1000000;
+		float s = (float) si/1000000;
 		return s;
 	}
 	
@@ -278,7 +283,7 @@ public class Utils
 
 	public static float toKB(long si)
 	{
-		float s = si/1000;
+		float s = (float) si/1000;
 		return s;
 	}
 	
