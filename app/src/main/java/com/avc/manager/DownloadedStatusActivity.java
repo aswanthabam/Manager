@@ -73,6 +73,7 @@ public class DownloadedStatusActivity extends AppCompatActivity implements Statu
 				runOnUiThread(new Runnable(){
 					@Override public void run()
 					{
+						Manager.collectThumbnails(f);
 						// When the all status are git set the adapter and hide prograess bar too
 						rcView.setAdapter(adapter);
 						//Utils.toast(activiy,String.valueOf(f.files.size()));

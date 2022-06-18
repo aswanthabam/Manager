@@ -20,13 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View.*;
 import android.content.*;
 
-public class StatusSaverActivity extends AppCompatActivity implements StatusRVAdapter.OnBind , StatusRVAdapter.OnDialog
+public class StatusSaverActivity extends AppCompatActivity implements StatusRVAdapter.OnBind , StatusRVAdapter.OnDialog,
+StatusSaver.OnStatusScanListener,StatusSaver.OnStatusChangeListener
 {
 	public RecyclerView rcView;
 	public StatusRVAdapter adapter;
 	public AppCompatActivity activity;
-	public WhatsApp whatsapp;
-	public GROUPFiles f;
 	public CoordinatorLayout main;
 	public ImageView topImg,downloads_icon;
 	public Toolbar toolbar;
@@ -34,7 +33,7 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 	public TextView TotalTxt;
 	public LinearLayout bar;
 	public Map<VideoView,Integer> vViews = new ArrayMap<VideoView,Integer>();
-	
+	Animation anim;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -69,20 +68,16 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 		Drawable di = new BitmapDrawable(getResources(),Bitmap.createScaledBitmap(dr,Me.dr_size,Me.dr_size,true));
 		getSupportActionBar().setHomeAsUpIndicator(di);
 		
-		// Whatsapp object
-		
-		whatsapp = new WhatsApp(this);
-		
 		// Top slideshow image animations
 
-		final Animation anim = AnimationUtils.loadAnimation(this,R.anim.fading_animation);
+		anim = AnimationUtils.loadAnimation(this,R.anim.fading_animation);
 
 		anim.setAnimationListener(new Animation.AnimationListener()
 		{
 			@Override public void onAnimationStart(Animation a){}
 			@Override public void onAnimationEnd(Animation a)
 			{
-				if(anim_o > adapter.thumbnails.size() -1) anim_o = 0;
+				if(anim_o > Manager.thumbnails.size() -1) anim_o = 0;
 				topImg.startAnimation(anim);
 				topImg.setImageBitmap(adapter.getThumbnail(anim_o));
 				anim_o++;
@@ -94,69 +89,10 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 
 		GridLayoutManager lManager = new GridLayoutManager(this,3);
 		rcView.setLayoutManager((RecyclerView.LayoutManager) lManager);
-		// Group status files and show them.while the completed message is got
-		f = new GROUPFiles();
-		f.setListener(new GROUPFiles.Listener()
-		{
-			@Override public void onRemove(GROUPFiles ff){}
-			@Override public void onAdded(GROUPFiles ff){}
-			@Override public void onPause(GROUPFiles ff)
-			{
-				ff.sortFiles(GROUPFiles.SORT_BY_DATE_DESCENDING);
-				new Thread(new Runnable()
-				{
-					@Override public void run()
-					{
-						adapter.thumbnails = adapter.getThumbnails();
-					}
-				}).start();
-				
-				runOnUiThread(new Runnable()
-				{
-					@Override public void run()
-					{
-						rcView.setAdapter(adapter);
-						bar.setVisibility(View.GONE);
-						rcView.setVisibility(View.VISIBLE);		
-					}
-				});
-				// Starts the showing of top image slideshow
-				new Thread(new Runnable()
-				{
-					@Override public void run()
-					{
-						while(true)
-						{
-							if(adapter != null)
-							{
-								if(adapter.thumbnails.size() < 1) continue;
-								runOnUiThread(new Runnable(){
-									@Override public void run()
-									{
-										TotalTxt.setText(adapter.files.files.size()+" Statuses Available");
-										topImg.setImageBitmap(adapter.getThumbnail(anim_o));
-										topImg.startAnimation(anim);
-										anim_o++;
-									}
-								});
-								break;
-							}
-						}
-					}
-				}).start();
-			}
-		});
-		// Check for status files for smooth running it is done inside thread
-		new Thread(new Runnable(){
-			@Override public void run()
-			{
-				adapter = new StatusRVAdapter(activity,f);
-				adapter.setOnBindListener(StatusSaverActivity.this);
-				adapter.setOnDialogListener(StatusSaverActivity.this);
-				adapter.parent = main;
-				whatsapp.getStatuses(f);
-			}
-		}).start();
+		
+		Manager.status_saver.setOnStatusChangeListener(this);
+		Manager.status_saver.setOnStatusScanListener(this);
+		Manager.status_saver.getStatuses(this);
 		
 		// Top view downloaded status  clock listenr
 		
@@ -170,6 +106,82 @@ public class StatusSaverActivity extends AppCompatActivity implements StatusRVAd
 			}
 		});
 	}
+	
+	
+	/*
+	 ************
+	 Status saver listeners
+	 *************
+	*/
+	
+	@Override
+	public void onStart(GROUPFiles f)
+	{
+		adapter = new StatusRVAdapter(activity,f);
+		adapter.setOnBindListener(StatusSaverActivity.this);
+		adapter.setOnDialogListener(StatusSaverActivity.this);
+		adapter.parent = main;
+	}
+
+	@Override
+	public void onEnd(GROUPFiles f)
+	{
+		f.sortFiles(GROUPFiles.SORT_BY_DATE_DESCENDING);
+		new Thread(new Runnable()
+			{
+				@Override public void run()
+				{
+					Manager.thumbnails = adapter.getThumbnails();
+				}
+			}).start();
+
+		runOnUiThread(new Runnable()
+			{
+				@Override public void run()
+				{
+					rcView.setAdapter(adapter);
+					bar.setVisibility(View.GONE);
+					rcView.setVisibility(View.VISIBLE);		
+				}
+			});
+		// Starts the showing of top image slideshow
+		new Thread(new Runnable()
+			{
+				@Override public void run()
+				{
+					while(true)
+					{
+						if(adapter != null)
+						{
+							if(Manager.thumbnails.size() < 1) continue;
+							runOnUiThread(new Runnable(){
+									@Override public void run()
+									{
+										TotalTxt.setText(adapter.files.files.size()+" Statuses Available");
+										topImg.setImageBitmap(adapter.getThumbnail(anim_o));
+										topImg.startAnimation(anim);
+										anim_o++;
+									}
+								});
+							break;
+						}
+					}
+				}
+			}).start();
+	}
+	
+	@Override
+	public void onAdd(GROUPFiles f)
+	{
+		
+	}
+	
+	@Override
+	public void onRemove(GROUPFiles f)
+	{
+		
+	}
+	
 	// Options item selectiom
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)

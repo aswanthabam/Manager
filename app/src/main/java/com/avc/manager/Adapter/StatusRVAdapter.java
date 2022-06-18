@@ -16,6 +16,7 @@ import android.util.*;
 import android.support.v7.widget.*;
 import android.support.v7.app.*;
 import android.support.design.widget.*;
+import android.preference.*;
 /*
  Adapter for Recycler View showing all statuses
 */
@@ -27,7 +28,7 @@ public class StatusRVAdapter extends RecyclerView.Adapter<StatusRVAdapter.ViewHo
 	private ImageVideoPreviewDialog di;
 	public boolean dialog = false;
 	public CoordinatorLayout parent;
-	public Map<File,Bitmap> thumbnails = new ArrayMap<File,Bitmap>();
+	//public Map<File,Bitmap> thumbnails = new ArrayMap<File,Bitmap>();
 	// Initialize listener
 	private OnDialog ondialog = new OnDialog()
 	{
@@ -55,15 +56,15 @@ public class StatusRVAdapter extends RecyclerView.Adapter<StatusRVAdapter.ViewHo
 	public Bitmap getThumbnail(int i)
 	{
 		File f = files.files.get(i);
-		if(thumbnails.get(f) != null) return thumbnails.get(f);
-		return thumbnails.get(f);
+		if(Manager.thumbnails.get(f) != null) return Manager.thumbnails.get(f);
+		return Manager.thumbnails.get(f);
 	}
 	// Get thumbnail of a file from previously collected mao
 	
-	public Bitmap getThumbnail(File f)
+	public static Bitmap getThumbnail(File f)
 	{
-		if(thumbnails.get(f) != null) return thumbnails.get(f);
-		return thumbnails.get(f);
+		if(Manager.thumbnails.get(f) != null) return Manager.thumbnails.get(f);
+		return Manager.thumbnails.get(f);
 	}
 	
 	// View holder
@@ -200,9 +201,9 @@ public class StatusRVAdapter extends RecyclerView.Adapter<StatusRVAdapter.ViewHo
 			}else{
 				
 			}
-			thumbnails.put(f,Thumb);
+			Manager.thumbnails.put(f,Thumb);
 		}
-		return thumbnails;
+		return Manager.thumbnails;
 	}
 	// Get item view type
 	@Override

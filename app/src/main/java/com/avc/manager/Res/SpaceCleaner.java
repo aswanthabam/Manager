@@ -9,17 +9,23 @@ public class SpaceCleaner
 {
 	private AppCompatActivity activity;
 	public static GROUPFiles files;
+	public static GROUPFiles un_counted_files;
+	public static GROUPFiles all_files;
 	public static Map<Manager.Scanable,Integer> show_home_contributions = new ArrayMap<Manager.Scanable,Integer>();
 	public SpaceCleaner(AppCompatActivity a)
 	{
 		activity = a;
 	}
-	
+	public static long size = 0;
 	// Scan for space cleanup for fast up it is done inside a thread
 	
 	public void storageScan()
 	{
+		
 		files = new GROUPFiles();
+		un_counted_files = new GROUPFiles();
+		all_files = new GROUPFiles();
+		
 		activity.runOnUiThread(new Runnable(){
 			@Override public void run()
 			{
@@ -30,11 +36,38 @@ public class SpaceCleaner
 		new Thread(new Runnable(){
 				@Override public void run()
 				{
+					un_counted_files.setListener(new GROUPFiles.Listener()
+						{
+							@Override public void onAdded(final GROUPFiles f)
+							{
+								all_files.add(f);
+								activity.runOnUiThread(new Runnable()
+									{
+										@Override public void run()
+										{
+											onuncountedfilechange.onUnCountedAdd(f);
+										}
+									});
+							}
+							@Override public void onRemove(final GROUPFiles f)
+							{
+								all_files.remove(f);
+								activity.runOnUiThread(new Runnable()
+									{
+										@Override public void run()
+										{
+											onuncountedfilechange.onUnCountedRemove(f);
+										}
+									});
+							}
+							@Override public void onPause(final GROUPFiles f){}
+						});
 					// Group files liatener callbacks when added,removed,paused the filss
 					files.setListener(new GROUPFiles.Listener()
 						{
 							@Override public void onAdded(final GROUPFiles f)
 							{
+								all_files.add(f);
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
@@ -46,6 +79,7 @@ public class SpaceCleaner
 							}
 							@Override public void onRemove(final GROUPFiles f)
 							{
+								all_files.remove(f);
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
@@ -65,6 +99,7 @@ public class SpaceCleaner
 									});
 							}
 						});
+					
 					// Loop through all scanable file defined this data in Me is added through the main activity
 					for(Manager.Scanable scan : Manager.space_cleaner_scannable)
 					{
@@ -87,7 +122,8 @@ public class SpaceCleaner
 						}
 						fiso.setLinkage(scan);
 						if(flag){
-							files.add(fiso);
+							if(scan.count) files.add(fiso);
+							else un_counted_files.add(fiso);
 							if(scan.show_in_home){
 								if(show_home_contributions.containsKey(scan)){
 									int mj = show_home_contributions.get(scan);
@@ -102,6 +138,7 @@ public class SpaceCleaner
 						}
 					}
 					files.pause();
+					un_counted_files.pause();
 				}
 			}).start();
 	}
@@ -145,6 +182,7 @@ public class SpaceCleaner
 	}
 	public static boolean scanAll(GROUPFiles fi,List<String> urls,List<String> except)
 	{
+		
 		boolean flag = false;
 		for(int i = 0;i < urls.size();i++)
 		{
@@ -159,6 +197,7 @@ public class SpaceCleaner
 
 			}
 		}
+		
 		return flag;
 	}
 
@@ -187,7 +226,19 @@ public class SpaceCleaner
 		Listeners 
 		***********
 	*/
+	// On Uncounted file added or removed liatenr
+	private OnUnCountedFileChangeListener onuncountedfilechange = new OnUnCountedFileChangeListener(){
+		@Override public void onUnCountedAdd(GROUPFiles f){}
+		@Override public void onUnCountedRemove(GROUPFiles f){}
+	};
+	public void setOnUncountedFileChangeListener(OnUnCountedFileChangeListener l){onuncountedfilechange = l;}
+	public interface OnUnCountedFileChangeListener
+	{
+		void onUnCountedAdd(GROUPFiles files);
+		void onUnCountedRemove(GROUPFiles files);
+	}
 	
+	// On a mesaage
 	private OnHomeMessageListener onhomemessage = new OnHomeMessageListener(){
 		@Override public void onMessageChange(GROUPFiles f){}
 	};

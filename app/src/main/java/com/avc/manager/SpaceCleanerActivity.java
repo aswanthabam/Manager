@@ -14,7 +14,8 @@ import java.io.*;
 import android.content.*;
 import java.util.*;
 
-public class SpaceCleanerActivity extends AppCompatActivity implements SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener
+public class SpaceCleanerActivity extends AppCompatActivity implements SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,
+SpaceCleaner.OnUnCountedFileChangeListener
 {
     private Toolbar toolbar;
 	public int SystemWidth,SystemHeight;
@@ -125,6 +126,19 @@ public class SpaceCleanerActivity extends AppCompatActivity implements SpaceClea
 			SizeInfoText.setText("");
 			clear.setVisibility(View.GONE);
 		}
+	}
+
+	@Override
+	public void onUnCountedAdd(GROUPFiles files)
+	{
+		// Uncounted or effectable file is added
+		Utils.toast(this,files.name);
+	}
+
+	@Override
+	public void onUnCountedRemove(GROUPFiles files)
+	{
+		// Uncounted or effectable file is Removed
 	}
 	
 	@Override

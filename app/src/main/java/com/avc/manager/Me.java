@@ -1,6 +1,7 @@
 package com.avc.manager;
 import java.text.*;
 import java.util.*;
+import java.io.*;
 // Class for storing all deatils about the app itself
 // Used for update purpose (Version id and othe details are there)
 // An Me.Update class is available for storing the deatils about the update fetched online
@@ -9,7 +10,7 @@ public class Me
 	// Some details which are constant all over the app
 	
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
+	public static File internalStorage;
 	
 	// Details about the system
 	//Variables
@@ -25,6 +26,7 @@ public class Me
 	
 	public static String app_id = "1000";
 	public static String version = "1";
+	public static String version_name = "avc_manager_beta 1.0.0";
 	public static String app_pass = "avcmanager";
 	public static String name = "AVC Manager";
 	public static Update update = new Update();

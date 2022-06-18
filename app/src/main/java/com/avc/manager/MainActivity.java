@@ -23,9 +23,12 @@ import android.support.v4.content.*;
 import android.support.graphics.drawable.*;
 import java.io.*;
 import android.os.*;
+import android.view.View.*;
+import android.widget.GridLayout.*;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener, PubConnect.OnUpdateResponceListener,
-SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHomeMessageListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,PubConnect.OnUpdateResponceListener,
+SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHomeMessageListener,
+SpaceCleaner.OnUnCountedFileChangeListener
 {
     private Toolbar toolbar;
     private DrawerLayout d;
@@ -36,8 +39,7 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 	//public AppCompatActivity activity;
 	public Me me;
 	public LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
-	//public int SystemWidth,SystemHeight;
-	//private String[] info_txts = {"NMB of storage can be freed","Delete old whatsapp images","TELENMB Storage is used by telegram"};
+	private ImageView settings_icon;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,14 +55,6 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 		conn.setOnUpdateResponceListener(this);
 		conn.checkForUpdates();
 		
-		// Check for permissions
-		
-		String[] per = {
-			Manifest.permission.WRITE_EXTERNAL_STORAGE,
-			Manifest.permission.READ_EXTERNAL_STORAGE
-		};
-		requestPermissions(per,6909);
-		
 		// Views initialization
 		
         toolbar = findViewById(R.id.mainToolbar);
@@ -71,8 +65,22 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 		Item2 =findViewById(R.id.activity_mainGridItem2);
 		Item3 =findViewById(R.id.activity_mainGridItem3);
 		Item4 =findViewById(R.id.activity_mainGridItem4);
+		settings_icon = findViewById(R.id.activity_mainSettingsIcon);
 		
 		// Set click listeners
+		
+		settings_icon.setOnClickListener(new OnClickListener()
+		{
+			@Override public void onClick(View v)
+			{
+				Intent i = new Intent(Manager._main_activity,SettingsActivity.class);
+				startActivity(i);
+			}
+		});
+		ViewGroup.LayoutParams par1 = settings_icon.getLayoutParams();
+		par1.width = Me.dr_size; par1.height = Me.dr_size;
+		settings_icon.setLayoutParams(par1);
+		
 		// For grid items
 		Item1.setOnClickListener(this);
 		Item2.setOnClickListener(this);
@@ -82,28 +90,9 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 		// set full screen and margins
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);// Set to full screen
         
-		Rect rectangle = new Rect();
-		Window window = getWindow();
-		window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
-		int statusBarHeight = rectangle.top;
-		int contentViewTop = 
-			window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
-		Me.titleBarHeight= contentViewTop - statusBarHeight;
 		
 		toolbar.setPadding(0,Me.titleBarHeight+30,0,0);
 		
-		// Get display width and set the width to linear layout for same width and height
-
-		Display display = getWindowManager().getDefaultDisplay();
-		DisplayMetrics outMetrics = new DisplayMetrics ();
-		display.getMetrics(outMetrics);
-
-		// Store the width and height in pixels for future use
-
-		Me.SystemWidth = outMetrics.widthPixels;
-		Me.SystemHeight = outMetrics.heightPixels;
-		
-		Me.density  = (int) getResources().getDisplayMetrics().density;
 		HomeTopBox = findViewById(R.id.activity_mainBubbleBg);
 		GridContainer = findViewById(R.id.activity_mainGridItemsContainer);
         
@@ -121,7 +110,6 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 		
 		// Set home navigation icon and size
 		
-		Me.dr_size = (int) getResources().getDimension(R.dimen.topbar_drawer_icon_size)/Me.density;
 		Drawable dr = getResources().getDrawable(R.drawable.menus);
 		Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
 		Drawable di = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, Me.dr_size, Me.dr_size, true));
@@ -132,31 +120,47 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 		
 		infoTxt = findViewById(R.id.activity_mainInfoTxt);
 		floatUp = AnimationUtils.loadAnimation(this,R.anim.text_float_up);
-		floatUp.setRepeatCount(0);
-		/*floatUp.setRepeatMode(Animation.REVERSE);
-		*/
+		//floatUp.setRepeatCount();
+		//floatUp.setRepeatMode(Animation.INFINITE);
+		
 		floatUp.setAnimationListener(new Animation.AnimationListener()
 		{
 			@Override public void onAnimationEnd(Animation n)
 			{
-				infoTxt.setText("");
-				infoTxt.startAnimation(floatUp);
+				new Thread(new Runnable(){
+					@Override public void run()
+					{
+						Manager._main_activity.runOnUiThread(new Runnable()
+						{
+							@Override public void run()
+							{
+								infoTxt.setText("");
+								infoTxt.startAnimation(floatUp);
+							}
+						});
+					}
+				}).start();		
 			}
 			@Override public void onAnimationRepeat(Animation n)
 			{
-				
+				//floatUp.startNow();
 			}
 			@Override public void onAnimationStart(Animation n)
 			{
-				if(info_i >= Manager.show_home.size()) info_i = 0;
-				info_i++;
-				infoTxt.setText(Manager.show_home.get(info_i-1));
-				//Utils.toast(activity,String.valueOf(info_i)+" : "+Manager.show_home.get(info_i));
+				if(Manager.show_home.size() > 0)
+				{
+					infoTxt.setText(Manager.show_home.get(info_i));
+					info_i++;
+					if(info_i >= Manager.show_home.size())
+					{
+						info_i = 0;
+					}
+				}else info_i = 0;
 			}
 		});
 		info_i = 0;
 		infoTxt.startAnimation(floatUp);
-		
+		//floatUp.startNow();
 		
 		ViewGroup.LayoutParams par = GridContainer.getLayoutParams();
 		par.height = Me.SystemWidth;
@@ -171,25 +175,57 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 		HomeTopBox.setLayoutParams(par);
 		
 		
-		Me.externalStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath();
+		Manager.status_saver = new StatusSaver(this);
+		Manager.status_saver.setOnStatusScanListener(onstatusscan);
+		Manager.status_saver.setOnStatusChangeListener(onstatuschange);
+		if(Manager.loaded_status_saver) Manager.status_saver.getStatuses(this);
+		else Utils.toast(this,"Unable to load status saver");
 		
 		Manager.space_cleaner = new SpaceCleaner(this);
 		Manager.space_cleaner.setOnFileChangeListener(this);
 		Manager.space_cleaner.setOnScanListener(this);
 		Manager.space_cleaner.setOnHomeMessageListener(this);
-		if(Manager.loadSpaceCleaner(this)) Manager.space_cleaner.storageScan();
+		if(Manager.loaded_space_cleaner) Manager.space_cleaner.storageScan();
 		else Utils.toast(this,"Unable to load space cleaner");
 		
-		if(Manager.loadStatusSaver(this)) Manager.status_saver = new StatusSaver(this);
-		else Utils.toast(this,"Unable to load status saver");
-    }
+	}
+	
+	public static void itemSelection(int id,AppCompatActivity a)
+	{
+		Intent i;
+		switch(id)
+		{
+			case R.id.activity_mainGridItem1:
+			case R.id.nav_item1:
+				// Main grid item 1 (Space Cleaner)
+				i = new Intent(a,SpaceCleanerActivity.class);
+				a.startActivity(i);
+
+				break;
+			case R.id.activity_mainGridItem2:
+			case R.id.nav_item2:
+				//Main grid item 2 (Status saver)
+				i = new Intent(a,StatusSaverActivity.class);
+				a.startActivity(i);
+				break;
+			case R.id.activity_mainGridItem3:
+				// Main grid item 3
+				break;
+			case R.id.activity_mainGridItem4:
+			case R.id.nav_item3:
+				// Main grid item 4
+				i = new Intent(a,SettingsActivity.class);
+				a.startActivity(i);
+				break;
+		}
+	}
 	
 	// Drawer Navigation item click listener
 	
 	@Override
 	public boolean onNavigationItemSelected(MenuItem p1)
 	{
-		
+		itemSelection(p1.getItemId(),this);
 		return true;
 	}
 	
@@ -198,50 +234,14 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 	@Override
 	public void onClick(View p1)
 	{
-		Intent i;
-		switch(p1.getId())
-		{
-			case R.id.activity_mainGridItem1:
-				// Main grid item 1 (Space Cleaner)
-				i = new Intent(this,SpaceCleanerActivity.class);
-				startActivity(i);
-				
-				break;
-			case R.id.activity_mainGridItem2:
-				//Main grid item 2 (Status saver)
-				i = new Intent(this,StatusSaverActivity.class);
-				startActivity(i);
-				break;
-			case R.id.activity_mainGridItem3:
-				// Main grid item 3
-				break;
-			case R.id.activity_mainGridItem4:
-				// Main grid item 4
-				break;
-		}
-	}
-	
-	// Function to check if a permission is granted or not(Useless)
-	
-	public static boolean isPermission(AppCompatActivity a,String[] permission)
-	{
-		boolean flag = true;
-		
-		for(String i : permission)
-		if(ContextCompat.checkSelfPermission(a,i) == PackageManager.PERMISSION_DENIED)
-		{
-			flag = false;
-			break;
-		}
-		return flag;
+		itemSelection(p1.getId(),this);
 	}
 	
 	// PubConnect : Calls when the responce of check for update is got
-	
 	@Override
-	public void onUpdateResponce(HttpURLConnection conn, String out, JSONObject obj, PubConnect.UpdateConnect up)
+	public void onUpdateResponce(JSONObject obj, PubConnect.UpdateConnect up,boolean is_connected)
 	{
-		
+		if(is_connected)
 		try{
 			// The api gives the data in json 
 			// Status will be "ok" if no error
@@ -252,43 +252,18 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 				if(message.getBoolean("available_update"))
 				{
 					// Etc. Etc. more about the api responce can be found in server code
-					JSONObject update = message.getJSONObject("update");
-					JSONObject info = update.getJSONArray("info").getJSONObject(0);
-					// Add all deatils to "Me" object (Me.Update)
-					me.update.app_id = update.getString("app_id");
-					me.update.app_name = update.getString("app_name");
-					me.update.version = update.getString("version");
-					me.update.version_id = update.getString("version_id");
-					me.update.author = update.getString("author");
-					me.update.description = update.getString("description");
-					me.update.file_name = update.getString("file_name");
-					me.update.pub_name = update.getString("pub_name");
-					me.update.more_link = update.getString("more_link");
-					me.update.uploaded_date = update.getString("uploaded_date");
-					me.update.created_date = update.getString("created_date");
-					me.update.common_app_id = update.getString("common_app_id");
-					
-					me.update.download_link = update.getString("download_link");
-					me.update.download_link_is_redirect = update.getBoolean("download_link_is_redirect");
-					me.update.download_link_is_icedrive = update.getBoolean("download_link_is_icedrive");
-					
-					me.update.title = info.getString("title");
-					me.update.sub_title = info.getString("sub_title");
-					me.update.update_description = info.getString("description");
-					me.update.must_update = info.getBoolean("must_update");
-					// Create pubconnect dialog with update notification
-					PubConnect.UpdateConnect.UpdateDialog di = up.getDialog(me);
-					di.show(); //show
+					Manager.updateApp(message,up);
 				}
 			}else
 			{
-				
+
 			}
 		}catch(Exception e)
 		{
 			Log.e("UPDATE_CHECK","Couldnt connect to server");
 		}
 	}
+	
 
 	@Override
 	protected void onResume()
@@ -299,9 +274,56 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 			Manager.space_cleaner.setOnScanListener(this);
 			Manager.space_cleaner.setOnHomeMessageListener(this);
 		}
+		if(Manager.status_saver != null)
+		{
+			Manager.status_saver.setOnStatusChangeListener(onstatuschange);
+			Manager.status_saver.setOnStatusScanListener(onstatusscan);
+		}
 		super.onResume();
 	}
+	/*
+	 ****************************************
+	 Status Saver Listeners of this activity
+	 becuase space cleaner also use this method we want to set variables to hold those interface
+	 ***************************************
+	*/
 	
+	public StatusSaver.OnStatusScanListener onstatusscan = new StatusSaver.OnStatusScanListener()
+	{
+
+		@Override
+		public void onStart(GROUPFiles all)
+		{
+			
+		}
+
+		@Override
+		public void onEnd(GROUPFiles all)
+		{
+			Manager.show_home.add(Manager.status_saver_show_in_home_text.replaceAll("&size",String.valueOf(StatusSaver.files.files.size())));
+			info_i = 0;
+			infoTxt.setText("");
+			infoTxt.startAnimation(floatUp);
+		}
+		
+	};
+	
+	public StatusSaver.OnStatusChangeListener onstatuschange = new StatusSaver.OnStatusChangeListener()
+	{
+
+		@Override
+		public void onAdd(GROUPFiles all)
+		{
+			
+		}
+
+		@Override
+		public void onRemove(GROUPFiles all)
+		{
+			
+		}
+
+	};
 	/*
 	 ****************************************
 	 Space Cleaner Listeners of this activity
@@ -318,9 +340,24 @@ SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHom
 	public void onEnd(GROUPFiles files)
 	{
 		// Stirage scan ended
-		Manager.show_home.add(Manager.space_cleaner_show_in_home_text.replaceAll("&size",files.sizeSTR));
+		info_i = 0;
+		infoTxt.setText("");
+		Manager.show_home.add(Manager.space_cleaner_show_in_home_text.replaceAll("&size",SpaceCleaner.files.sizeSTR));
+		infoTxt.startAnimation(floatUp);
+	}
+	
+	@Override
+	public void onUnCountedAdd(GROUPFiles files)
+	{
+		// Uncounted or effectable file is added
 	}
 
+	@Override
+	public void onUnCountedRemove(GROUPFiles files)
+	{
+		// Uncounted or effectable file is Removed
+	}
+	
 	@Override
 	public void onAdd(GROUPFiles files)
 	{

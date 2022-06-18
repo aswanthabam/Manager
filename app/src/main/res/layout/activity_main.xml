@@ -25,7 +25,18 @@
 				android:layout_width="match_parent"
 				android:layout_height="?attr/actionBarSize"
 				android:background="@android:color/transparent"
-				app:layout_scrollFlags="scroll|enterAlways"/>
+				app:layout_scrollFlags="scroll|enterAlways"
+				android:gravity="center_vertical">
+
+				<ImageView
+					android:id="@+id/activity_mainSettingsIcon"
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_gravity="right|center_vertical"
+					android:layout_margin="10dp"
+					android:src="@drawable/settings"/>
+
+			</android.support.v7.widget.Toolbar>
 
 		</android.support.design.widget.AppBarLayout>
 
@@ -58,7 +69,7 @@
 							android:typeface="monospace"
 							android:textSize="@dimen/home_floating_text_size"
 							android:textColor="@color/colorControlNormal"
-							android:text="100MB of memory can be freed"
+							android:text=""
 							android:textStyle="bold"/>
 
 					</LinearLayout>

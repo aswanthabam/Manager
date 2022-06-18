@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:layout_margin="5dp"
+	android:padding="10dp">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="We need permission to continue"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:typeface="serif"
+		android:layout_marginBottom="10dp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/request_permission"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:layout_marginBottom="10dp"
+		android:id="@+id/requestpermissionTextView1"
+		android:typeface="sans"
+		android:textSize="14sp"
+		android:lineSpacingExtra="5sp"
+		android:singleLine="false"/>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:gravity="right|center_vertical">
+
+		<Button
+			android:layout_width="wrap_content"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:text="Continue"
+			android:id="@+id/requestpermissionButton1"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

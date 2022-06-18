@@ -9,6 +9,7 @@ import java.net.*;
 import android.net.*;
 import android.media.*;
 import android.support.v7.app.*;
+import android.preference.*;
 // Preview a video or image show image if tge file is image if video
 // play the video
 public class ImageVideoPreviewDialog extends Dialog
@@ -18,13 +19,14 @@ public class ImageVideoPreviewDialog extends Dialog
 	public VideoView v1;
 	public ImageView v2,Cancel,download,share;
 	public LinearLayout main;
-	public boolean want_save = true;
+	public boolean want_save;
 	private boolean video = false;
 	
 	public ImageVideoPreviewDialog(AppCompatActivity a,File f)
 	{
 		super(a);
 		activity = a; file = f;
+		want_save = PreferenceManager.getDefaultSharedPreferences(a).getBoolean("save_file_when_sharing",true);
 	}
 
 	@Override

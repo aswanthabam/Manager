@@ -1,14 +1,32 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-	android:gravity="center">
-    <TextView
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:gravity="top|center_horizontal">
+
+	<LinearLayout
+		android:orientation="vertical"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal|bottom"
-		android:text="AVC Manager"
-		android:textColor="@color/mainIconTint"
-		android:gravity="center_horizontal|bottom"
-		android:textStyle="bold" />
+		android:layout_marginTop="10dp">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="top|center_horizontal"
+			android:textStyle="bold"
+			android:id="@+id/splashscreenTextView1"
+			android:text="Loading..."
+			android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+		<ProgressBar
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:id="@+id/splashscreenProgressBar1"/>
+
+	</LinearLayout>
+
 </LinearLayout>
+

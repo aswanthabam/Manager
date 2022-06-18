@@ -32,7 +32,7 @@ public class PubConnect
 	private OnUpdateResponceListener onupdate = new OnUpdateResponceListener(){
 
 		@Override
-		public void onUpdateResponce(HttpURLConnection conn, String out, JSONObject obj,UpdateConnect up)
+		public void onUpdateResponce(JSONObject obj,UpdateConnect up,boolean a)
 		{
 			// TODO: Implement this method
 		}
@@ -56,9 +56,9 @@ public class PubConnect
 		public String TAG = "UPDATE_CHECK_URL_CONNECTION";
 		public HttpURLConnection conn;
 		public UpdateConnect This = this;
-		public UpdateDialog getDialog(Me m)
+		public UpdateDialog getDialog()
 		{
-			return new UpdateDialog(activity,m);
+			return new UpdateDialog(activity);
 		}
 		@Override
 		public void run()
@@ -84,13 +84,14 @@ public class PubConnect
 					@Override public void run()
 					{
 						try{
-							onupdate.onUpdateResponce(conn,out,obj,This); // callback the listenr
+							onupdate.onUpdateResponce(obj,This,true); // callback the listenr
 						}catch(Exception e){
 							Log.e(TAG,"Error in reading responce");
 						}
 					}
 				});
 			}catch(Exception e){
+				onupdate.onUpdateResponce(new JSONObject(),This,false);
 				Log.e(TAG,"Error in connecting due to ("+e.toString()+")");
 			}
 		}
@@ -105,12 +106,11 @@ public class PubConnect
 			public Button btn1,btn2;
 			public LinearLayout cont;
 			public ProgressBar bar;
-			public Me me = new Me();
 			
-			public UpdateDialog(AppCompatActivity a,Me m)
+			public UpdateDialog(AppCompatActivity a)
 			{
 				super(a);
-				activity = a; me = m;
+				activity = a; 
 			}
 
 			@Override
@@ -136,19 +136,19 @@ public class PubConnect
 				
 				cont.setVisibility(View.GONE);
 				
-				title.setText(me.update.title);
-				sub.setText(me.update.sub_title);
-				des.setText(me.update.description);
+				title.setText(Me.update.title);
+				sub.setText(Me.update.sub_title);
+				des.setText(Me.update.description);
 				
 				// If the file is already downloaded and found inside internal stirage
 				// Direct setuo the install button
-				if(!me.update.must_update) btn2.setText("Later");
+				if(!Me.update.must_update) btn2.setText("Later");
 				
 				btn1.setOnClickListener(new View.OnClickListener()
 				{
 					@Override public void onClick(View v)
 					{
-						if(me.update.must_update) activity.finish();
+						if(Me.update.must_update) activity.finish();
 						else{
 							dismiss();
 						}
@@ -163,16 +163,16 @@ public class PubConnect
 							// Set the lrogress bar visible
 							cont.setVisibility(View.VISIBLE);
 							// Setup download manager
-							final DownloadManager.Request d = new DownloadManager.Request(Uri.parse(me.update.download_link));
-							d.setDescription("Version "+me.update.version);
-							d.setTitle("Downloading update ("+me.update.file_name+")");
+							final DownloadManager.Request d = new DownloadManager.Request(Uri.parse(Me.update.download_link));
+							d.setDescription("Version "+Me.update.version);
+							d.setTitle("Downloading update ("+Me.update.file_name+")");
 							
 							// setup the file and folder to which the update want to be saved
 							
 							File f = new File(Environment.getExternalStorageDirectory()+"/AVC Manager/Updates");
 							if(!f.exists()) f.mkdirs();
 							for(File df : f.listFiles()) df.delete();
-							final File fi = new File(f.getAbsolutePath()+"/"+me.update.file_name);
+							final File fi = new File(f.getAbsolutePath()+"/"+Me.update.file_name);
 							// Decimal point to 2decimal for download percentage indication
 							final DecimalFormat fo = new DecimalFormat("#.##");
 							
@@ -248,12 +248,12 @@ public class PubConnect
 				// If the app must want to be updated the app will close if dissmissed
 				setOnDismissListener(new OnDismissListener(){
 					@Override public void onDismiss(DialogInterface d){
-						if(me.update.must_update) activity.finish();
+						if(Me.update.must_update) activity.finish();
 					}
 				});
 				// if the fike.is found in internal storage 
 				// Install button is shown
-				File f = new File(Environment.getExternalStorageDirectory()+"/AVC Manager/Updates/"+me.update.file_name);
+				File f = new File(Environment.getExternalStorageDirectory()+"/AVC Manager/Updates/"+Me.update.file_name);
 				if(f.exists())
 				{
 					setButtonInstall(f); // Call function
@@ -289,6 +289,6 @@ public class PubConnect
 	}
 	public interface OnUpdateResponceListener
 	{
-		void onUpdateResponce(HttpURLConnection conn,String out,JSONObject obj,PubConnect.UpdateConnect up);
+		void onUpdateResponce(JSONObject obj,PubConnect.UpdateConnect up,boolean is_connected);
 	}
 }

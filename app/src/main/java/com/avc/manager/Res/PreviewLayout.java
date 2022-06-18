@@ -8,6 +8,8 @@ import com.avc.manager.*;
 import android.media.*;
 import android.app.*;
 import android.support.v7.app.*;
+import android.preference.*;
+import com.avc.manager.Adapter.*;
 /*
  Preview layout ( Similar to imagevideo preview dialog)
  This class is a associative class and didnt extends any base class
@@ -24,7 +26,7 @@ public class PreviewLayout
 	public static final int AUTO_CROP = 11;
 	public static final int MUTE = 10;
 	public static final int UNMUTE = 11;
-	
+	public boolean preview_video;
 	public boolean video = false;
 	// Different type of initializers 
 	// with some attrivute set to default or not 
@@ -131,6 +133,8 @@ public class PreviewLayout
 		
 		v2.setVisibility(View.GONE);
 		v1.setVisibility(View.GONE);
+		preview_video = PreferenceManager.getDefaultSharedPreferences(con).getBoolean("preview_video",true);
+		
 	}
 	
 	// Returns true if the given file is video
@@ -198,20 +202,25 @@ public class PreviewLayout
 			return true;
 		}else if(m.startsWith("video/"))
 		{
-			video = true;
-			v2.setVideoPath(f.getAbsolutePath());
-			v2.setVisibility(View.VISIBLE);
-			v1.setVisibility(View.GONE);
-			//v2.setAudioAttributes(new AudioAttributes());
-			v2.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-			{
-				@Override public void onCompletion(MediaPlayer p)
+			if(!preview_video){
+				v1.setImageBitmap(Manager.thumbnails.get(f));
+				v1.setVisibility(View.VISIBLE);
+				v2.setVisibility(View.GONE);
+			}else{
+				video = true;
+				v2.setVideoPath(f.getAbsolutePath());
+				v2.setVisibility(View.VISIBLE);
+				v1.setVisibility(View.GONE);
+				//v2.setAudioAttributes(new AudioAttributes());
+				v2.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
 				{
-					v2.start();
-				}
-			});
-			v2.start();
-			
+					@Override public void onCompletion(MediaPlayer p)
+					{
+						v2.start();
+					}
+				});
+				v2.start();
+			}
 			return true;
 		}
 		else

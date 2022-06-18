@@ -15,6 +15,7 @@ import org.apache.http.*;
 import java.net.*;
 import org.json.*;
 import android.support.v7.app.*;
+import android.preference.*;
 
 public class Utils
 {
@@ -26,13 +27,26 @@ public class Utils
 		activity = a;
 	}
 	
-	// Converts a List<> to Array[]
-	
-	public static Object[] listToArray(List<Object> list)
+	// Read a file.via File or InputStream object to string output
+	public static String readFile(File f) throws Exception{return readFile(new FileInputStream(f));}
+	public static String readFile(InputStream fos) throws Exception
 	{
-		Object[] o = new Object[list.size()];
-		o = list.toArray(o);
-		return o;
+		char[] b = new char[1024];
+		int i;
+		InputStreamReader re = new InputStreamReader(fos);
+		StringWriter writer = new StringWriter();
+		while(-1 !=(i = re.read(b))) writer.write(b,0,i);
+		fos.close();
+		writer.close();
+		fos.close();
+		return writer.toString();
+	}
+	
+	// Get a preference 
+	
+	public static SharedPreferences getPreference(AppCompatActivity a,String fi)
+	{
+		return a.getSharedPreferences(fi,Context.MODE_PRIVATE);
 	}
 	
 	// Convert string to Json
