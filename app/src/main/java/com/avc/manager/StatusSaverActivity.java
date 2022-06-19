@@ -37,7 +37,7 @@ StatusSaver.OnStatusScanListener,StatusSaver.OnStatusChangeListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		// TODO: Implement this method
+		setTheme(Manager.getTheme(this));
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.status_saver);

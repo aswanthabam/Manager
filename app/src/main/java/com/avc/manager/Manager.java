@@ -11,10 +11,12 @@ import android.util.*;
 import android.media.*;
 import android.provider.*;
 import android.content.*;
+import android.preference.*;
 
 // Class handles tge details about this app Manager
 public class Manager
 {
+	
 	public static List<String> show_home = new ArrayList<String>();	// The strings which want to.be shown in home screen
 	public static AppCompatActivity _main_activity;
 	public static boolean loaded_status_saver = false;
@@ -399,5 +401,32 @@ public class Manager
 		{
 			return false;
 		}
+	}
+	public static void setTheme(AppCompatActivity c){
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(c);
+		boolean dark = p.getBoolean("theme",false);
+		if(dark)
+		{
+			c.setTheme(R.style.AppThemeDark);
+			//c.getTheme().applyStyle(R.style.AppThemeDark,true);
+		}else{
+			c.setTheme(R.style.AppThemeLight);
+			//c.getTheme().applyStyle(R.style.AppThemeLight,true);
+		}
+		c.recreate();
+	}
+	
+	public static int getTheme(AppCompatActivity c) {
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(c);
+		boolean dark = p.getBoolean("theme",false);
+		if(dark)
+		{
+			return R.style.AppThemeDark;
+			//c.getTheme().applyStyle(R.style.AppThemeDark,true);
+		}else{
+			return R.style.AppThemeLight;
+			//c.getTheme().applyStyle(R.style.AppThemeLight,true);
+		}
+		//c.recreate();
 	}
 }

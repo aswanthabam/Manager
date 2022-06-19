@@ -27,6 +27,13 @@ public class Utils
 		activity = a;
 	}
 	
+	public static int getAttr(AppCompatActivity a,int attr)
+	{
+		TypedValue v = new TypedValue();
+		a.getTheme().resolveAttribute(attr,v,true);
+		return v.resourceId;
+	}
+	
 	// Read a file.via File or InputStream object to string output
 	public static String readFile(File f) throws Exception{return readFile(new FileInputStream(f));}
 	public static String readFile(InputStream fos) throws Exception

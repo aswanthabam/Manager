@@ -16,6 +16,11 @@
             android:title="@string/settings_save_file_when_sharing_title"
 			android:summary="@string/settings_save_file_when_sharing_summary"/>
 		
+		<SwitchPreference
+            android:defaultValue="false"
+            android:key="theme"
+            android:title="Dark Theme"/>
+		
 	</PreferenceCategory>
 	
 	<PreferenceCategory

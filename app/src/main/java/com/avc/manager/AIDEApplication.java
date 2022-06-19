@@ -4,14 +4,18 @@ import java.io.*;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.*;
+import android.preference.*;
 /**import com.google.android.gms.ads.MobileAds;**/
 
 public class AIDEApplication extends Application
 {
 	private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
-
+	
 	@Override
 	public void onCreate() {
+		//setTheme(R.style.AppThemeLight);
+		//Manager.getTheme(this);
 		/**MobileAds.initialize(this, "$appid$");**/
 		this.uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
@@ -36,9 +40,19 @@ public class AIDEApplication extends Application
 			}
 		});
 		super.onCreate();
+		/*SharedPreferences prefe = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean dark = prefe.getBoolean("theme",false);
 
+		if(dark)
+		{
+			setTheme(R.style.SplashThemeDark);
+		}else{
+			setTheme(R.style.SplashThemeLight);
+		}*/
+		
+		//recreate();
 	}
-
+	
 
 	private String getStackTrace(Throwable th){
 		Exception e = new Exception(th);

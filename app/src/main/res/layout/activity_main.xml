@@ -68,7 +68,7 @@
 							android:gravity="center"
 							android:typeface="monospace"
 							android:textSize="@dimen/home_floating_text_size"
-							android:textColor="@color/colorControlNormal"
+							android:textColor="?attr/colorControlNormal"
 							android:text=""
 							android:textStyle="bold"/>
 
@@ -101,7 +101,7 @@
 
 								<ImageView
 									android:id="@+id/activity_mainImageViewAnim"
-									android:tint="@color/mainIconTint"
+									android:tint="?attr/mainIconTint"
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"
 									android:layout_margin="@dimen/home_main_icon_margin"
@@ -115,12 +115,12 @@
 									android:layout_margin="@dimen/home_main_icon_text_margin"
 									android:textStyle="bold"
 									android:textSize="@dimen/home_main_icon_text_size"
-									android:textColor="@color/mainIconTint"/>
+									android:textColor="?attr/mainIconTint"/>
 								
 								<TextView
 									android:id="@+id/activity_mainGridItem1InfoTxt"
 									android:layout_width="@dimen/home_main_icon_info_txt_width"
-									android:textColor="@color/lightBlack"
+									android:textColor="?attr/lightBlack"
 									android:layout_height="wrap_content"
 									android:gravity="center"
 									android:text="Free up device storage"
@@ -140,7 +140,7 @@
 								android:layout_weight="1.0">
 
 								<ImageView
-									android:tint="@color/mainIconTint"
+									android:tint="?attr/mainIconTint"
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"
 									android:layout_margin="@dimen/home_main_icon_margin"
@@ -154,12 +154,12 @@
 									android:layout_margin="@dimen/home_main_icon_text_margin"
 									android:textStyle="bold"
 									android:textSize="@dimen/home_main_icon_text_size"
-									android:textColor="@color/mainIconTint"/>
+									android:textColor="?attr/mainIconTint"/>
 
 								<TextView
 									android:id="@+id/activity_mainGridItem2InfoTxt"
 									android:layout_width="@dimen/home_main_icon_info_txt_width"
-									android:textColor="@color/lightBlack"
+									android:textColor="?attr/lightBlack"
 									android:layout_height="wrap_content"
 									android:gravity="center"
 									android:text="Save whatsapp status"
@@ -187,7 +187,7 @@
 								android:layout_weight="1.0">
 
 								<ImageView
-									android:tint="@color/mainIconTint"
+									android:tint="?attr/mainIconTint"
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"
 									android:layout_margin="@dimen/home_main_icon_margin"
@@ -201,12 +201,12 @@
 									android:layout_margin="@dimen/home_main_icon_text_margin"
 									android:textStyle="bold"
 									android:textSize="@dimen/home_main_icon_text_size"
-									android:textColor="@color/mainIconTint"/>
+									android:textColor="?attr/mainIconTint"/>
 
 								<TextView
 									android:id="@+id/activity_mainGridItem3InfoTxt"
 									android:layout_width="@dimen/home_main_icon_info_txt_width"
-									android:textColor="@color/lightBlack"
+									android:textColor="?attr/lightBlack"
 									android:layout_height="wrap_content"
 									android:gravity="center"
 									android:text="Knows about your phone hardware"
@@ -226,7 +226,7 @@
 								android:layout_weight="1.0">
 
 								<ImageView
-									android:tint="@color/mainIconTint"
+									android:tint="?attr/mainIconTint"
 									android:layout_width="@dimen/home_main_icon_width"
 									android:layout_height="@dimen/home_main_icon_width"
 									android:layout_margin="@dimen/home_main_icon_margin"
@@ -240,12 +240,12 @@
 									android:layout_margin="@dimen/home_main_icon_text_margin"
 									android:textStyle="bold"
 									android:textSize="@dimen/home_main_icon_text_size"
-									android:textColor="@color/mainIconTint"/>
+									android:textColor="?attr/mainIconTint"/>
 
 								<TextView
 									android:id="@+id/activity_mainGridItem4InfoTxt"
 									android:layout_width="@dimen/home_main_icon_info_txt_width"
-									android:textColor="@color/lightBlack"
+									android:textColor="?attr/lightBlack"
 									android:layout_height="wrap_content"
 									android:gravity="center"
 									android:text="Free up device storage"

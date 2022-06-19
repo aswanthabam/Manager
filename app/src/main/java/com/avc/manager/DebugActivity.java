@@ -24,7 +24,8 @@ public class DebugActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        //Manager.getTheme(this);
+		super.onCreate(savedInstanceState);
 
 
 

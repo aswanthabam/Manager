@@ -25,10 +25,12 @@ import java.io.*;
 import android.os.*;
 import android.view.View.*;
 import android.widget.GridLayout.*;
+import android.content.res.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,PubConnect.OnUpdateResponceListener,
 SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHomeMessageListener,
-SpaceCleaner.OnUnCountedFileChangeListener
+SpaceCleaner.OnUnCountedFileChangeListener,
+SettingsActivity.SettingFragment.OnChangeTheme
 {
     private Toolbar toolbar;
     private DrawerLayout d;
@@ -44,8 +46,10 @@ SpaceCleaner.OnUnCountedFileChangeListener
 	@Override
     protected void onCreate(Bundle savedInstanceState)
     {
+		setTheme(Manager.getTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+		SettingsActivity.SettingFragment.setOnChangeListener(this);
 		Manager._main_activity = this;
 		
 		// Initialize objects related to app and perform an update check
@@ -107,13 +111,13 @@ SpaceCleaner.OnUnCountedFileChangeListener
 		d.setDrawerListener(t);
 		t.syncState();
 		n.setNavigationItemSelectedListener(this);
-		
+		n.setItemTextColor(getColorStateList(Utils.getAttr(this,R.attr.text_color)));
 		// Set home navigation icon and size
 		
 		Drawable dr = getResources().getDrawable(R.drawable.menus);
 		Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
 		Drawable di = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, Me.dr_size, Me.dr_size, true));
-		di.setTint(getResources().getColor(R.color.colorAccent));
+		di.setTint(getResources().getColor(Utils.getAttr(this,R.attr.colorAccent)));
 		getSupportActionBar().setHomeAsUpIndicator(di); // Change drawer icon
 		
 		// Floating text initialization
@@ -268,6 +272,7 @@ SpaceCleaner.OnUnCountedFileChangeListener
 	@Override
 	protected void onResume()
 	{
+		Manager.getTheme(this);
 		// Changes to this activity listener when backed to this activity
 		if(Manager.space_cleaner != null){
 			Manager.space_cleaner.setOnFileChangeListener(this);
@@ -376,6 +381,12 @@ SpaceCleaner.OnUnCountedFileChangeListener
 		// The message list want to be shown in hime screen floating text is changed by spaceCleaber object
 		
 		//Utils.toast(this,String.valueOf(Manager.show_home.size()));
+	}
+
+	@Override
+	public void onChange()
+	{
+		Manager.setTheme(this);
 	}
 	
 }

@@ -21,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		// TODO: Implement this method
+		setTheme(Manager.getTheme(this));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings_activity);
 		
@@ -37,11 +37,11 @@ public class SettingsActivity extends AppCompatActivity
 		Drawable dr = getResources().getDrawable(R.drawable.btn_back);
 		Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
 		Drawable di = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, Me.dr_size, Me.dr_size, true));
-		di.setTint(getResources().getColor(R.color.colorAccent));
+		di.setTint(getResources().getColor(Utils.getAttr(this,R.attr.colorAccent)));
 		getSupportActionBar().setHomeAsUpIndicator(di); // Change drawer icon
 		
 		SettingFragment frag = new SettingFragment();
-		getFragmentManager().beginTransaction().add(R.id.settings_activityFrameLayout,frag).commit();
+		getFragmentManager().beginTransaction().replace(R.id.settings_activityFrameLayout,frag).commit();
 		//frag.update_app = frag.getPreferenceManager().findPreference("check_update_app");
 		
 		
@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity
 	public static class SettingFragment extends PreferenceFragment implements PubConnect.OnUpdateResponceListener
 	{
 		Preference pref1,pref2,pref3;
+		SwitchPreference dark_theme;
 		PreferenceScreen update_app,update_space,update_status;
 		
 		@Override
@@ -63,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity
 			update_app = (PreferenceScreen) findPreference("check_update_app");
 			update_space = (PreferenceScreen) findPreference("check_update_space_cleaner");
 			update_status = (PreferenceScreen) findPreference("check_update_status_saver");
-			
+			dark_theme = (SwitchPreference) findPreference("theme");
 			pref1 = findPreference("status_saver_version");
 			pref2 = findPreference("space_cleaner_version");
 			pref3 = findPreference("app_version");
@@ -91,6 +92,14 @@ public class SettingsActivity extends AppCompatActivity
 						return true;
 					}
 				});
+			dark_theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
+				@Override public boolean onPreferenceChange(Preference p1,Object p)
+				{
+					Manager.setTheme((AppCompatActivity)getActivity());
+					onchangetheme.onChange();
+					return true;
+				}
+			});
 		}
 		
 		@Override
@@ -131,6 +140,27 @@ public class SettingsActivity extends AppCompatActivity
 				Utils.toast(activity,"No updates available");
 			}
 			else Utils.toast(activity,"Unable to connect at this moment");
+		}
+		
+		public void onChange(AppCompatActivity a)
+		{
+			Manager.setTheme(a);
+		}
+		public static OnChangeTheme onchangetheme = new OnChangeTheme()
+		{
+			
+			@Override
+			public void onChange()
+			{
+				//onChange();
+				//super.onChange((AppCompatActivity)getActivity());
+			}
+			
+		};
+		public static void setOnChangeListener(OnChangeTheme l){onchangetheme = l;}
+		public interface OnChangeTheme
+		{
+			void onChange();
 		}
 	}
 	

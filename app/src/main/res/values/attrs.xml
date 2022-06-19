@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<attr name="primary" format="color"/>
+    <attr name="primaryDark" format="color"/>
+    <attr name="accent" format="color"/>
+    <attr name="controlNormal" format="color"/>
+    <attr name="controlHighlight" format="color"/>
+	<attr name="mainIconTint" format="color"/>
+	<attr name="lightBlack" format="color"/>
+	<attr name="light_border" format="color"/>
+	<attr name="text_color"></attr>
+	<attr name="text_color_secondary"></attr>
+	
+</resources>

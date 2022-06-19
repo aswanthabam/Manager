@@ -23,16 +23,36 @@ implements Manager.OnDecompressFileListener
 {
 	public AppCompatActivity a;
 	private TextView txt;
+	
 	private ProgressBar bar;
 	String[] per = {
 		Manifest.permission.WRITE_EXTERNAL_STORAGE,
 		Manifest.permission.READ_EXTERNAL_STORAGE
 	};
+	SharedPreferences prefe;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		// TODO: Implement this method
+		//if(!theme.equals(current_theme)) setTheme(theme)
 		super.onCreate(savedInstanceState);
+		
+		prefe = PreferenceManager.getDefaultSharedPreferences(this);
+		final boolean dark = prefe.getBoolean("theme",false);
+		boolean current_theme = prefe.getBoolean("current_theme",true);
+		
+		if(current_theme != dark){
+			if(dark)
+			{
+				setTheme(R.style.SplashThemeDark);
+				prefe.edit().putBoolean("current_theme",true).commit();
+			}else{
+				setTheme(R.style.SplashThemeLight);
+				prefe.edit().putBoolean("current_theme",false).commit();
+			}
+			//recreate();
+		}
+		//getWindow().setBackgroundDrawableResource(R.drawable.gradient_background);
+		
 		setContentView(R.layout.splash_screen);
 		a = this;
 		final AppCompatActivity a = this;
@@ -40,8 +60,34 @@ implements Manager.OnDecompressFileListener
 		bar = findViewById(R.id.splashscreenProgressBar1);
 		bar.setVisibility(View.GONE);
 		permRun(per);
-		
 	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState)
+	{
+		
+		super.onPostCreate(savedInstanceState);
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		
+		super.onStart();
+	}
+	
+	public void setTheme(String m)
+	{
+		if(m == "light")
+		{
+			setTheme(R.style.SplashThemeLight);
+			finish();
+			Intent i = new Intent(this,SplashScreenActivity.class);
+			prefe.edit().putString("current_theme","light").commit();
+			startActivity(i);
+		}
+	}
+	
 	public void permRun(final String[] per)
 	{
 		Manager.permission_granted = true;

@@ -26,7 +26,7 @@ public class DownloadedStatusActivity extends AppCompatActivity implements Statu
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		// TODO: Implement this method
+		setTheme(Manager.getTheme(this));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.downloaded_status);
 		

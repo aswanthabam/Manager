@@ -1,16 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorControlNormal</item>
-    	<item name="colorControlHighlight">@color/colorControlHighlight</item>
+	
+	<style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?attr/primary</item>
+        <item name="colorPrimaryDark">?attr/primaryDark</item>
+        <item name="colorAccent">?attr/accent</item>
+        <item name="colorControlNormal">?attr/controlNormal</item>
+    	<item name="colorControlHighlight">?attr/controlHighlight</item>
 		<item name="android:windowLightStatusBar">false</item>
+		<item name="mainIconTint">?attr/mainIconTint</item>
+		<item name="lightBlack">?attr/lightBlack</item>
+		<item name="light_border">?attr/light_border</item>
+		<item name="android:textColor">?attr/text_color</item>
+		<item name="android:textColorSecondary">?attr/text_color_secondary</item>
 	</style>
-	<style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+	<style name="SplashBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowBackground">@drawable/splash_bg</item>
-		<item name="colorPrimaryDark">@color/colorPrimary</item>
+		<item name="colorPrimary">?attr/primary</item>
+		<item name="colorPrimaryDark">?attr/primaryDark</item>
 		<item name="android:windowLightStatusBar">true</item>
+		<item name="android:textColor">?attr/text_color</item>
 	</style>
+	
+	
+	
+	<style name="AppThemeDark" parent="@style/BaseTheme">
+        <item name="primary">@color/darkColorPrimary</item>
+        <item name="primaryDark">@color/darkColorPrimaryDark</item>
+        <item name="accent">@color/darkColorAccent</item>
+        <item name="controlNormal">@color/darkColorControlNormal</item>
+    	<item name="controlHighlight">@color/darkColorPrimaryDark</item>
+		<item name="android:windowLightStatusBar">false</item>
+		<item name="mainIconTint">@color/darkMainIconTint</item>
+		<item name="lightBlack">@color/darkLightBlack</item>
+		<item name="light_border">@color/darkLight_border</item>
+		<item name="text_color">@color/darkMainIconTint</item>
+		<item name="text_color_secondary">@color/lightTextColorSecondary</item>
+	</style>
+	
+	
+	<style name="SplashThemeDark" parent="@style/SplashBaseTheme">
+		<item name="android:windowBackground">@drawable/splash_bg</item>
+		<item name="primary">@color/darkColorPrimary</item>
+		<item name="primaryDark">@color/darkColorPrimary</item>
+		<item name="android:windowLightStatusBar">true</item>
+		<item name="text_color">@color/darkMainIconTint</item>
+	</style>
+	
+	
+	
+	<style name="AppThemeLight" parent="@style/BaseTheme">
+        <item name="primary">@color/lightColorPrimary</item>
+        <item name="primaryDark">@color/lightColorPrimaryDark</item>
+        <item name="accent">@color/lightColorAccent</item>
+        <item name="controlNormal">@color/lightColorControlNormal</item>
+    	<item name="controlHighlight">@color/lightColorControlHighlight</item>
+		<item name="android:windowLightStatusBar">false</item>
+		<item name="mainIconTint">@color/lightMainIconTint</item>
+		<item name="lightBlack">@color/lightLightBlack</item>
+		<item name="light_border">@color/lightLight_border</item>
+		<item name="text_color">@color/lightMainIconTint</item>
+		<item name="text_color_secondary">@color/lightTextColorSecondary</item>
+	</style>
+	
+	
+	<style name="SplashThemeLight" parent="@style/SplashBaseTheme">
+		<item name="android:windowBackground">@drawable/splash_bg</item>
+		<item name="primary">@color/lightColorPrimary</item>
+		<item name="primaryDark">@color/lightColorPrimary</item>
+		<item name="android:windowLightStatusBar">false</item>
+		<item name="text_color">@color/lightMainIconTint</item>
+	</style>
+	
 </resources>

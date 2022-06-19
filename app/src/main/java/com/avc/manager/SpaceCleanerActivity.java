@@ -25,6 +25,7 @@ SpaceCleaner.OnUnCountedFileChangeListener
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+		setTheme(Manager.getTheme(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.space_cleaner);
         toolbar = (Toolbar) findViewById(R.id.mainToolbar);

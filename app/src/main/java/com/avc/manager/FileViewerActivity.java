@@ -27,6 +27,7 @@ public class FileViewerActivity extends AppCompatActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		setTheme(Manager.getTheme(this));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.file_viewer);
 		
@@ -47,7 +48,7 @@ public class FileViewerActivity extends AppCompatActivity
 		Drawable dr = getResources().getDrawable(R.drawable.btn_back);
 		Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
 		Drawable di = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, Me.dr_size, Me.dr_size, true));
-		di.setTint(getResources().getColor(R.color.colorAccent));
+		di.setTint(getResources().getColor(Utils.getAttr(this,R.attr.colorAccent)));
 		getSupportActionBar().setHomeAsUpIndicator(di); // Change drawer icon
 		
 		// Setting RecyclerView adapter

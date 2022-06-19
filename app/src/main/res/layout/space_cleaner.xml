@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:animateLayoutChanges="true"
 	android:layout_height="match_parent"
-	android:background="@color/colorPrimary">
+	android:background="?attr/colorPrimary">
 
 	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
@@ -51,7 +51,7 @@
 						android:text="Small Text"
 						android:textSize="@dimen/space_cleaner_top_text_size"
 						android:textStyle="bold"
-						android:textColor="@color/mainIconTint"
+						android:textColor="?attr/mainIconTint"
 						android:layout_gravity="center"/>
 
 					<TextView
@@ -60,7 +60,7 @@
 						android:layout_height="wrap_content"
 						android:text=""
 						android:textSize="@dimen/space_cleaner_current_file_txt_size"
-						android:textColor="@color/lightBlack"
+						android:textColor="?attr/lightBlack"
 						android:gravity="center"
 						android:singleLine="true"
 						android:layout_gravity="center"/>
@@ -105,7 +105,7 @@
 								android:layout_height="@dimen/space_cleaner_icons_width"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"
 								android:src="@drawable/whatsapp"
-								android:tint="@color/mainIconTint"/>
+								android:tint="?attr/mainIconTint"/>
 
 							<TextView
 								android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
 								android:textSize="@dimen/space_cleaner_icon_text_size"
 								android:text="WhatsApp Cleaner"
 								android:gravity="center"
-								android:textColor="@color/mainIconTint"
+								android:textColor="?attr/mainIconTint"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
@@ -130,7 +130,7 @@
 								android:layout_height="@dimen/space_cleaner_icons_width"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"
 								android:src="@drawable/telegram"
-								android:tint="@color/mainIconTint"/>
+								android:tint="?attr/mainIconTint"/>
 
 							<TextView
 								android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
 								android:textSize="@dimen/space_cleaner_icon_text_size"
 								android:text="Telegram Cleaner"
 								android:gravity="center"
-								android:textColor="@color/mainIconTint"
+								android:textColor="?attr/mainIconTint"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
@@ -155,7 +155,7 @@
 								android:layout_height="@dimen/space_cleaner_icons_width"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"
 								android:src="@drawable/instagram"
-								android:tint="@color/mainIconTint"/>
+								android:tint="?attr/mainIconTint"/>
 
 							<TextView
 								android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
 								android:textSize="@dimen/space_cleaner_icon_text_size"
 								android:text="Instagram Cleaner"
 								android:gravity="center"
-								android:textColor="@color/mainIconTint"
+								android:textColor="?attr/mainIconTint"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
@@ -188,7 +188,7 @@
 								android:layout_height="@dimen/space_cleaner_icons_width"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"
 								android:src="@drawable/facebook"
-								android:tint="@color/mainIconTint"/>
+								android:tint="?attr/mainIconTint"/>
 
 							<TextView
 								android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
 								android:textSize="@dimen/space_cleaner_icon_text_size"
 								android:text="Facebook Cleaner"
 								android:gravity="center"
-								android:textColor="@color/mainIconTint"
+								android:textColor="?attr/mainIconTint"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
@@ -213,7 +213,7 @@
 								android:layout_height="@dimen/space_cleaner_icons_width"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"
 								android:src="@drawable/whatsapp"
-								android:tint="@color/mainIconTint"/>
+								android:tint="?attr/mainIconTint"/>
 
 							<TextView
 								android:layout_width="wrap_content"
@@ -221,7 +221,7 @@
 								android:textSize="@dimen/space_cleaner_icon_text_size"
 								android:text="WhatsApp Cleaner"
 								android:gravity="center"
-								android:textColor="@color/mainIconTint"
+								android:textColor="?attr/mainIconTint"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>
@@ -238,7 +238,7 @@
 								android:layout_height="@dimen/space_cleaner_icons_width"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"
 								android:src="@drawable/telegram"
-								android:tint="@color/mainIconTint"/>
+								android:tint="?attr/mainIconTint"/>
 
 							<TextView
 								android:layout_width="wrap_content"
@@ -246,7 +246,7 @@
 								android:textSize="@dimen/space_cleaner_icon_text_size"
 								android:text="WhatsApp Cleaner"
 								android:gravity="center"
-								android:textColor="@color/mainIconTint"
+								android:textColor="?attr/mainIconTint"
 								android:layout_margin="@dimen/space_cleaner_icons_margin"/>
 
 						</LinearLayout>

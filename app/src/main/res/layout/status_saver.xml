@@ -6,7 +6,7 @@
 	android:layout_width="match_parent"
 	android:animateLayoutChanges="true"
 	android:layout_height="match_parent"
-	android:background="@color/colorPrimary">
+	android:background="?attr/colorPrimary">
 
 	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
@@ -51,7 +51,7 @@
 				android:layout_height="200dp"
 				android:gravity="center"
 				android:padding="10dp"
-				android:background="@color/colorPrimary"
+				android:background="?attr/colorPrimary"
 				android:layout_margin="5dp">
 
 				<ImageView
