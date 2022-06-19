@@ -18,8 +18,8 @@
 	<color name="green_1">#2DAA7D</color>
 	
 	
-	<color name="darkColorPrimary">#000000</color>
-    <color name="darkColorPrimaryDark">#0794FF</color>
+	<color name="darkColorPrimary">#121212</color>
+    <color name="darkColorPrimaryDark">#105472</color>
     <color name="darkColorAccent">#6AFCD0</color>
     <color name="darkColorControlNormal">#1CBE89</color>
     <color name="darkColorControlHighlight">#81C9FF</color>
