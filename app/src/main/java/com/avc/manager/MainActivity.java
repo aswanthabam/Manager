@@ -26,6 +26,7 @@ import android.os.*;
 import android.view.View.*;
 import android.widget.GridLayout.*;
 import android.content.res.*;
+import android.support.v7.widget.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,PubConnect.OnUpdateResponceListener,
 SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHomeMessageListener,
@@ -35,13 +36,16 @@ SettingsActivity.SettingFragment.OnChangeTheme
     private Toolbar toolbar;
     private DrawerLayout d;
 	private NavigationView n;
-	public TextView infoTxt;
+	public TextView infoTxt,scan_text1,scan_text2;
 	public Animation floatUp;
 	public int info_i = 0;
 	//public AppCompatActivity activity;
 	public Me me;
-	public LinearLayout GridContainer, HomeTopBox,Item1,Item2,Item3,Item4;
+	public LinearLayout GridContainer,Item1,Item2,Item3,Item4;
+	RelativeLayout HomeTopBox;
 	private ImageView settings_icon;
+	private ImageView scan_image_1;
+	
     
 	@Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,6 +68,9 @@ SettingsActivity.SettingFragment.OnChangeTheme
         toolbar = findViewById(R.id.mainToolbar);
         d = findViewById(R.id.mainDrawerLayout);
 		n = findViewById(R.id.nav_view);
+		scan_image_1 = findViewById(R.id.activity_mainScanAnim);
+		scan_text1 = findViewById(R.id.activity_mainScanText1);
+		scan_text2 = findViewById(R.id.activity_mainScanText2);
 		
 		Item1 =findViewById(R.id.activity_mainGridItem1); // Space cleaner
 		Item2 =findViewById(R.id.activity_mainGridItem2);
@@ -100,6 +107,10 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		HomeTopBox = findViewById(R.id.activity_mainBubbleBg);
 		GridContainer = findViewById(R.id.activity_mainGridItemsContainer);
         
+		
+		//scan_anim.start();
+		
+		
 		// Setting drawer and toolbar
 		//androidx.core.util.Preconditions.checkArgumentInRange();
 		setSupportActionBar(toolbar);
@@ -127,44 +138,6 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		//floatUp.setRepeatCount();
 		//floatUp.setRepeatMode(Animation.INFINITE);
 		
-		floatUp.setAnimationListener(new Animation.AnimationListener()
-		{
-			@Override public void onAnimationEnd(Animation n)
-			{
-				new Thread(new Runnable(){
-					@Override public void run()
-					{
-						Manager._main_activity.runOnUiThread(new Runnable()
-						{
-							@Override public void run()
-							{
-								infoTxt.setText("");
-								infoTxt.startAnimation(floatUp);
-							}
-						});
-					}
-				}).start();		
-			}
-			@Override public void onAnimationRepeat(Animation n)
-			{
-				//floatUp.startNow();
-			}
-			@Override public void onAnimationStart(Animation n)
-			{
-				if(Manager.show_home.size() > 0)
-				{
-					infoTxt.setText(Manager.show_home.get(info_i));
-					info_i++;
-					if(info_i >= Manager.show_home.size())
-					{
-						info_i = 0;
-					}
-				}else info_i = 0;
-			}
-		});
-		info_i = 0;
-		infoTxt.startAnimation(floatUp);
-		//floatUp.startNow();
 		
 		ViewGroup.LayoutParams par = GridContainer.getLayoutParams();
 		par.height = Me.SystemWidth;
@@ -191,6 +164,28 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		Manager.space_cleaner.setOnHomeMessageListener(this);
 		if(Manager.loaded_space_cleaner) Manager.space_cleaner.storageScan();
 		else Utils.toast(this,"Unable to load space cleaner");
+		
+		final AnimatedVectorDrawableCompat scan_anim = AnimatedVectorDrawableCompat.create(this,R.drawable.scan_animated);
+		scan_image_1.setImageDrawable(scan_anim);
+
+		final Animatable scan = (Animatable) scan_image_1.getDrawable();
+		
+		scan_anim.registerAnimationCallback(new Animatable2Compat.AnimationCallback()
+		{
+			@Override public void onAnimationEnd(Drawable d)
+			{
+				scan_image_1.post(new Runnable(){
+					@Override public void run()
+					{
+						if(!StatusSaver.files.is_paused && !SpaceCleaner.all_files.is_paused)
+							scan.start();
+						else scan_image_1.setImageResource(R.drawable.scan);
+					}
+				});
+			}
+		});
+		
+		scan.start();
 		
 	}
 	
@@ -305,10 +300,11 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		@Override
 		public void onEnd(GROUPFiles all)
 		{
-			Manager.show_home.add(Manager.status_saver_show_in_home_text.replaceAll("&size",String.valueOf(StatusSaver.files.files.size())));
-			info_i = 0;
-			infoTxt.setText("");
-			infoTxt.startAnimation(floatUp);
+			//Manager.show_home.add(Manager.status_saver_show_in_home_text.replaceAll("&size",String.valueOf(StatusSaver.files.files.size())));
+			//info_i = 0;
+			//infoTxt.setText("");
+			//infoTxt.startAnimation(floatUp);
+			scan_text2.setText(StatusSaver.files.files.size()+"");
 		}
 		
 	};
@@ -319,13 +315,13 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		@Override
 		public void onAdd(GROUPFiles all)
 		{
-			
+			scan_text2.setText(StatusSaver.files.files.size()+"");
 		}
 
 		@Override
 		public void onRemove(GROUPFiles all)
 		{
-			
+			scan_text2.setText(StatusSaver.files.files.size()+"");
 		}
 
 	};
@@ -345,10 +341,13 @@ SettingsActivity.SettingFragment.OnChangeTheme
 	public void onEnd(GROUPFiles files)
 	{
 		// Stirage scan ended
-		info_i = 0;
+		/*info_i = 0;
 		infoTxt.setText("");
 		Manager.show_home.add(Manager.space_cleaner_show_in_home_text.replaceAll("&size",SpaceCleaner.files.sizeSTR));
 		infoTxt.startAnimation(floatUp);
+		*/
+		scan_text1.setText(SpaceCleaner.files.sizeSTR);
+		
 	}
 	
 	@Override
@@ -367,12 +366,16 @@ SettingsActivity.SettingFragment.OnChangeTheme
 	public void onAdd(GROUPFiles files)
 	{
 		// New fike added to space cleane
+		scan_text1.setText(SpaceCleaner.files.sizeSTR);
+		
 	}
 
 	@Override
 	public void onRemove(GROUPFiles files)
 	{
 		// File remoced
+		scan_text1.setText(SpaceCleaner.files.sizeSTR);
+		
 	}
 	
 	@Override

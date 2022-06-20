@@ -14,6 +14,8 @@ import java.security.*;
 import android.content.pm.*;
 import android.view.View.*;
 import android.preference.*;
+import android.support.graphics.drawable.*;
+import android.graphics.drawable.*;
 
 /*
  Splash screen to show when the app is loading
@@ -23,8 +25,9 @@ implements Manager.OnDecompressFileListener
 {
 	public AppCompatActivity a;
 	private TextView txt;
-	
+	private ImageView img;
 	private ProgressBar bar;
+	private Animatable scan;
 	String[] per = {
 		Manifest.permission.WRITE_EXTERNAL_STORAGE,
 		Manifest.permission.READ_EXTERNAL_STORAGE
@@ -35,7 +38,7 @@ implements Manager.OnDecompressFileListener
 	{
 		//if(!theme.equals(current_theme)) setTheme(theme)
 		super.onCreate(savedInstanceState);
-		
+		/*
 		prefe = PreferenceManager.getDefaultSharedPreferences(this);
 		final boolean dark = prefe.getBoolean("theme",false);
 		boolean current_theme = prefe.getBoolean("current_theme",true);
@@ -50,15 +53,22 @@ implements Manager.OnDecompressFileListener
 				prefe.edit().putBoolean("current_theme",false).commit();
 			}
 			//recreate();
-		}
+		}*/
 		//getWindow().setBackgroundDrawableResource(R.drawable.gradient_background);
 		
 		setContentView(R.layout.splash_screen);
+		
 		a = this;
 		final AppCompatActivity a = this;
 		txt = findViewById(R.id.splashscreenTextView1);
 		bar = findViewById(R.id.splashscreenProgressBar1);
 		bar.setVisibility(View.GONE);
+		img = findViewById(R.id.splash_screenImageView);
+		final AnimatedVectorDrawableCompat scan_anim = AnimatedVectorDrawableCompat.create(this,R.drawable.ic_animated);
+		img.setImageDrawable(scan_anim);
+
+		scan = (Animatable) img.getDrawable();
+		
 		permRun(per);
 	}
 
@@ -155,7 +165,15 @@ implements Manager.OnDecompressFileListener
 						if(Manager.loaded_status_saver)pre.edit().putInt("status_saver_version",Manager.status_saver_version).commit();
 						if(Manager.loaded_space_cleaner) pre.edit().putInt("space_cleaner_version",Manager.space_cleaner_version).commit();
 						/* Start activity */
-						
+						runOnUiThread(new Runnable()
+						{
+							@Override public void run()
+							{
+								txt.setVisibility(View.GONE);
+								scan.start();
+							}
+						});
+						try{Thread.sleep(2500);}catch(Exception e){}
 						Intent i = new Intent(a,MainActivity.class);
 						startActivity(i);
 						finish();

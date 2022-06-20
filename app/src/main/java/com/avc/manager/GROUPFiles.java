@@ -17,7 +17,7 @@ public class GROUPFiles
 	public long size = 0;
 	public float sizeKB = 0,sizeMB = 0,sizeGB = 0;
 	public Object linkedObject = null; // This object is used as an extension of thia class
-	
+	public boolean is_paused = false;
 	private Listener listener = new Listener(){
 		@Override public void onPause(GROUPFiles f){}
 		@Override public void onRemove(GROUPFiles f){}
@@ -162,6 +162,7 @@ public class GROUPFiles
 	
 	public void pause()
 	{
+		is_paused = true;
 		if(listener != null) listener.onPause(this);
 	}
 	
