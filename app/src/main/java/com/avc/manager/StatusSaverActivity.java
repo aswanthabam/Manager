@@ -19,6 +19,7 @@ import android.support.design.widget.*;
 import android.support.v7.widget.Toolbar;
 import android.view.View.*;
 import android.content.*;
+import android.preference.*;
 
 public class StatusSaverActivity extends AppCompatActivity implements StatusRVAdapter.OnBind , StatusRVAdapter.OnDialog,
 StatusSaver.OnStatusScanListener,StatusSaver.OnStatusChangeListener
@@ -124,26 +125,37 @@ StatusSaver.OnStatusScanListener,StatusSaver.OnStatusChangeListener
 	}
 
 	@Override
-	public void onEnd(GROUPFiles f)
+	public void onEnd(final GROUPFiles f)
 	{
+		
 		f.sortFiles(GROUPFiles.SORT_BY_DATE_DESCENDING);
 		new Thread(new Runnable()
+		{
+			@Override public void run()
 			{
-				@Override public void run()
-				{
-					Manager.thumbnails = adapter.getThumbnails();
-				}
-			}).start();
+				if(PreferenceManager.getDefaultSharedPreferences(activity).getBoolean("preview_video",true))
+					new Thread(new Runnable()
+					{
+						@Override public void run()
+						{
+							Manager.collectThumbnails(f);
+						}
+					}).start();
+				else
+					Manager.collectThumbnails(f);
+				runOnUiThread(new Runnable()
+					{
+						@Override public void run()
+						{
+							rcView.setAdapter(adapter);
+							bar.setVisibility(View.GONE);
+							rcView.setVisibility(View.VISIBLE);		
+						}
+					});
+			}
+		}).start();
 
-		runOnUiThread(new Runnable()
-			{
-				@Override public void run()
-				{
-					rcView.setAdapter(adapter);
-					bar.setVisibility(View.GONE);
-					rcView.setVisibility(View.VISIBLE);		
-				}
-			});
+		
 		// Starts the showing of top image slideshow
 		new Thread(new Runnable()
 			{

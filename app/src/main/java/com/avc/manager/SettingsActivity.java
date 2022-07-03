@@ -163,5 +163,18 @@ public class SettingsActivity extends AppCompatActivity
 			void onChange();
 		}
 	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// TODO: Implement this method
+		switch(item.getItemId()){
+			case android.R.id.home:
+				finish();
+				break;
+		}
+		return true;
+	}
+	
 	
 }

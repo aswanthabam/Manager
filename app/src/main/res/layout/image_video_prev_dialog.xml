@@ -36,7 +36,15 @@
 				android:layout_width="25dp"
 				android:layout_height="25dp"
 				android:src="@drawable/share"/>
-
+			
+			<ImageView
+				android:layout_margin="10dp"
+				android:id="@+id/image_video_prev_dialogExpand"
+				android:layout_width="25dp"
+				android:layout_height="25dp"
+				android:tint="?attr/colorAccent"
+				android:src="@drawable/expand"/>
+			
 		</LinearLayout>
 
 		<LinearLayout
@@ -60,7 +68,7 @@
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
-
+		
 		<VideoView
 			android:id="@+id/image_video_prev_dialogVideoView"
 			android:layout_width="match_parent"
@@ -75,6 +83,8 @@
 			android:src="@drawable/ic_launcher"
 			android:maxHeight="300dp"
 			android:adjustViewBounds="true"/>
+		
+		
 
 	</RelativeLayout>
 

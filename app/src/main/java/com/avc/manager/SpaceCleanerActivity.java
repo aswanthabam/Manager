@@ -69,12 +69,22 @@ SpaceCleaner.OnUnCountedFileChangeListener
 		{
 			@Override public void onClick(View v)
 			{
-				if(SpaceCleaner.files.files.size() > 0){
-					for(File f : SpaceCleaner.files.files){
-						f.delete();
+				new Thread(new Runnable(){
+					@Override public void run(){
+						if(SpaceCleaner.files.files.size() > 0){
+							for(File f : SpaceCleaner.files.files){
+								f.delete();
+							}
+							SpaceCleaner.files.remove(SpaceCleaner.files.files);
+							activity.runOnUiThread(new Runnable(){
+								@Override public void run(){
+									sizeTxt.setText("All Cleared");
+								}
+							});
+						}
 					}
-					sizeTxt.setText("All Cleared");
-				}
+					
+				}).start();
 			}
 		});
 		//new CacheCleaner(this);
@@ -146,7 +156,7 @@ SpaceCleaner.OnUnCountedFileChangeListener
 	public void onAdd(GROUPFiles files)
 	{
 		// New fike added to space cleaner
-		sizeTxt.setText(files.sizeSTR);
+		sizeTxt.setText(SpaceCleaner.files.sizeSTR);
 		SizeInfoText.setText(files.current);
 	}
 
@@ -154,8 +164,8 @@ SpaceCleaner.OnUnCountedFileChangeListener
 	public void onRemove(GROUPFiles files)
 	{
 		// File removed
-		sizeTxt.setText(files.sizeSTR);
-		SizeInfoText.setText("");
+		/*sizeTxt.setText(SpaceCleaner.files.sizeSTR);
+		SizeInfoText.setText("");*/
 	}
 	
 }

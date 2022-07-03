@@ -94,6 +94,11 @@
 			android:screenOrientation="portrait"
 			android:label=""/>
 
+		<activity
+			android:name=".MediaPlayerActivity"
+			android:screenOrientation="portrait"
+			android:label=""/>
+
 	</application>
 
 </manifest>

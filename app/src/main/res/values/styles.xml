@@ -13,6 +13,7 @@
 		<item name="light_border">?attr/light_border</item>
 		<item name="android:textColor">?attr/text_color</item>
 		<item name="android:textColorSecondary">?attr/text_color_secondary</item>
+		<item name="spiner_disabled">?attr/spiner_disabled</item>
 	</style>
 	<style name="SplashBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowBackground">@drawable/splash_bg</item>
@@ -36,6 +37,7 @@
 		<item name="light_border">@color/darkLight_border</item>
 		<item name="text_color">@color/darkMainIconTint</item>
 		<item name="text_color_secondary">@color/lightTextColorSecondary</item>
+		<item name="spiner_disabled">@color/darkSpiner_disabled</item>
 	</style>
 	
 	
@@ -61,6 +63,7 @@
 		<item name="light_border">@color/lightLight_border</item>
 		<item name="text_color">@color/lightMainIconTint</item>
 		<item name="text_color_secondary">@color/lightTextColorSecondary</item>
+		<item name="spiner_disabled">@color/lightSpiner_disabled</item>
 	</style>
 	
 	

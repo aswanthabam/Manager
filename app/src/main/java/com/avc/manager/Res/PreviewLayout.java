@@ -100,6 +100,8 @@ public class PreviewLayout
 						
 						v2.setScaleX(scaleX);
 						v2.setScaleY(scaleY);
+						
+						
 						break;
 					case AUTO_CROP:
 

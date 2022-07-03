@@ -10,6 +10,7 @@ import android.net.*;
 import android.media.*;
 import android.support.v7.app.*;
 import android.preference.*;
+import android.content.*;
 // Preview a video or image show image if tge file is image if video
 // play the video
 public class ImageVideoPreviewDialog extends Dialog
@@ -17,7 +18,7 @@ public class ImageVideoPreviewDialog extends Dialog
 	private AppCompatActivity activity;
 	public File file;
 	public VideoView v1;
-	public ImageView v2,Cancel,download,share;
+	public ImageView v2,Cancel,download,share,expand;
 	public LinearLayout main;
 	public boolean want_save;
 	private boolean video = false;
@@ -46,8 +47,18 @@ public class ImageVideoPreviewDialog extends Dialog
 		main = findViewById(R.id.image_video_prev_dialogLinearLayoutMain);
 		download = findViewById(R.id.image_video_prev_dialogDownload);
 		share = findViewById(R.id.image_video_prev_dialogShare);
+		expand = findViewById(R.id.image_video_prev_dialogExpand);
 		
 		// Click listener
+		
+		expand.setOnClickListener(new View.OnClickListener(){
+			@Override public void onClick(View v)
+			{
+				MediaPlayerActivity.file = file;
+				Intent i = new Intent(activity,MediaPlayerActivity.class);
+				activity.startActivity(i);
+			}
+		});
 		
 		Cancel.setOnClickListener(new View.OnClickListener()
 		{

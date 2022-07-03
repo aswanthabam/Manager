@@ -101,10 +101,35 @@ public class SpaceCleaner
 						});
 					
 					// Loop through all scanable file defined this data in Me is added through the main activity
-					for(Manager.Scanable scan : Manager.space_cleaner_scannable)
+					for(final Manager.Scanable scan : Manager.space_cleaner_scannable)
 					{
 						boolean flag = false;
 						GROUPFiles fiso = new GROUPFiles();
+						fiso.setListener(new GROUPFiles.Listener(){
+							@Override public void onAdded(final GROUPFiles f){
+								activity.runOnUiThread(new Runnable()
+									{
+										@Override public void run()
+										{
+											/*if(scan.count)files.add(f);
+											else un_counted_files.add(f);*/
+										}
+									});
+							}
+							@Override public void onRemove(final GROUPFiles f){
+								activity.runOnUiThread(new Runnable()
+									{
+										@Override public void run()
+										{
+											/*if(scan.count)files.remove(f);
+											else un_counted_files.remove(f);*/
+										}
+									});
+							}
+							@Override public void onPause(GROUPFiles f){
+								
+							}
+						});
 						fiso.setName(scan.name);
 						fiso.setParent(scan.parent);
 

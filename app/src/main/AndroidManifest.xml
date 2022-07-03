@@ -39,7 +39,8 @@
 		<activity android:name=".FileViewerActivity" android:screenOrientation="portrait" android:label="" />
 		<activity android:name=".DownloadedStatusActivity" android:screenOrientation="portrait" android:label="" />
 		<activity android:name=".SettingsActivity" android:screenOrientation="portrait" android:label="" />
-			
+		<activity android:name=".MediaPlayerActivity" android:screenOrientation="portrait" android:label="" />
+		
 	</application>
 
 </manifest>

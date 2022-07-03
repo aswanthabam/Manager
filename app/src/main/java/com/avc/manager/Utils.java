@@ -34,6 +34,19 @@ public class Utils
 		return v.resourceId;
 	}
 	
+	public static void writeFile(String path,String c) throws Exception
+	{
+		writeFile(new FileOutputStream(path),c);
+	}
+	public static void writeFille(File f,String c) throws Exception
+	{
+		writeFile(new FileOutputStream(f),c);
+	}
+	public static void writeFile(FileOutputStream s,String c) throws Exception
+	{
+		s.write(c.getBytes());
+	}
+	
 	// Read a file.via File or InputStream object to string output
 	public static String readFile(File f) throws Exception{return readFile(new FileInputStream(f));}
 	public static String readFile(InputStream fos) throws Exception

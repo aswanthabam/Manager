@@ -11,5 +11,5 @@
 	<attr name="light_border" format="color"/>
 	<attr name="text_color"></attr>
 	<attr name="text_color_secondary"></attr>
-	
+	<attr name="spiner_disabled"></attr>
 </resources>

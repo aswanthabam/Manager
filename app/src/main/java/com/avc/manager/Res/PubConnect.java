@@ -142,7 +142,7 @@ public class PubConnect
 				
 				// If the file is already downloaded and found inside internal stirage
 				// Direct setuo the install button
-				if(!Me.update.must_update) btn2.setText("Later");
+				
 				
 				btn1.setOnClickListener(new View.OnClickListener()
 				{
@@ -244,7 +244,18 @@ public class PubConnect
 						}
 						
 				 	}
+					
 				});
+				if(!Me.update.must_update){
+					btn2.setText("Later");
+					btn2.setOnClickListener(new View.OnClickListener()
+					{
+						@Override public void onClick(View v)
+						{
+							dismiss();
+						}
+					});
+				}
 				// If the app must want to be updated the app will close if dissmissed
 				setOnDismissListener(new OnDismissListener(){
 					@Override public void onDismiss(DialogInterface d){

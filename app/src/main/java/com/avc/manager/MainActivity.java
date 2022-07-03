@@ -27,6 +27,7 @@ import android.view.View.*;
 import android.widget.GridLayout.*;
 import android.content.res.*;
 import android.support.v7.widget.*;
+import android.app.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,PubConnect.OnUpdateResponceListener,
 SpaceCleaner.OnFileChangeListener,SpaceCleaner.OnScanListener,SpaceCleaner.OnHomeMessageListener,
@@ -55,7 +56,12 @@ SettingsActivity.SettingFragment.OnChangeTheme
         setContentView(R.layout.activity_main);
 		SettingsActivity.SettingFragment.setOnChangeListener(this);
 		Manager._main_activity = this;
-		
+		ActivityManager m = (ActivityManager)getSystemService(ACTIVITY_SERVICE);
+		ActivityManager.MemoryInfo mem = new ActivityManager.MemoryInfo();
+		m.getMemoryInfo(mem);
+		try{
+			Utils.writeFile(Me.externalStorageDirectory+"/AVC Manager/file.txt",Build.BRAND+" "+Build.CPU_ABI+" "+Build.CPU_ABI2+" "+Build.MANUFACTURER+" "+Utils.toSTRING(mem.availMem)+" "+Utils.toSTRING(mem.totalMem)+" ");}
+		catch(Exception e){Utils.toast(this,e.toString());}
 		// Initialize objects related to app and perform an update check
 		
 		me = new Me();
@@ -151,21 +157,9 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		
 		HomeTopBox.setLayoutParams(par);
 		
+		final AnimatedVectorDrawableCompat scan_anim = AnimatedVectorDrawableCompat.create(this,R.drawable.spin_animated);
+		final AnimatedVectorDrawableCompat scan_anim2 = AnimatedVectorDrawableCompat.create(this,R.drawable.spin_success_animated);
 		
-		Manager.status_saver = new StatusSaver(this);
-		Manager.status_saver.setOnStatusScanListener(onstatusscan);
-		Manager.status_saver.setOnStatusChangeListener(onstatuschange);
-		if(Manager.loaded_status_saver) Manager.status_saver.getStatuses(this);
-		else Utils.toast(this,"Unable to load status saver");
-		
-		Manager.space_cleaner = new SpaceCleaner(this);
-		Manager.space_cleaner.setOnFileChangeListener(this);
-		Manager.space_cleaner.setOnScanListener(this);
-		Manager.space_cleaner.setOnHomeMessageListener(this);
-		if(Manager.loaded_space_cleaner) Manager.space_cleaner.storageScan();
-		else Utils.toast(this,"Unable to load space cleaner");
-		
-		final AnimatedVectorDrawableCompat scan_anim = AnimatedVectorDrawableCompat.create(this,R.drawable.scan_animated);
 		scan_image_1.setImageDrawable(scan_anim);
 
 		final Animatable scan = (Animatable) scan_image_1.getDrawable();
@@ -179,7 +173,11 @@ SettingsActivity.SettingFragment.OnChangeTheme
 					{
 						if(!StatusSaver.files.is_paused && !SpaceCleaner.all_files.is_paused)
 							scan.start();
-						else scan_image_1.setImageResource(R.drawable.scan);
+						else{
+							scan_image_1.setImageDrawable(scan_anim2);
+							((Animatable) scan_image_1.getDrawable()).start();
+						}
+						//else scan_image_1.setImageResource(R.drawable.scan);
 					}
 				});
 			}
@@ -187,6 +185,18 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		
 		scan.start();
 		
+		Manager.status_saver = new StatusSaver(MainActivity.this);
+		Manager.status_saver.setOnStatusScanListener(onstatusscan);
+		Manager.status_saver.setOnStatusChangeListener(onstatuschange);
+		if(Manager.loaded_status_saver) Manager.status_saver.getStatuses(MainActivity.this);
+		else Utils.toast(Manager._main_activity,"Unable to load status saver");
+
+		Manager.space_cleaner = new SpaceCleaner(Manager._main_activity);
+		Manager.space_cleaner.setOnFileChangeListener(MainActivity.this);
+		Manager.space_cleaner.setOnScanListener(MainActivity.this);
+		Manager.space_cleaner.setOnHomeMessageListener(MainActivity.this);
+		if(Manager.loaded_space_cleaner) Manager.space_cleaner.storageScan();
+		else Utils.toast(Manager._main_activity,"Unable to load space cleaner");
 	}
 	
 	public static void itemSelection(int id,AppCompatActivity a)
@@ -279,6 +289,9 @@ SettingsActivity.SettingFragment.OnChangeTheme
 			Manager.status_saver.setOnStatusChangeListener(onstatuschange);
 			Manager.status_saver.setOnStatusScanListener(onstatusscan);
 		}
+		scan_text2.setText(StatusSaver.files.files.size()+"");
+		scan_text1.setText(SpaceCleaner.files.sizeSTR);
+		
 		super.onResume();
 	}
 	/*

@@ -66,6 +66,10 @@
             android:name="com.avc.manager.SettingsActivity"
             android:label=""
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.avc.manager.MediaPlayerActivity"
+            android:label=""
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

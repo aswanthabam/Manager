@@ -10,7 +10,7 @@
 	<color name="lightLightBlack">#8D8D8D</color>
 	<color name="lightLight_border">#C0C0C0</color>
 	<color name="lightTextColorSecondary">#A6A6A6</color>
-	
+	<color name="lightSpiner_disabled">#DCFFFE</color>
 	
 	<color name="green">#70F44D</color>
 	<color name="red">#F50909</color>
@@ -27,5 +27,6 @@
 	<color name="darkLightBlack">#A7A7A7</color>
 	<color name="darkLight_border">#DEDEDE</color>
 	<color name="darkTextColorSecondary">#B0B0B0</color>
+	<color name="darkSpiner_disabled">#00423B</color>
 	
 </resources>

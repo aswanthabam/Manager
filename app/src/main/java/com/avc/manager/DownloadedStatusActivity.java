@@ -104,6 +104,7 @@ public class DownloadedStatusActivity extends AppCompatActivity implements Statu
 						
 					}
 					files.pause();
+					files.sortFiles(GROUPFiles.SORT_BY_DATE_DESCENDING);
 				}
 				catch(Exception e)
 				{
@@ -134,8 +135,20 @@ public class DownloadedStatusActivity extends AppCompatActivity implements Statu
 				di.want_save = false;
 				if(di.file != null && di.file.isFile() && di.file.exists()){
 					di.file.delete();
+					files.remove(di.file);
+					rcView.setAdapter(adapter);
 					Utils.toast(activiy,"Deleted");
 				}
+			}
+		});
+		di.share.setOnClickListener(new View.OnClickListener(){
+			@Override public void onClick(View v)
+			{
+				Utils.toast(activiy,"Sharing...");
+				Utils.shareFile(activiy,"AVC Manager","Hey,\nLook at this amazing content, "+
+								"I saved this status using AVC Manager Application!. AVC Manager has more features like this including\n"+
+								" • Status saver\n • Space cleaner\n • Device Optimization etc..\n\n Download the app now."
+								,di.file.getAbsolutePath(),Utils.getMimeType(di.file.getAbsolutePath()));
 			}
 		});
 		di.download.setImageResource(R.drawable.trash);
