@@ -1,0 +1,65 @@
+ 
+<resources>
+ 
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+	
+    <dimen name="activity_vertical_margin">16dp</dimen>
+ 	
+	<dimen name="status_bar_height">38dp</dimen>
+	
+	<!-- Home element sizes -->
+	
+	<dimen name="home_top_box_height">300dp</dimen>
+	
+	<dimen name="home_main_menu_box_height">300dp</dimen>
+	
+	<dimen name="home_extra_tools_box_height">100dp</dimen>
+	
+	<!-- Topbar item sizes-->
+	
+	<dimen name="topbar_drawer_icon_size">45dp</dimen>
+	
+	<!-- Main icon menu sizes -->
+	
+	<dimen name="home_main_icon_width">32dp</dimen>
+	
+	<dimen name="home_main_icon_text_size">14sp</dimen>
+	
+	<dimen name="home_main_icon_margin">0dp</dimen>
+	
+	<dimen name="home_main_icon_text_margin">10dp</dimen>
+	
+	<dimen name="home_main_icon_info_txt_width">70dp</dimen>
+	
+	<dimen name="home_main_icon_info_txt_size">10sp</dimen>
+	
+	<dimen name="home_main_icon_info_txt_margin">0dp</dimen>
+	
+	<dimen name="home_main_icon_vertical_margin_bottom">40dp</dimen>
+	
+	<!-- Home floating text sizes -->
+	
+	<dimen name="home_floating_text_size">15sp</dimen>
+	
+	<!-- Space cleaner activity sizes -->
+	
+	<dimen name="space_cleaner_top_text_size">20dp</dimen>
+	
+	<dimen name="space_cleaner_current_file_txt_size">10sp</dimen>
+	
+	<dimen name="space_cleaner_top_size_box_height">200dp</dimen>
+	
+	<dimen name="space_cleaner_menu_box1_height">200dp</dimen>
+	
+	<dimen name="space_cleaner_icons_container_margin">10dp</dimen>
+	
+	<dimen name="space_cleaner_icons_width">28dp</dimen>
+	
+	<dimen name="space_cleaner_icon_text_size">8sp</dimen>
+	
+	<dimen name="space_cleaner_icons_container_padding">5dp</dimen>
+	
+	<dimen name="space_cleaner_icons_margin">5dp</dimen>
+	
+</resources>
+

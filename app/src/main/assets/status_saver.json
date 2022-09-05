@@ -1,0 +1,30 @@
+{
+	"version":1,
+	"version-name":"1.0.0 beta",
+	"name":"Status Saver",
+	"saveable":[
+		{
+			"name":"WhatsApp Status Saver",
+			"folders":[
+				"/WhatsApp/media/.Statuses",
+				"/Android/com.whatsapp/media/.Statuses"
+			],
+			"files":[
+				
+			],
+			"mimes":[
+				"image/",
+				"video/"
+			],
+			"except-files":[".nomedia"],
+			"save-to":"/AVC Manager/WhatsApp Statuses",
+			"icon":"Manager/WhatsApp.png",
+			"show-in-home":true,
+			"show-in-home-text":"&size WhatsApp Statuses available",
+			"parent":"/WhatsApp/media/.Statuses"
+		}
+	],
+	"date":"17-06-2022 11:37:00",
+	"description":"status saver",
+	"show-in-home-text":"&size media files can be saved"
+}

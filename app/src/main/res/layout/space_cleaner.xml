@@ -35,11 +35,13 @@
 			<LinearLayout
 				android:orientation="vertical"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+				android:layout_height="wrap_content"
+				android:gravity="center">
 
 				<LinearLayout
+					android:id="@+id/space_cleanerLineraLayoutContainer"
 					android:orientation="vertical"
-					android:layout_width="match_parent"
+					android:layout_width="@dimen/space_cleaner_top_size_box_height"
 					android:layout_height="@dimen/space_cleaner_top_size_box_height"
 					android:background="@drawable/top_arrow_bg"
 					android:gravity="center">
@@ -60,7 +62,7 @@
 						android:layout_height="wrap_content"
 						android:text=""
 						android:textSize="@dimen/space_cleaner_current_file_txt_size"
-						android:textColor="?attr/lightBlack"
+						android:textColor="?attr/mainIconTint"
 						android:gravity="center"
 						android:singleLine="true"
 						android:layout_gravity="center"/>
@@ -78,7 +80,19 @@
 						/>
 
 				</LinearLayout>
-
+				
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					>
+					<android.support.v7.widget.RecyclerView
+						android:id="@+id/space_cleanerRecyclerView"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						/>
+				</RelativeLayout>
+				<!--
 				<LinearLayout
 					android:orientation="vertical"
 					android:layout_width="match_parent"
@@ -254,7 +268,7 @@
 					</LinearLayout>
 
 				</LinearLayout>
-
+-->
 			</LinearLayout>
 
 		</ScrollView>

@@ -4,6 +4,7 @@ import com.avc.manager.*;
 import java.util.*;
 import java.io.*;
 import android.util.*;
+import android.content.*;
 
 public class SpaceCleaner
 {
@@ -12,6 +13,10 @@ public class SpaceCleaner
 	public static GROUPFiles un_counted_files;
 	public static GROUPFiles all_files;
 	public static Map<Manager.Scanable,Integer> show_home_contributions = new ArrayMap<Manager.Scanable,Integer>();
+	public SpaceCleaner()
+	{
+		
+	}
 	public SpaceCleaner(AppCompatActivity a)
 	{
 		activity = a;
@@ -26,6 +31,8 @@ public class SpaceCleaner
 		un_counted_files = new GROUPFiles();
 		all_files = new GROUPFiles();
 		
+		if(activity == null) onscan.onStart(files);
+		else
 		activity.runOnUiThread(new Runnable(){
 			@Override public void run()
 			{
@@ -41,6 +48,9 @@ public class SpaceCleaner
 							@Override public void onAdded(final GROUPFiles f)
 							{
 								all_files.add(f);
+								
+								if(activity == null)onuncountedfilechange.onUnCountedAdd(f);
+								else
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
@@ -48,10 +58,13 @@ public class SpaceCleaner
 											onuncountedfilechange.onUnCountedAdd(f);
 										}
 									});
+									
 							}
 							@Override public void onRemove(final GROUPFiles f)
 							{
 								all_files.remove(f);
+								if(activity == null)onuncountedfilechange.onUnCountedRemove(f);
+								else
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
@@ -59,6 +72,7 @@ public class SpaceCleaner
 											onuncountedfilechange.onUnCountedRemove(f);
 										}
 									});
+								
 							}
 							@Override public void onPause(final GROUPFiles f){}
 						});
@@ -68,18 +82,22 @@ public class SpaceCleaner
 							@Override public void onAdded(final GROUPFiles f)
 							{
 								all_files.add(f);
+								if(activity == null)onfilechange.onAdd(f);
+								else
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
 										{
 											onfilechange.onAdd(f);
-
 										}
 									});
+									
 							}
 							@Override public void onRemove(final GROUPFiles f)
 							{
 								all_files.remove(f);
+								if(activity == null)onfilechange.onRemove(f);
+								else
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
@@ -87,9 +105,12 @@ public class SpaceCleaner
 											onfilechange.onRemove(f);
 										}
 									});
+									
 							}
 							@Override public void onPause(final GROUPFiles f)
 							{
+								if(activity == null)onscan.onEnd(f);
+								else
 								activity.runOnUiThread(new Runnable()
 									{
 										@Override public void run()
@@ -97,6 +118,7 @@ public class SpaceCleaner
 											onscan.onEnd(f);
 										}
 									});
+									
 							}
 						});
 					
@@ -107,24 +129,10 @@ public class SpaceCleaner
 						GROUPFiles fiso = new GROUPFiles();
 						fiso.setListener(new GROUPFiles.Listener(){
 							@Override public void onAdded(final GROUPFiles f){
-								activity.runOnUiThread(new Runnable()
-									{
-										@Override public void run()
-										{
-											/*if(scan.count)files.add(f);
-											else un_counted_files.add(f);*/
-										}
-									});
+								
 							}
 							@Override public void onRemove(final GROUPFiles f){
-								activity.runOnUiThread(new Runnable()
-									{
-										@Override public void run()
-										{
-											/*if(scan.count)files.remove(f);
-											else un_counted_files.remove(f);*/
-										}
-									});
+								
 							}
 							@Override public void onPause(GROUPFiles f){
 								
@@ -132,7 +140,7 @@ public class SpaceCleaner
 						});
 						fiso.setName(scan.name);
 						fiso.setParent(scan.parent);
-
+						
 						if(scan.folders.size() > 0)
 						{
 							if(scan.folder_delete_all){
@@ -164,6 +172,7 @@ public class SpaceCleaner
 					}
 					files.pause();
 					un_counted_files.pause();
+					all_files.pause();
 				}
 			}).start();
 	}

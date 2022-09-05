@@ -73,7 +73,7 @@ public class PubConnect
 				p.add(new BasicNameValuePair("version",version_id));
 				p.add(new BasicNameValuePair("app_pass",app_pass));
 				// Parse the url and get the output
-				URL url = new URL("http://localhost:8000/appstore-api/api/?"+Utils.QUERYEncode(p));
+				URL url = new URL(Me.host+"appstore-api/api/?"+Utils.QUERYEncode(p));
 				conn = (HttpURLConnection) url.openConnection();
 				conn.setDoInput(true);
 				final String out = Utils.reader(activity,conn);

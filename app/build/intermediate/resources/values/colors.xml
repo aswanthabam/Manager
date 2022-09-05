@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lightColorPrimary">#FFFFFFFF</color>
+    <color name="lightColorPrimaryDark">#54B7FF</color>
+	<color name="colorPrimaryDarkLight">#94D1FF</color>
+    <color name="lightColorAccent">#2DAA7D</color>
+    <color name="lightColorControlNormal">#2DAA7D</color>
+    <color name="lightColorControlHighlight">#54B7FF</color>
+	<color name="lightMainIconTint">#292A2A</color>
+	<color name="lightLightBlack">#8D8D8D</color>
+	<color name="lightLight_border">#C0C0C0</color>
+	<color name="lightTextColorSecondary">#A6A6A6</color>
+	<color name="lightSpiner_disabled">#DCFFFE</color>
+	
+	<color name="green">#70F44D</color>
+	<color name="red">#F50909</color>
+	<color name="blue">#54B7FF</color>
+	<color name="green_1">#2DAA7D</color>
+	
+	
+	<color name="darkColorPrimary">#121212</color>
+    <color name="darkColorPrimaryDark">#105472</color>
+    <color name="darkColorAccent">#6AFCD0</color>
+    <color name="darkColorControlNormal">#1CBE89</color>
+    <color name="darkColorControlHighlight">#81C9FF</color>
+	<color name="darkMainIconTint">#D8D8D8</color>
+	<color name="darkLightBlack">#A7A7A7</color>
+	<color name="darkLight_border">#DEDEDE</color>
+	<color name="darkTextColorSecondary">#B0B0B0</color>
+	<color name="darkSpiner_disabled">#00423B</color>
+	
+</resources>

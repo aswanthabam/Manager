@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:layout_margin="10dp">
+
+	<TextView
+		android:id="@+id/show_before_deleteTitle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Text"
+		android:textSize="19sp"
+		android:layout_margin="10dp"
+		android:textStyle="bold"
+		android:textColor="?attr/mainIconTint"/>
+
+	<TextView
+		android:id="@+id/show_before_deleteDescription"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text=""
+		android:layout_margin="10dp"
+		android:layout_marginTop="5dp"
+		android:layout_marginBottom="0dp"/>
+
+	<ScrollView
+		android:id="@+id/show_before_deleteScrollView"
+		android:layout_width="match_parent"
+		android:layout_height="150dp"
+		android:minHeight="200dp"
+		android:layout_margin="10dp">
+
+		<TextView
+			android:id="@+id/show_before_deleteFiles"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text=""/>
+
+	</ScrollView>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:gravity="right|center_vertical">
+
+		<Button
+			android:id="@+id/show_before_deleteButton2"
+			android:layout_width="wrap_content"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:text="Cancel"/>
+
+		<Button
+			android:id="@+id/show_before_deleteButton1"
+			android:layout_width="wrap_content"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:text="Continue"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

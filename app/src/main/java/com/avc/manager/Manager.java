@@ -50,6 +50,7 @@ public class Manager
 
 		}
 		Manager.thumbnails.put(f,Thumb);
+		
 	}
 	/*
 	 All the static and non static contebt below is 
@@ -107,14 +108,25 @@ public class Manager
 					break;
 				}else
 				{
-					if(decompress(a.getAssets().open("Manager.zip"),new File(Me.internalStorage.getAbsolutePath()+"/Manager/")))
+					InputStream in = a.getAssets().open("status_saver.json");
+					con = Utils.readFile(in);
+					status = new JSONObject(con);
+					
+					if(!internalFile.getParentFile().exists()) internalFile.getParentFile().mkdirs();
+					if(!internalFile.exists()) internalFile.createNewFile();
+					FileOutputStream fos = new FileOutputStream(internalFile);
+					Utils.writeFile(fos,con);
+					fos.close();
+					//Utils.toast(a,Utils.readFile(internalFile));
+					/*if(decompress(a.getAssets().open("Manager.zip"),new File(Me.internalStorage.getAbsolutePath()+"/Manager/")))
 					{
 						con = Utils.readFile(internalFile);
 						status = new JSONObject(con);
-					}else return false;
+					}else return false;*/
 					break;
 				}
 			}
+			
 			int i = 0;
 			
 			status_saver_name = status.getString("name");
@@ -232,12 +244,26 @@ public class Manager
 					break;
 				}else
 				{
+					InputStream in = a.getAssets().open("space_cleaner.json");
+					con = Utils.readFile(in);
+					
+					space = new JSONObject(con);
+					
+					if(!internalFile.getParentFile().exists()) internalFile.getParentFile().mkdirs();
+					if(!internalFile.exists()) internalFile.createNewFile();
+					FileOutputStream fos = new FileOutputStream(internalFile);
+					Utils.writeFile(fos,con);
+					fos.close();
+					//Utils.toast(a,Utils.readFile(internalFile));
+					break;
+					/*
 					if(decompress(a.getAssets().open("Manager.zip"),new File(Me.internalStorage.getAbsolutePath()+"/Manager/")))
 					{
 						con = Utils.readFile(internalFile);
 						space = new JSONObject(con);
 					}else return false;
 					break;
+					*/
 				}
 			}
 			int is = 0;

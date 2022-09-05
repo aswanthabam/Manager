@@ -1,0 +1,176 @@
+{
+	"version":1,
+	"version-name":"1.0.0 beta",
+	"scanable":[
+		{
+			"name":"WhatsApp Shared",
+			"folders":[
+				"/WhatsApp/.Shared",
+				"/Android/data/com.whatsapp/.Shared"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains shared images like the thumbnail of website etc.",
+			"ask-before-delete":false,
+			"ask-before-info":"",
+			"parent":"/Whatsapp/.Shared",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Whatsapp",
+			"show-user":false,
+			"count":true
+		},
+		{
+			"name":"WhatsApp Sented Files",
+			"folders":[
+				"/WhatsApp/media/WhatsApp Images/Sent",
+				"/Android/data/com.whatsapp/media/WhatsApp Images/Sent",
+				"/WhatsApp/media/WhatsApp Documents/Sent",
+				"/Android/data/com.whatsapp/media/WhatsApp Documents/Sent",
+				"/WhatsApp/media/WhatsApp Audio/Sent",
+				"/Android/data/com.whatsapp/media/WhatsApp Audio/Sent",
+				"/WhatsApp/media/WhatsApp Video/Sent",
+				"/Android/data/com.whatsapp/media/WhatsApp Video/Sent",
+				"/WhatsApp/media/WhatsApp Animated Gifs/Sent",
+				"/Android/data/com.whatsapp/media/WhatsApp Animated Gifs/Sent"
+				
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains shared images like the thumbnail of website etc.",
+			"ask-before-delete":true,
+			"ask-before-info":" ",
+			"parent":"/Whatsapp/media/",
+			"show-in-home":false,
+			"show-in-home-text":"",
+			"show-user":true,
+			"count":false
+		},
+		{
+			"name":"WhatsApp Links",
+			"folders":[
+				"/WhatsApp/media/.Links",
+				"/Android/data/com.whatsapp/media/.Links"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains images like the thumbnail of Links groups etc.",
+			"ask-before-delete":false,
+			"ask-before-info":"",
+			"parent":"/Whatsapp/media/.Links",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Whatsapp",
+			"show-user":false,
+			"count":true
+		},
+		{
+			"name":"Telegram Images",
+			"folders":[
+				"/Telegram/Telegram Images"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains images downloaded from Telegram.",
+			"ask-before-delete":false,
+			"ask-before-info":"",
+			"parent":"/Telegram/",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Telegram",
+			"show-user":false,
+			"count":true
+		},
+		{
+			"name":"Telegram Audio",
+			"folders":[
+				"/Telegram/Telegram Audio"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains audio downloaded from Telegram.",
+			"ask-before-delete":false,
+			"ask-before-info":"",
+			"parent":"/Telegram/",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Telegram",
+			"show-user":false,
+			"count":true
+		}
+		,
+		{
+			"name":"Telegram Files",
+			"folders":[
+				"/Telegram/Telegram Files"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains files downloaded from Telegram.",
+			"ask-before-delete":false,
+			"ask-before-info":"",
+			"parent":"/Telegram/",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Telegram",
+			"show-user":false,
+			"count":true
+		}
+		,
+		{
+			"name":"Telegram Video",
+			"folders":[
+				"/Telegram/Telegram Video"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains Video Files downloaded from Telegram.",
+			"ask-before-delete":true,
+			"ask-before-info":"This may contain any huge files like movies.",
+			"parent":"/Telegram/",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Telegram",
+			"show-user":false,
+			"count":false
+		}
+		,
+		{
+			"name":"Telegram Documents",
+			"folders":[
+				"/Telegram/Telegram Documents"
+			],
+			"files":[],
+			"folder-delete-all":true,
+			"folder-delete-all-except":[".nomedia"],
+			"file-delete-all":true,
+			"file-delete-one":false,
+			"description":"Contains Document Files downloaded from Telegram.",
+			"ask-before-delete":true,
+			"ask-before-info":"This may contain any huge files like movies.",
+			"parent":"/Telegram/",
+			"show-in-home":false,
+			"show-in-home-text":"&size unnecessary storage used by Telegram",
+			"show-user":false,
+			"count":false
+		}
+	],
+	"date":"16-06-2022 21:10:00",
+	"name":"Space Cleaner Details",
+	"show-in-home-text":"&size of memory can be freed"
+}

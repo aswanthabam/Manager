@@ -26,13 +26,23 @@
 				android:text="Loading..."
 				android:textAppearance="?android:attr/textAppearanceSmall"/>
 
+		</LinearLayout>
+		
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center">
+
+
 			<ProgressBar
 				android:layout_width="match_parent"
 				android:layout_height="40dp"
-				android:id="@+id/splashscreenProgressBar1"/>
+				android:id="@+id/splashscreenProgressBar1"
+				android:layout_gravity="center"/>
 
 		</LinearLayout>
-
+		
 		<LinearLayout
 			android:orientation="vertical"
 			android:layout_width="match_parent"
@@ -43,8 +53,7 @@
 				android:id="@+id/splash_screenImageView"
 				android:layout_width="80dp"
 				android:layout_height="80dp"
-				android:layout_margin="10dp"
-				/>
+				android:layout_margin="10dp"/>
 
 			<TextView
 				android:layout_width="wrap_content"

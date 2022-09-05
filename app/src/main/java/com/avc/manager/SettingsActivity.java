@@ -100,6 +100,14 @@ public class SettingsActivity extends AppCompatActivity
 					return true;
 				}
 			});
+			update_space.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+			{
+					@Override public boolean onPreferenceClick(Preference pr)
+					{
+						Utils.toast(activity,"Checking for updates");
+						return true;
+					}
+			});
 		}
 		
 		@Override

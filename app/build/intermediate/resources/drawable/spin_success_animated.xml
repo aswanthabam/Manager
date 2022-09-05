@@ -1,0 +1,23 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt" android:drawable="@drawable/spin">
+    <target android:name="an_1" android:animation="@anim/spin_success_1"/>>
+    <target android:name="an_2" android:animation="@anim/spin_success_2"/>
+    <target android:name="an_3" android:animation="@anim/spin_success_3"/>
+    <target android:name="an_4" android:animation="@anim/spin_success_4"/>
+    <target android:name="an_5" android:animation="@anim/spin_success_5"/>
+    <target android:name="an_6" android:animation="@anim/spin_success_6"/>
+    <target android:name="an_7" android:animation="@anim/spin_success_7"/>
+    <target android:name="an_8" android:animation="@anim/spin_success_8"/>
+    <target android:name="an_9" android:animation="@anim/spin_success_9"/>
+    <target android:name="an_10" android:animation="@anim/spin_success_10"/>
+    <target android:name="an_11" android:animation="@anim/spin_success_11"/>
+    <target android:name="an_12" android:animation="@anim/spin_success_12"/>
+    <target android:name="an_13" android:animation="@anim/spin_success_13"/>
+    <target android:name="an_14" android:animation="@anim/spin_success_14"/>
+    <target android:name="an_15" android:animation="@anim/spin_success_15"/>
+    <target android:name="an_16" android:animation="@anim/spin_success_16"/>
+    <target android:name="an_17" android:animation="@anim/spin_success_17"/>
+    <target android:name="an_18" android:animation="@anim/spin_success_18"/>
+    <target android:name="an_19" android:animation="@anim/spin_success_19"/>
+</animated-vector>

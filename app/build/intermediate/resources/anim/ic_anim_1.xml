@@ -1,0 +1,23 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+	<objectAnimator
+		android:propertyName="strokeWidth"
+		android:duration="1000"
+		android:valueFrom="0"
+		android:valueTo="8"
+		android:valueType="floatType"
+		android:interpolator="@android:interpolator/fast_out_slow_in"/>
+	<objectAnimator
+		android:propertyName="trimPathOffset"
+		android:duration="1000"
+		android:valueFrom="0"
+		android:valueTo="1"
+		android:valueType="floatType"
+		android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+	<objectAnimator
+		android:propertyName="trimPathStart"
+		android:duration="1000"
+		android:valueFrom="1"
+		android:valueTo="0"
+		android:valueType="floatType"
+		android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+</set>

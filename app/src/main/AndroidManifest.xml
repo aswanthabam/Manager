@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppThemeDark"
-		android:resizeableActivity = "true">
+		android:resizeableActivity = "false">
 		<provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.avc.manager.provider"
@@ -39,8 +39,7 @@
 		<activity android:name=".FileViewerActivity" android:screenOrientation="portrait" android:label="" />
 		<activity android:name=".DownloadedStatusActivity" android:screenOrientation="portrait" android:label="" />
 		<activity android:name=".SettingsActivity" android:screenOrientation="portrait" android:label="" />
-		<activity android:name=".MediaPlayerActivity" android:screenOrientation="portrait" android:label="" />
-		
+		<activity android:name=".MediaPlayerActivity" android:screenOrientation="portrait" android:label="" /> 
 	</application>
 
 </manifest>

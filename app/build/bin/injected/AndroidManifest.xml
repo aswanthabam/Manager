@@ -30,7 +30,7 @@
 		android:icon="@drawable/ic_launcher"
 		android:label="@string/app_name"
 		android:theme="@style/AppThemeDark"
-		android:resizeableActivity="true">
+		android:resizeableActivity="false">
 
 		<provider
 			android:name="android.support.v4.content.FileProvider"

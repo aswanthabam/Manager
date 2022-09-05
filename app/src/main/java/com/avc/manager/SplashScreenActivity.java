@@ -16,6 +16,9 @@ import android.view.View.*;
 import android.preference.*;
 import android.support.graphics.drawable.*;
 import android.graphics.drawable.*;
+import android.support.transition.*;
+import android.widget.Toolbar.*;
+import android.support.v7.widget.*;
 
 /*
  Splash screen to show when the app is loading
@@ -32,6 +35,7 @@ implements Manager.OnDecompressFileListener
 		Manifest.permission.WRITE_EXTERNAL_STORAGE,
 		Manifest.permission.READ_EXTERNAL_STORAGE
 	};
+	Dialog d;
 	SharedPreferences prefe;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -105,20 +109,22 @@ implements Manager.OnDecompressFileListener
 		{
 			@Override public void run()
 			{
-				for(String p : per)
-				{
-					if(checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED)
-					{
-						Manager.permission_granted = false;
-					}
-				}
+				
 			}
 		});
 		r.start();
 		try{r.join();}catch(Exception e){}
+		for(String p : per)
+		{
+			if(checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED)
+			{
+				Manager.permission_granted = false;
+			}
+		}
 		if(Manager.permission_granted)
 		{
-			
+			if(d != null) d.dismiss();
+			//bar.setVisibility(View.VISIBLE);
 			new Thread(new Runnable()
 			{
 				@Override public void run()
@@ -156,11 +162,38 @@ implements Manager.OnDecompressFileListener
 
 					/* Load json data files */
 					Manager.setOnDecompressFileListener(SplashScreenActivity.this);
-					
+					runOnUiThread(new Runnable()
+						{
+							@Override public void run()
+							{
+								txt.setText("Loading (Core) ...");
+							}
+						});
 					Manager.loaded_about = Manager.loadAbout(a);
 					if(Manager.loaded_about){
+						runOnUiThread(new Runnable()
+							{
+								@Override public void run()
+								{
+									txt.setText("Loading (Space Cleaner) ...");
+								}
+							});
 						Manager.loaded_space_cleaner = Manager.loadSpaceCleaner(a);
+						runOnUiThread(new Runnable()
+							{
+								@Override public void run()
+								{
+									txt.setText("Loading (Status Saver) ...");
+								}
+							});
 						Manager.loaded_status_saver = Manager.loadStatusSaver(a);
+						runOnUiThread(new Runnable()
+							{
+								@Override public void run()
+								{
+									txt.setText("Loading ...");
+								}
+							});
 						SharedPreferences pre = PreferenceManager.getDefaultSharedPreferences(a);
 						if(Manager.loaded_status_saver)pre.edit().putInt("status_saver_version",Manager.status_saver_version).commit();
 						if(Manager.loaded_space_cleaner) pre.edit().putInt("space_cleaner_version",Manager.space_cleaner_version).commit();
@@ -187,13 +220,22 @@ implements Manager.OnDecompressFileListener
 						});
 						Utils.toast(a,"Unable to load");
 					}
+					runOnUiThread(new Runnable()
+					{
+						@Override public void run()
+						{
+							//bar.setVisibility(View.VISIBLE);
+						}
+					});
 				}
 			}).start();
 		}
 		else{
 			txt.setText("Granting permission");
-			final Dialog d = new Dialog(this);
-			d.getWindow().setBackgroundDrawableResource(R.drawable.light_border_background);
+			d = new Dialog(this,R.style.DialogStyle);
+			d.getWindow().setGravity(Gravity.BOTTOM);
+			d.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+//			d.getWindow().setBackgroundDrawableResource(R.drawable.light_border_background);
 			d.setContentView(R.layout.request_permission);
 			Button con = d.findViewById(R.id.requestpermissionButton1);
 			TextView t = d.findViewById(R.id.requestpermissionTextView1);
@@ -202,7 +244,6 @@ implements Manager.OnDecompressFileListener
 			{
 				@Override public void onClick(View v)
 				{
-					d.dismiss();
 					requestPermissions(per,6909);
 				}
 			});
@@ -210,7 +251,7 @@ implements Manager.OnDecompressFileListener
 			{
 				@Override public void onDismiss(DialogInterface i)
 				{
-					requestPermissions(per,6909);
+					permRun(per);
 				}
 			});
 			t.setText(R.string.request_permission);
@@ -218,6 +259,7 @@ implements Manager.OnDecompressFileListener
 		}
 		
 	}
+	
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)

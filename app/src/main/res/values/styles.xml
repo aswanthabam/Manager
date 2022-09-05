@@ -75,4 +75,10 @@
 		<item name="text_color">@color/lightMainIconTint</item>
 	</style>
 	
+	<style name="DialogStyle">
+		<item name="android:windowBackground">@drawable/dialog_background</item>
+		<item name="android:windowEnterAnimation">@anim/pop_up</item>
+		<item name="android:windowExitAnimation">@anim/pop_down</item>
+	</style>
+	
 </resources>

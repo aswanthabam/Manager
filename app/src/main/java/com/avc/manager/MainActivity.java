@@ -42,7 +42,7 @@ SettingsActivity.SettingFragment.OnChangeTheme
 	public int info_i = 0;
 	//public AppCompatActivity activity;
 	public Me me;
-	public LinearLayout GridContainer,Item1,Item2,Item3,Item4;
+	public LinearLayout GridContainer,Item1,Item2/*,Item3*/,Item4;
 	RelativeLayout HomeTopBox;
 	private ImageView settings_icon;
 	private ImageView scan_image_1;
@@ -80,7 +80,7 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		
 		Item1 =findViewById(R.id.activity_mainGridItem1); // Space cleaner
 		Item2 =findViewById(R.id.activity_mainGridItem2);
-		Item3 =findViewById(R.id.activity_mainGridItem3);
+		//Item3 =findViewById(R.id.activity_mainGridItem3);
 		Item4 =findViewById(R.id.activity_mainGridItem4);
 		settings_icon = findViewById(R.id.activity_mainSettingsIcon);
 		
@@ -101,7 +101,7 @@ SettingsActivity.SettingFragment.OnChangeTheme
 		// For grid items
 		Item1.setOnClickListener(this);
 		Item2.setOnClickListener(this);
-		Item3.setOnClickListener(this);
+		//Item3.setOnClickListener(this);
 		Item4.setOnClickListener(this);
 		
 		// set full screen and margins
@@ -217,9 +217,9 @@ SettingsActivity.SettingFragment.OnChangeTheme
 				i = new Intent(a,StatusSaverActivity.class);
 				a.startActivity(i);
 				break;
-			case R.id.activity_mainGridItem3:
+			/*case R.id.activity_mainGridItem3:
 				// Main grid item 3
-				break;
+				break;*/
 			case R.id.activity_mainGridItem4:
 			case R.id.nav_item3:
 				// Main grid item 4

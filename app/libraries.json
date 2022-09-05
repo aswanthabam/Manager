@@ -1,0 +1,23 @@
+[
+  {
+    "artifactId": "appcompat-v7",
+    "excludes": [],
+    "groupId": "com.android.support",
+    "scope": "compile",
+    "versionName": "27.1.1"
+  },
+  {
+    "artifactId": "design",
+    "excludes": [],
+    "groupId": "com.android.support",
+    "scope": "compile",
+    "versionName": "27.1.1"
+  },
+  {
+    "artifactId": "runtime",
+    "excludes": [],
+    "groupId": "android.arch.core",
+    "scope": "compile",
+    "versionName": "1.+"
+  }
+]
