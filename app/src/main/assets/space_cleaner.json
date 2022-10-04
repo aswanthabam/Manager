@@ -121,13 +121,13 @@
 			"file-delete-all":true,
 			"file-delete-one":false,
 			"description":"Contains files downloaded from Telegram.",
-			"ask-before-delete":false,
-			"ask-before-info":"",
+			"ask-before-delete":true,
+			"ask-before-info":"This file may contain some nessasary downloaded files from Telegram",
 			"parent":"/Telegram/",
 			"show-in-home":false,
 			"show-in-home-text":"&size unnecessary storage used by Telegram",
 			"show-user":false,
-			"count":true
+			"count":false
 		}
 		,
 		{

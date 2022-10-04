@@ -19,6 +19,7 @@ import android.graphics.drawable.*;
 import android.support.transition.*;
 import android.widget.Toolbar.*;
 import android.support.v7.widget.*;
+import android.content.res.*;
 
 /*
  Splash screen to show when the app is loading
@@ -235,7 +236,12 @@ implements Manager.OnDecompressFileListener
 			d = new Dialog(this,R.style.DialogStyle);
 			d.getWindow().setGravity(Gravity.BOTTOM);
 			d.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-//			d.getWindow().setBackgroundDrawableResource(R.drawable.light_border_background);
+			WindowManager.LayoutParams par = d.getWindow().getAttributes();
+			Point size = displaySize(this);
+			
+			par.width = size.x - dpToPx(20);
+			d.getWindow().setAttributes(par);
+			//d.getWindow().setBackgroundDrawableResource(R.drawable.light_border_background);
 			d.setContentView(R.layout.request_permission);
 			Button con = d.findViewById(R.id.requestpermissionButton1);
 			TextView t = d.findViewById(R.id.requestpermissionTextView1);
@@ -289,5 +295,18 @@ implements Manager.OnDecompressFileListener
 			}
 		});
 	}
+	
+	public static Point displaySize(Context context) {
+        WindowManager manager = (WindowManager) context
+			.getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        return point;
+    }
+
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
 	
 }

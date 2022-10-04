@@ -29,7 +29,15 @@
 				android:layout_width="25dp"
 				android:layout_height="25dp"
 				android:src="@drawable/download_1"/>
-
+			
+			<ImageView
+				android:layout_margin="10dp"
+				android:id="@+id/image_video_prev_dialogAudio"
+				android:layout_width="25dp"
+				android:layout_height="25dp"
+				android:tint="?attr/colorAccent"
+				android:src="@drawable/audio"/>
+			
 			<ImageView
 				android:layout_margin="10dp"
 				android:id="@+id/image_video_prev_dialogShare"

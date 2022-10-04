@@ -7,7 +7,7 @@ import java.io.*;
 // An Me.Update class is available for storing the deatils about the update fetched online
 public class Me
 {
-	public static String host = "https://avctech.000freewebhostapp.com/";
+	public static String host = "https://avctech.000webhostapp.com/";
 	// Some details which are constant all over the app
 	
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

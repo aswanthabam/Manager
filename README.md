@@ -4,6 +4,7 @@
 [![AVC TECH](https://github.com/AVC-Tech/Manager/raw/master/app/src/main/res/drawable-hdpi/Banner.png)](https://github.com/AVC-Tech/Manager/raw/master/app/src/main/res/drawable-hdpi/Banner.png)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://avctech.000webhostapp.com)
+[![Download](https://badgen.net/badge/Download/apk/)](https://github.com/AVC-Tech/Manager/releases/download/v1.0.0-beta.1/AVC-Manager-v1.0.0-beta.1.apk)
 
 AVC Manager is an Android app with the following features:-
 

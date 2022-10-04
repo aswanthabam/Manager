@@ -2,6 +2,7 @@ package com.avc.manager.Res;
 import android.support.v7.app.*;
 import com.avc.manager.*;
 import java.io.*;
+import android.os.*;
 
 public class StatusSaver
 {
@@ -11,7 +12,16 @@ public class StatusSaver
 	{
 		activity = a;
 	}
-	
+	public static void saveStatus(AppCompatActivity a,File f)
+	{
+		AudioExtractor ex = new AudioExtractor();
+		File url = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Utils.FOLDER +"/Audio/");
+		if(!url.exists()) url.mkdirs();
+		String path = url.getAbsolutePath()+"/"+f.getName()+".mp3";
+		try{
+			ex.genVideoUsingMuxer(f.getAbsolutePath(),path,-1,-1,true,false);
+		}catch(Exception e){Utils.toast(a,"Unable to save status "+e.toString());}
+	}
 	public void getStatuses(final AppCompatActivity a)
 	{
 		files = new GROUPFiles();

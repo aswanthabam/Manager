@@ -11,6 +11,7 @@ import android.media.*;
 import android.support.v7.app.*;
 import android.preference.*;
 import android.content.*;
+import com.avc.manager.Res.*;
 // Preview a video or image show image if tge file is image if video
 // play the video
 public class ImageVideoPreviewDialog extends Dialog
@@ -18,7 +19,7 @@ public class ImageVideoPreviewDialog extends Dialog
 	private AppCompatActivity activity;
 	public File file;
 	public VideoView v1;
-	public ImageView v2,Cancel,download,share,expand;
+	public ImageView v2,Cancel,download,share,expand,audio;
 	public LinearLayout main;
 	public boolean want_save;
 	private boolean video = false;
@@ -48,6 +49,7 @@ public class ImageVideoPreviewDialog extends Dialog
 		download = findViewById(R.id.image_video_prev_dialogDownload);
 		share = findViewById(R.id.image_video_prev_dialogShare);
 		expand = findViewById(R.id.image_video_prev_dialogExpand);
+		audio = findViewById(R.id.image_video_prev_dialogAudio);
 		
 		// Click listener
 		
@@ -92,6 +94,15 @@ public class ImageVideoPreviewDialog extends Dialog
 								"I saved this status using AVC Manager Application!. AVC Manager has more features like this including\n"+
 								" • Status saver\n • Space cleaner\n • Device Optimization etc..\n\n Download the app now."
 				,f.getAbsolutePath(),Utils.getMimeType(f.getAbsolutePath()));
+			}
+		});
+		
+		audio.setOnClickListener(new View.OnClickListener()
+		{
+			@Override public void onClick(View v)
+			{
+				StatusSaver.saveStatus(activity,file);
+				Utils.toast(activity,"Audio saved!");
 			}
 		});
 		
