@@ -18,6 +18,12 @@ AVC Manager is an Android app with the following features:-
 - Intresting User Interface (User Interface with animations and transitions for better experience)
 - Preview Status (Simple preview of status is available for finding the status you need faster)
 - Storage saver which will help you to remove temperory and unnessasaey files saved by whatsapp, facebook, telegram etc.
+- Directly save Audio from your WhatsApp Status.
 - Updates : Provide in app updates
 
 The app is currently under development. More features on the way ;)
+
+## Whats New
+
+- Save Audio from status
+- Several Bug Fixes 
