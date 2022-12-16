@@ -132,6 +132,7 @@ public class ImageVideoPreviewDialog extends Dialog
 			v1.setVisibility(View.GONE);
 			v2.setVisibility(View.VISIBLE);
 			v2.setImageURI(Uri.fromFile(file));
+			audio.setVisibility(View.GONE);
 		}
 	}
 	
