@@ -4,7 +4,6 @@ import android.os.*;
 import android.widget.*;
 import java.io.*;
 import android.media.*;
-import android.support.v4.media.session.*;
 import android.view.View.*;
 import android.view.*;
 import android.content.pm.*;

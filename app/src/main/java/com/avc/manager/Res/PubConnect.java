@@ -66,12 +66,12 @@ public class PubConnect
 			try
 			{
 				// Add initial values to send as get request
-				List<NameValuePair> p = new ArrayList<NameValuePair>();
-				p.add(new BasicNameValuePair("connecting_as","App"));
-				p.add(new BasicNameValuePair("connecting_for","Updates"));
-				p.add(new BasicNameValuePair("common_app_id",app_id));
-				p.add(new BasicNameValuePair("version",version_id));
-				p.add(new BasicNameValuePair("app_pass",app_pass));
+				List<Pair<String,String>> p = new ArrayList<Pair<String,String>>();
+				p.add(Pair.create("connecting_as","App"));
+				p.add(Pair.create("connecting_for","Updates"));
+				p.add(Pair.create("common_app_id",app_id));
+				p.add(Pair.create("version",version_id));
+				p.add(Pair.create("app_pass",app_pass));
 				// Parse the url and get the output
 				URL url = new URL(Me.host+"appstore-api/api/?"+Utils.QUERYEncode(p));
 				conn = (HttpURLConnection) url.openConnection();

@@ -3,7 +3,6 @@ import android.support.v7.app.*;
 import android.support.v7.widget.*;
 import android.view.*;
 import java.util.*;
-import java.io.*;
 import android.widget.*;
 import com.avc.manager.*;
 import java.text.*;

@@ -43,24 +43,6 @@ implements Manager.OnDecompressFileListener
 	{
 		//if(!theme.equals(current_theme)) setTheme(theme)
 		super.onCreate(savedInstanceState);
-		/*
-		prefe = PreferenceManager.getDefaultSharedPreferences(this);
-		final boolean dark = prefe.getBoolean("theme",false);
-		boolean current_theme = prefe.getBoolean("current_theme",true);
-		
-		if(current_theme != dark){
-			if(dark)
-			{
-				setTheme(R.style.SplashThemeDark);
-				prefe.edit().putBoolean("current_theme",true).commit();
-			}else{
-				setTheme(R.style.SplashThemeLight);
-				prefe.edit().putBoolean("current_theme",false).commit();
-			}
-			//recreate();
-		}*/
-		//getWindow().setBackgroundDrawableResource(R.drawable.gradient_background);
-		
 		setContentView(R.layout.splash_screen);
 		
 		a = this;
@@ -117,9 +99,11 @@ implements Manager.OnDecompressFileListener
 		try{r.join();}catch(Exception e){}
 		for(String p : per)
 		{
-			if(checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED)
-			{
-				Manager.permission_granted = false;
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				if(checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED)
+				{
+					Manager.permission_granted = false;
+				}
 			}
 		}
 		if(Manager.permission_granted)

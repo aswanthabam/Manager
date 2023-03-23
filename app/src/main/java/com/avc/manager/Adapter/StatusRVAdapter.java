@@ -1,5 +1,6 @@
 package com.avc.manager.Adapter;
 
+import android.annotation.SuppressLint;
 import android.view.*;
 import android.widget.*;
 import com.avc.manager.*;
@@ -129,8 +130,9 @@ public class StatusRVAdapter extends RecyclerView.Adapter<StatusRVAdapter.ViewHo
 	}
 	// Binded view holder
 	@Override
-	public void onBindViewHolder(final ViewHolder p1, final int p2)
+	public void onBindViewHolder(final ViewHolder p1,int p2)
 	{
+		p2 = p1.getAdapterPosition();
 		p1.ad_pos = p2;
 		p1.fi = files.files.get(p2);
 		setThumbnail(p1,p2); // Set the thumbnails 
@@ -193,7 +195,12 @@ public class StatusRVAdapter extends RecyclerView.Adapter<StatusRVAdapter.ViewHo
 			Bitmap Thumb = null;
 			if(m.startsWith("image/"))
 			{
-				Thumb = ThumbnailUtils.createImageThumbnail(f.getAbsolutePath(),MediaStore.Images.Thumbnails.MINI_KIND);
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+					Thumb = ThumbnailUtils.createImageThumbnail(f.getAbsolutePath(),MediaStore.Images.Thumbnails.MINI_KIND);
+				}else {
+					// Thumb = ThumbnailUtils.createImageThumbnail(f.getAbsolutePath(),MediaStore.Images.Thumbnails.MINI_KIND);
+					// Code to load image thumbnail in olderversions
+				}
 			}
 			else if(m.startsWith("video/"))
 			{

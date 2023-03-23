@@ -107,21 +107,21 @@ public class Utils
 	
 	// Convert namw value pair to query in the form key=value&key2=value2
 	
-	public static String QUERYEncode(List<NameValuePair> params) throws UnsupportedEncodingException
+	public static String QUERYEncode(List<Pair<String,String>> params) throws UnsupportedEncodingException
 	{
 		StringBuilder result = new StringBuilder();
 		boolean first = true;
 
-		for (NameValuePair pair : params)
+		for (Pair<String,String> pair : params)
 		{
 			if (first)
 				first = false;
 			else
 				result.append("&");
 
-			result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+			result.append(URLEncoder.encode(pair.first, "UTF-8"));
 			result.append("=");
-			result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+			result.append(URLEncoder.encode(pair.second, "UTF-8"));
 		}
 
 		return result.toString();
@@ -202,7 +202,12 @@ public class Utils
 	// from resource
 	public static Drawable getDrawable(Context c,int r)
 	{
-		return c.getDrawable(r);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			return c.getDrawable(r);
+		}else {
+			// Add drawable to display in older android
+			return null;
+		}
 	}
 	
 	// Get bitmap

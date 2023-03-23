@@ -12,4 +12,5 @@
 	<attr name="text_color"></attr>
 	<attr name="text_color_secondary"></attr>
 	<attr name="spiner_disabled"></attr>
+    <attr name="colorAccent" format="color" />
 </resources>
