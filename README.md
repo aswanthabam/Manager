@@ -1,7 +1,7 @@
 # AVC Manager
 ### Easier, Faster, Simple
 
-[![AVC TECH](https://github.com/AVC-Tech/Manager/raw/master/app/src/main/res/drawable-hdpi/Banner.png)](https://github.com/AVC-Tech/Manager/raw/master/app/src/main/res/drawable-hdpi/Banner.png)
+<p align='center'>[![AVC TECH](https://github.com/AVC-Tech/Manager/raw/master/app/src/main/res/drawable-hdpi/Banner.png)](https://github.com/AVC-Tech/Manager/raw/master/app/src/main/res/drawable-hdpi/Banner.png)</p>
 
 <span><a href='https://github.com/aswanthabam/Manager/releases'><img src='https://img.shields.io/badge/Download-3DDC84?style=for-the-badge&logo=download&logoColor=white'/></a> <img src="https://img.shields.io/badge/Android_Studio-FFDC84?style=for-the-badge&logo=android&logoColor=white"/></span>
 
